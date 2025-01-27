@@ -1,18 +1,20 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import SmartLogo from "./SmartLogo";
 import { Button } from "./ui";
 import { Icon } from "@iconify/react";
 import { useSession, signOut } from "next-auth/react";
 import { userName } from "@/lib/utils";
+import { useState } from "react";
+import Menu from "./Menu";
 
 interface INavItems {
   label: string;
   href: string;
 }
 
-const NavLinks: INavItems[] = [
+export const NavLinks: INavItems[] = [
   { label: "Home", href: "/" },
   { label: "About us", href: "/" },
   { label: "Shop", href: "/" },
@@ -20,40 +22,29 @@ const NavLinks: INavItems[] = [
   { label: "Contact us", href: "/" },
 ];
 
-const Icons: INavItems[] = [
+export const Icons: INavItems[] = [
   { label: "lucide:user", href: "/" },
   { label: "fluent:cart-16-regular", href: "/" },
 ];
 
 const NavBar = () => {
   const { data: session } = useSession();
+  const [openMenu, isMenuOpen] = useState<boolean>(false);
 
   return (
     <nav className="sticky top-0 z-50 flex items-center justify-between h-24 px-10 bg-white">
-      <section className="flex items-center space-x-14">
-        <div className="flex items-center space-x-3">
-          <Image
-            className="mx-auto"
-            src={"/logo.png"}
-            width={45}
-            height={49}
-            alt="logo"
-          />
-          <p className="font-semibold text-2xl leading-7">
-            S<span className="text-primaryRed">mart</span>
-          </p>
-        </div>
-        <ul className="hidden xl:flex items-center space-x-11">
-          {NavLinks.map((link, index) => (
-            <li
-              key={index}
-              className="font-medium text-xl leading-6 hover:text-primaryRed duration-300"
-            >
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <SmartLogo />
+
+      <ul className="hidden xl:flex flex-1 items-center justify-start space-x-11 ml-14">
+        {NavLinks.map((link, index) => (
+          <li
+            key={index}
+            className="font-medium text-xl leading-6 hover:text-primaryRed duration-300"
+          >
+            <Link href={link.href}>{link.label}</Link>
+          </li>
+        ))}
+      </ul>
 
       <section className="hidden xl:flex space-x-[22px] items-center">
         {session ? (
@@ -109,13 +100,17 @@ const NavBar = () => {
           ))}
         </div>
       </section>
+
+      {/* Menu Icon */}
       <Image
+        onClick={() => isMenuOpen((prev) => !prev)}
         src={"/images/menu.svg"}
         alt="smart"
         width={51}
         height={51}
         className="cursor-pointer xl:hidden"
       />
+      {openMenu && <Menu />}
     </nav>
   );
 };
