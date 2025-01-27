@@ -3,10 +3,12 @@ import NavBar from "@/components/NavBar";
 import Image from "next/image";
 import Link from "next/link";
 import Heading from "@/components/Heading";
+import OfferBar from "@/components/OfferBar";
 
 export default function Home() {
   return (
     <div>
+      <OfferBar />
       <NavBar />
 
       <Link
