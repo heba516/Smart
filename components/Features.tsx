@@ -27,7 +27,10 @@ const features: IFeatures[] = [
 
 const Features = () => {
   return (
-    <section className="xl:px-20 grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3 mt-10">
+    <section
+      id="features"
+      className="xl:px-20 grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3 mt-10"
+    >
       {features.map((feature, index) => (
         <div
           className="group relative overflow-hidden w-[312px] h-[294px] rounded-[36px] py-7 px-8 shadow-md border-b-8 border-b-primaryRed text-center flex flex-col items-center space-y-5"
