@@ -29,7 +29,7 @@ const NavBar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="sticky top-0 z-50 flex items-center justify-between h-24 px-5 lg:px-10 bg-white">
+    <nav className="w-full z-50 flex items-center justify-between h-24 px-5 lg:px-10 bg-white">
       <SmartLogo />
 
       <ul className="hidden xl:flex flex-1 items-center justify-start space-x-11 ml-14">
