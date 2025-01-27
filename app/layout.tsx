@@ -33,8 +33,8 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession();
   return (
-    <html lang="en">
-      <body className={`${urbanist.variable} antialiased`}>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${urbanist.variable} antialiased`} id="home">
         <SessionProvider session={session}>{children}</SessionProvider>
         <Toaster
           position="top-center"
