@@ -12,8 +12,8 @@ import {
   Input,
   Button,
   Checkbox,
-} from "./ui";
-import { PasswordValidationChecklist } from "./CheckValidationList";
+} from "@/components/ui";
+import { PasswordValidationChecklist } from "@/components/CheckValidationList";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
