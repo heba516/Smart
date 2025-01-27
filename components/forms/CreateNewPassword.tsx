@@ -13,8 +13,8 @@ import {
   Input,
   Button,
   FormDescription,
-} from "./ui";
-import { PasswordValidationChecklist } from "./CheckValidationList";
+} from "../ui";
+import { PasswordValidationChecklist } from "../CheckValidationList";
 import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
 import { useState } from "react";

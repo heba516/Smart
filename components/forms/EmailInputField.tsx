@@ -12,7 +12,7 @@ import {
   FormMessage,
   Input,
   Button,
-} from "./ui";
+} from "../ui";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 
