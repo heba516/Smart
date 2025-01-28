@@ -53,12 +53,17 @@ export default function Home() {
           <h2 className="capitalize text-3xl lg:text-4xl font-semibold">
             what is <span className="text-primaryRed">Smart ?</span>
           </h2>
-          <p className="2xl:w-[70%] text-black text-base xl:text-xl font-medium">
-            Lorem ipsum dolor sit amet consectetur. Lacus vitae tincidunt in leo
-            porttitor neque a. Felis eget netus est semper est faucibus dolor.
-            Eu dignissim quam nibh neque ipsum pharetra libero. Massa elementum
-            ultrices auctor non pellentesque a porta mauris amet. At cras eget
-            vel viverra donec.
+          <p className="2xl:w-[90%] text-black text-base xl:text-xl font-medium">
+            Simplify Your Shopping Experience with Smart Technology Our{" "}
+            <span className="font-bold">IoT-Driven Smart Retail System</span> is
+            here to make shopping easier and faster than ever! Through a
+            user-friendly <span className="font-bold">mobile app</span> and{" "}
+            <span className="font-bold">website</span>, customers can scan
+            products, add them to their cart, and complete payments
+            effortlessly. No more long queues or complicated processes , just a
+            smooth shopping experience , Experience the future of retail with
+            smart features that save you time and make every shopping trip more
+            convenient!
           </p>
         </article>
       </section>

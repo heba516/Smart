@@ -29,7 +29,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="xl:px-20 grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3 mt-10"
+      className="xl:w-[85%] mx-auto grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3 mt-10"
     >
       {features.map((feature, index) => (
         <div

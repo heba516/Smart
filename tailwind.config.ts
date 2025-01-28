@@ -18,6 +18,7 @@ export default {
                 lightGray: "hsl(var(--light-gray))",
                 medGray: "hsl(var(--medium-gray))",
                 darkGray: "hsl(var(--dark-gray))",
+                ring: "hsl(var(--ring))",
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 card: {
