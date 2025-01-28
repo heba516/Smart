@@ -5,6 +5,7 @@ import Link from "next/link";
 import Heading from "@/components/Heading";
 import OfferBar from "@/components/OfferBar";
 import Landing from "@/components/Landing";
+import Questions from "@/components/Questions";
 
 export default function Home() {
   return (
@@ -71,12 +72,15 @@ export default function Home() {
       {/* Features */}
       <div className="min-h-screen mx-auto text-center py-5">
         <Heading
-          title="Features in Smart"
+          label="Features in Smart"
           desc="Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur
         rutrum fames a."
         />
         <Features />
       </div>
+
+      {/* Questions */}
+      <Questions />
     </div>
   );
 }
