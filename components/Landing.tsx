@@ -21,7 +21,7 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen relative overflow-hidden text-center place-content-center space-y-14 px-1">
+    <div className="w-full h-screen relative overflow-hidden text-center lg:place-content-center space-y-20 px-1 lg:pb-14">
       <video
         autoPlay
         loop
@@ -31,32 +31,36 @@ const Landing = () => {
         <source src="/images/landing.mp4" type="video/mp4" />
       </video>
 
-      <h1 className="text-4xl md:text-6xl font-extrabold text-white capitalize">
-        {quotes[index]}
-      </h1>
-
-      <section className="font-medium text-white w-fit mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0">
-        <Button
-          variant={"outline"}
-          size={"lg"}
-          className="bg-white/15 backdrop-blur-md shadow-2xl text-xl rounded-lg"
-        >
-          Get Started
-        </Button>
-        <Button
-          variant={"ghost"}
-          size={"lg"}
-          className="hover:bg-transparent hover:text-white text-xl"
-        >
-          Know More
-        </Button>
+      <section className="space-y-9">
+        <h1 className="text-4xl md:text-6xl font-extrabold text-white capitalize">
+          {quotes[index]}
+        </h1>
+        <p className="text-base lg:text-xl font-bold text-border/75">
+          Scan, shop, and pay effortlessly with our innovative retail system.
+        </p>
+        <div className="font-medium text-white w-fit mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0">
+          <Button
+            variant={"outline"}
+            size={"lg"}
+            className="bg-white/15 backdrop-blur-md shadow-2xl text-xl rounded-xl lg:h-14 px-10"
+          >
+            Get Started
+          </Button>
+          <Button
+            variant={"ghost"}
+            size={"lg"}
+            className="hover:bg-transparent hover:text-white text-xl lg:h-14 px-10"
+          >
+            Know More
+          </Button>
+        </div>
       </section>
 
       <Link
         href={"#aboutus"}
-        className="w-8 h-11 rounded-full border-2 border-white flex justify-center py-2 mx-auto"
+        className="w-9 h-12 rounded-full border-[3px] border-white flex justify-center py-2 mx-auto"
       >
-        <span className="w-1 h-1 bg-white rounded-full animate-move-dot"></span>
+        <span className="w-[5px] h-[5px] bg-white rounded-full animate-move-dot"></span>
       </Link>
     </div>
   );

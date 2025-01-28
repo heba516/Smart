@@ -55,9 +55,9 @@ const NavBar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="w-full z-50 flex items-center justify-between h-24 px-5 lg:px-10 bg-white">
+    <nav className="w-full z-50 flex items-center justify-between h-24 px-5 md:px-7 lg:px-20 bg-white">
       <SmartLogo />
-      <ul className="hidden xl:flex flex-1 items-center justify-start space-x-11 ml-14">
+      <ul className="hidden xl:flex flex-1 items-center justify-start space-x-9 ml-14">
         {NavLinks.map((link, index) => (
           <li
             key={index}
@@ -68,12 +68,12 @@ const NavBar = () => {
         ))}
       </ul>
 
-      <section className="flex space-x-[22px] items-center">
+      <section className="flex space-x-2 md:space-x-[22px] items-center">
         {session ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <div className="flex items-center space-x-2 text-xl font-semibold">
-                <span className="cursor-pointer p-3 bg-primaryRed rounded-full text-white uppercase">
+              <div className="flex items-center space-x-2 text-lg md:text-xl font-semibold">
+                <span className="cursor-pointer p-2 md:p-3 bg-primaryRed rounded-full text-white uppercase">
                   {userName(session?.user?.name)}
                 </span>
                 <p className="hidden xl:flex items-center cursor-pointer">
@@ -154,7 +154,7 @@ const NavBar = () => {
               alt="smart"
               width={51}
               height={51}
-              className="cursor-pointer xl:hidden"
+              className="cursor-pointer xl:hidden w-10 h-10 md:w-[51px] md:h-[51px]"
             />
           </SheetTrigger>
           <SheetTitle></SheetTitle>
