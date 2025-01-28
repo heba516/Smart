@@ -35,10 +35,12 @@ const Landing = () => {
         <h1 className="text-4xl md:text-6xl font-extrabold text-white capitalize">
           {quotes[index]}
         </h1>
+
         <p className="text-base lg:text-xl font-bold text-border/75">
           Scan, shop, and pay effortlessly with our innovative retail system.
         </p>
-        <div className="font-medium text-white w-fit mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0">
+
+        <div className="font-medium text-white w-fit mx-auto flex flex-col md:flex-row space-y-5 md:space-y-0 md:space-x-4">
           <Button
             variant={"outline"}
             size={"lg"}
@@ -49,7 +51,7 @@ const Landing = () => {
           <Button
             variant={"ghost"}
             size={"lg"}
-            className="hover:bg-transparent hover:text-white text-xl lg:h-14 px-10"
+            className="hover:bg-transparent hover:text-white rounded-xl border border-transparent hover:border-white text-xl lg:h-14 px-10"
           >
             Know More
           </Button>
