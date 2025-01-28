@@ -30,7 +30,10 @@ export default function Home() {
       <Landing />
 
       {/* About us */}
-      <section className="lg:w-[90%] mx-auto min-h-screen py-5 px-10 flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0">
+      <section
+        id="aboutus"
+        className="lg:w-[90%] mx-auto min-h-screen py-5 px-10 flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0"
+      >
         <Image
           src={"/images/aboutus.png"}
           alt="smartmart"

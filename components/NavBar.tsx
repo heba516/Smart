@@ -24,11 +24,11 @@ interface ILinks {
 }
 
 const NavLinks: ILinks[] = [
-  { label: "Home", href: "/" },
-  { label: "About us", href: "/" },
+  { label: "Home", href: "#home" },
+  { label: "About us", href: "#aboutus" },
   { label: "Shop", href: "/" },
-  { label: "Contact us", href: "/" },
   { label: "Download app", href: "/" },
+  { label: "Contact us", href: "/" },
 ];
 
 const Icons: ILinks[] = [
