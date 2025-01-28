@@ -53,7 +53,7 @@ const Landing = () => {
       </section>
 
       <Link
-        href={"#features"}
+        href={"#aboutus"}
         className="w-8 h-11 rounded-full border-2 border-white flex justify-center py-2 mx-auto"
       >
         <span className="w-1 h-1 bg-white rounded-full animate-move-dot"></span>

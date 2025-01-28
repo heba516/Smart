@@ -68,6 +68,16 @@ export default {
                 "outline-gray": "0px 0px 0px 4px hsla(0, 0%, 66%, 0.25)",
                 error: "0px 0px 0px 4px hsla(358, 100%, 83%, 1)",
             },
+            keyframes: {
+            'move-dot': {
+                '0%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(15px)' },
+                '100%': { transform: 'translateY(0)' },
+          },
+            },
+            animation: {
+            'move-dot': 'move-dot 2s infinite ease-in-out',
+            },
         },
     },
     plugins: [require("tailwindcss-animate")],
