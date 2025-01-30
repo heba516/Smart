@@ -6,6 +6,7 @@ import Heading from "@/components/Heading";
 import OfferBar from "@/components/OfferBar";
 import Landing from "@/components/Landing";
 import Questions from "@/components/Questions";
+import { Reviews } from "@/components/Reviews";
 
 export default function Home() {
   return (
@@ -79,6 +80,9 @@ export default function Home() {
         />
         <Features />
       </div>
+
+      {/* Reviews */}
+      <Reviews />
 
       {/* Questions */}
       <Questions />
