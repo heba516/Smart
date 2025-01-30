@@ -6,6 +6,7 @@ import Heading from "@/components/Heading";
 import OfferBar from "@/components/OfferBar";
 import Landing from "@/components/Landing";
 import Questions from "@/components/Questions";
+import { Reviews } from "@/components/Reviews";
 
 export default function Home() {
   return (
@@ -17,13 +18,14 @@ export default function Home() {
 
       <Link
         href={""}
-        className="fixed right-0 top-1/4 w-fit py-2 px-3 rounded-l-full bg-white z-50"
+        className="fixed right-0 top-1/4 w-fit p-2 md:py-[10px] md:px-3 rounded-l-full bg-white border border-lightGray z-50"
       >
         <Image
           src={"/images/scanicon.png"}
           alt="smartmart"
-          width={60}
-          height={60}
+          width={69}
+          height={69}
+          className="w-12 h-12 md:w-[69px] md:h-[69px]"
         />
       </Link>
 
@@ -33,7 +35,7 @@ export default function Home() {
       {/* About us */}
       <section
         id="aboutus"
-        className="lg:w-[90%] mx-auto min-h-screen py-5 px-10 flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0"
+        className="lg:w-[90%] mx-auto min-h-screen py-5 flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0"
       >
         <Image
           src={"/images/aboutus.png"}
@@ -41,9 +43,9 @@ export default function Home() {
           width={750}
           height={700}
           loading="lazy"
-          className="lg:max-w-[550px] xl:max-w-[800px]"
+          className="lg:max-w-[550px] xl:max-w-[800px] md:px-10"
         />
-        <article className="flex flex-col items-center text-center space-y-5">
+        <article className="flex flex-col items-center text-center space-y-5 px-10">
           <Image
             src={"/images/logo.png"}
             alt="smartmart"
@@ -70,7 +72,7 @@ export default function Home() {
       </section>
 
       {/* Features */}
-      <div className="min-h-screen mx-auto text-center py-5">
+      <div className="min-h-screen mx-auto text-center py-5 space-y-5">
         <Heading
           label="Features in Smart"
           desc="Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur
@@ -78,6 +80,9 @@ export default function Home() {
         />
         <Features />
       </div>
+
+      {/* Reviews */}
+      <Reviews />
 
       {/* Questions */}
       <Questions />

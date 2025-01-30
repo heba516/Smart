@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -55,7 +56,7 @@ const NavBar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="w-full z-50 flex items-center justify-between h-24 px-5 md:px-7 lg:px-20 bg-white">
+    <nav className="w-full flex items-center justify-between h-16 md:h-24 px-5 md:px-7 lg:px-20 bg-white">
       <SmartLogo />
       <ul className="hidden xl:flex flex-1 items-center justify-start space-x-9 ml-14">
         {NavLinks.map((link, index) => (
@@ -162,13 +163,16 @@ const NavBar = () => {
             <SheetHeader>
               <SmartLogo />
             </SheetHeader>
-            <ul className="mx-auto py-9 space-y-9 border-b border-lightGray">
+
+            <ul className=" w-fit mx-auto py-9 space-y-9 border-b border-lightGray">
               {NavLinks.map((link, index) => (
                 <li
                   key={index}
                   className="font-medium text-xl leading-6 hover:text-primaryRed duration-300"
                 >
-                  <Link href={link.href}>{link.label}</Link>
+                  <SheetClose asChild>
+                    <Link href={link.href}>{link.label}</Link>
+                  </SheetClose>
                 </li>
               ))}
             </ul>
