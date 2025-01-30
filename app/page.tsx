@@ -17,14 +17,14 @@ export default function Home() {
 
       <Link
         href={""}
-        className="fixed right-0 top-1/4 w-fit p-2 md:px-3 rounded-l-full bg-white border border-lightGray z-50"
+        className="fixed right-0 top-1/4 w-fit p-2 md:py-[10px] md:px-3 rounded-l-full bg-white border border-lightGray z-50"
       >
         <Image
           src={"/images/scanicon.png"}
           alt="smartmart"
-          width={65}
-          height={65}
-          className="w-12 h-12 md:w-16 md:h-16"
+          width={69}
+          height={69}
+          className="w-12 h-12 md:w-[69px] md:h-[69px]"
         />
       </Link>
 

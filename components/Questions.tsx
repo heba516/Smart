@@ -1,3 +1,4 @@
+"use client";
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +9,7 @@ import Heading from "./Heading";
 import { IFeatures } from "@/interfaces";
 import Image from "next/image";
 import { Button } from "./ui";
+import { useState } from "react";
 
 const questions: IFeatures[] = [
   {
@@ -48,40 +50,47 @@ const questions: IFeatures[] = [
 ];
 
 export default function Questions() {
+  const [showAll, setShowAll] = useState(false);
+
   return (
-    <section className="lg:w-[70%] xl:w-[60%] px-4 mx-auto py-20 lg:py-0 text-center space-y-5">
+    <section className="lg:w-[70%] xl:w-[60%] px-4 mx-auto py-20 lg:py-0 text-center space-y-5 duration-300">
       <Heading
         label="Frequently Asked Questions"
         desc="Quick answers to questions you may have. Can't find what you're looking for? Check out our full documentation"
       />
       <Accordion type="single" collapsible>
-        {questions.map((question, index) => (
-          <AccordionItem value={`${index}`} key={index}>
-            <AccordionTrigger className="text-black text-sm md:text-xl font-medium">
-              <div className="flex items-center justify-start space-x-2 md:space-x-4">
-                <Image
-                  src={"/images/question.svg"}
-                  alt="smart"
-                  width={30}
-                  height={30}
-                  className="w-6 h-6 md:w-[30px] md:h-[30px]"
-                />
-                <p>{question.title}</p>
-              </div>
-              <span className="text-medGray ml-7 md:ml-0">{question.itm}</span>
-            </AccordionTrigger>
-            <AccordionContent className="text-sm md:text-base font-medium text-medGray">
-              {question.desc}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
+        {(showAll ? questions : questions.slice(0, 5)).map(
+          (question, index) => (
+            <AccordionItem value={`${index}`} key={index}>
+              <AccordionTrigger className="text-black text-sm md:text-xl font-medium">
+                <div className="flex items-center justify-start space-x-2 md:space-x-4">
+                  <Image
+                    src={"/images/question.svg"}
+                    alt="smart"
+                    width={30}
+                    height={30}
+                    className="w-6 h-6 md:w-[30px] md:h-[30px]"
+                  />
+                  <p>{question.title}</p>
+                </div>
+                <span className="text-medGray ml-7 md:ml-0">
+                  {question.itm}
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="text-sm md:text-base font-medium text-medGray w-[90%] mx-auto text-start border-t border-medGray">
+                {question.desc}
+              </AccordionContent>
+            </AccordionItem>
+          )
+        )}
       </Accordion>
 
       <Button
+        onClick={() => setShowAll((prev) => !prev)}
         size={"lg"}
-        className="w-full lg:w-3/5 mx-auto bg-transparent text-black border border-black rounded-lg text-base font-semibold"
+        className="w-full lg:w-3/5 mx-auto bg-transparent text-black border border-black hover:text-primaryRed hover:border-primaryRed rounded-lg text-base font-semibold duration-300"
       >
-        Show All
+        {!showAll ? "Show All" : "Show Less"}
       </Button>
     </section>
   );
