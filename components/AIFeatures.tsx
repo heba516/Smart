@@ -25,32 +25,39 @@ const aifeatures: IFeatures[] = [
 
 export default function AIFeatures() {
     return (
-        <section className="xl:px-20 grid grid-cols-1 lg:grid-cols-3  gap-10 mt-14">
+        <section className="gap-10 grid grid-cols-1 lg:grid-cols-3 mt-14 md:px-16 lg:px-20">
             {aifeatures.map((feature, index) => (
                 <div
-                    className="bg-[#F7F7F7]  rounded-[30px]  py-3 px-5 flex flex-col items-center space-y-4"
+                    className="group flex flex-col items-center space-y-4 bg-[#F7F7F7] hover:bg-[#FF434A] px-5 py-3 rounded-[30px]"
                     key={index}
                 >
-                    <div className="text-left ">
-                        <div className="flex items-center justify-between ps-1">
-                            <h3 className="text-[23px] uppercase font-bold text-[#ED1C24]">
+                    <div className="text-left">
+                        <div className="flex justify-between items-center ps-1">
+                            <h3 className="group-hover:text-white font-bold text-[#ED1C24] text-xl lg:text-[23px] uppercase">
                                 {feature.title}
                             </h3>
-                                <Image
-									className=""
-                                    src="images/aiUpArrow.svg"
-                                    width={55}
-                                    height={55}
-                                    alt="up arrow"
-                                />
+                            <Image
+                                className="group-hover:hidden"
+                                src="images/aiUpArrow.svg"
+                                width={55}
+                                height={55}
+                                alt="up arrow"
+                            />
+                            <Image
+                                className="group-hover:block hidden"
+                                src="images/rightArrow.svg"
+                                width={55}
+                                height={55}
+                                alt="up arrow"
+                            />
                         </div>
-                        <p className="text-[15px] font-normal px-2">
+                        <p className="group-hover:text-white px-2 font-normal text-sm lg:text-[15px]">
                             {feature.desc}
                         </p>
                     </div>
                     <div>
                         <Image
-                            className="w-full px-2"
+                            className="px-2 w-full"
                             src={feature.src}
                             width={337}
                             height={355}
