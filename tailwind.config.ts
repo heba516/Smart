@@ -10,7 +10,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                urban: ['"Urbanist"', "sans-serif"], // Add the new font here
+                urban: ['"Urbanist"', "sans-serif","Poppins"], // Add the new font here
             },
             colors: {
                 primaryRed: "hsl(var(--primary-red))",

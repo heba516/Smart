@@ -8,6 +8,8 @@ import Landing from "@/components/Landing";
 import AIFeatures from "@/components/AIFeatures";
 import SpecialSystem from "@/components/SpecialSystem";
 import GetOurApp from "@/components/GetOurApp";
+import ContactUs from "@/components/ContactUs";
+import Footer from "@/components/Footer";
 
 export default function Home() {
     return (
@@ -88,6 +90,16 @@ export default function Home() {
                         />
                     </Link>
                 </div>
+            </div>
+
+            {/*Contact Us */}
+            <div className="place-content-center bg-lighGray mx-auto py-10 min-h-screen">
+                <ContactUs />
+            </div>
+
+            {/* Footer */}
+            <div className="mx-auto p-20 w-full min-h-screen text-center">
+                <Footer />
             </div>
         </div>
     );
