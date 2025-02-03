@@ -1,25 +1,21 @@
+import { IFeatures } from "@/interfaces";
 import { MoveRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-export interface IFeatures {
-  src: string;
-  title: string;
-  desc: string;
-}
 
 const features: IFeatures[] = [
   {
-    src: "/images/feature2.svg",
+    itm: "/images/feature2.svg",
     title: "Smart shopping",
     desc: "Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur rutrum fames a.",
   },
   {
-    src: "/images/feature3.svg",
+    itm: "/images/feature3.svg",
     title: "Fast Checkout",
     desc: "Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur rutrum fames a.",
   },
   {
-    src: "/images/feature1.svg",
+    itm: "/images/feature1.svg",
     title: "Advanced security",
     desc: "Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur rutrum fames a.",
   },
@@ -29,7 +25,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="xl:px-20 grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3 mt-10"
+      className="xl:w-[85%] mx-auto grid grid-cols-1 lg:grid-cols-3 place-items-center gap-3"
     >
       {features.map((feature, index) => (
         <div
@@ -38,7 +34,7 @@ const Features = () => {
         >
           <Image
             className="text-primaryRed child group-hover:-translate-y-1 duration-700"
-            src={feature.src}
+            src={feature.itm}
             width={115}
             height={115}
             alt="Feature"

@@ -4,7 +4,7 @@ const SmartLogo = () => {
   return (
     <div className="flex items-center space-x-3">
       <Image
-        className="mx-auto"
+        className="mx-auto w-9 h-9 md:w-11 md:h-11"
         src={"/images/logo.png"}
         width={45}
         height={45}
