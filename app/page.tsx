@@ -98,7 +98,7 @@ export default function Home() {
             </div>
 
             {/* Footer */}
-            <div className="mx-auto p-20 w-full min-h-screen text-center">
+            <div className="mx-auto w-full min-h-screen text-center">
                 <Footer />
             </div>
         </div>

@@ -9,7 +9,7 @@ const Footer = () => {
 			<div className="flex border-white border-b">
 
 			</div>
-			<div className="h-[17px] font-semibold text-sm">
+			<div className="h-[17px] font-semibold text-sm text-white">
 				@2024  Smart |  All rights recieved
 			</div>
 		</section>
