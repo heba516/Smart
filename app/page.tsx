@@ -100,7 +100,7 @@ export default function Home() {
             </div>
 
             {/*Ai Features */}
-            <div className="place-content-center mx-auto py-10 min-h-screen text-center">
+            <div className="place-content-center mx-auto pt-10 pb-20 min-h-screen text-center">
                 <Heading
                     label="AI-Enhanced Customer Experience & Retail Insights"
                     desc="Smart Retail Innovations: Enhanced Shopping, Security, and Inventory Management"
@@ -118,11 +118,11 @@ export default function Home() {
             <Questions />
 
             {/*Future Shopping*/}
-            <div className="flex flex-col justify-center items-center lg:items-start bg-[url('/images/futureShopping.png')] bg-cover mx-auto my-10 p-12 lg:p-[150px] h-[635px] min-h-screen text-center">
+            <div className="flex flex-col justify-center items-center lg:items-start bg-[url('/images/futureShopping.png')] lg:bg-cover mx-auto my-20 p-12 lg:p-[150px] h-[635px] min-h-screen text-center">
                 <h2 className="mb-2 w-full lg:w-[55%] font-extrabold text-[32px] text-white md:text-[64px] uppercase">
                     THE FUTURE OF SHOPPING IS HERE START NOW !
                 </h2>
-                <div className="flex md:flex-row flex-col gap-8 mt-10 lg:ps-14 ps-20">
+                <div className="flex md:flex-row flex-col gap-8 mt-10 lg:ps-14 ps-10">
                     <Link href={""}>
                         <Image
                             src={"/images/whiteGooglePlay.png"}

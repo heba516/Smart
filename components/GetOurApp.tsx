@@ -4,7 +4,7 @@ import React from "react";
 
 export default function GetOurApp() {
     return (
-        <section className="xl:flex justify-center items-center gap-10 hidden mx-auto p-20 in-h-screen text-center text-centerxl:flex">
+        <section className="xl:flex justify-center items-center gap-10 hidden mx-auto px-20 pb-[300px] in-h-screen text-center text-centerxl:flex">
             <div className="flex flex-col justify-center items-center gap-16">
                 <header className="px-6">
                     <h2 className="mb-2 font-extrabold text-4xl text-primaryRed md:text-4xl uppercase">
