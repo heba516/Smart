@@ -4,7 +4,7 @@ import ContactUsForm from "@/components/forms/ContactUsForm";
 
 export default function ContactUs() {
     return (
-        <div>
+        <div className="place-content-center bg-lighGray mx-auto py-10 min-h-screen">
             <header className="mb-12 px-2 text-center">
                 <h2 className="mb-2 font-semibold text-[32px] text-primaryRed md:text-[40px]">
                     Contact Us
@@ -14,17 +14,17 @@ export default function ContactUs() {
                 </p>
             </header>
 
-            <section className="flex md:flex-row flex-col gap-20 bg-white px-20">
-                <div className="relative flex flex-col gap-5 bg-primaryRed p-8 rounded md:w-[539px] md:h-[647px]">
+            <section className="flex md:flex-row flex-col gap-20 bg-white px-3 md:px-20">
+                <div className="relative flex flex-col gap-5 bg-primaryRed p-1 md:p-8 rounded md:w-[539px] md:h-[647px]">
                     <Image
-                        className="top-[-40px] right-[-20px] absolute"
+                        className="top-[-50px] lg:top-[-60px] right-0 lg:right-[-15px] absolute"
                         src={"/images/contactusBigCircle.svg"}
                         alt="circle"
                         width={147}
                         height={147}
                     />
                     <Image
-                        className="top-[50px] right-[-15px] absolute"
+                        className="top-[30px] lg:top-[40px] right-0 lg:right-[-15px] absolute"
                         src={"/images/contactusSmallCircle.svg"}
                         alt="circle"
                         width={103}
@@ -71,7 +71,7 @@ export default function ContactUs() {
                                 width={20}
                                 height={16}
                             />
-                            <p className="w-50 font-normal text-base text-white">
+                            <p className="md:w-2/3 font-normal text-base text-white">
                                 132 Dartmouth Street Boston, Massachusetts 02156
                                 United States
                             </p>

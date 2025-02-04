@@ -11,19 +11,19 @@ import Image from "next/image";
 
 export function Reviews() {
   return (
-    <section className="w-[95%] min-h-screen place-content-center lg:place-content-start text-center mx-auto space-y-14 md:space-y-24 overflow-x-hidden">
+    <section className="place-content-center lg:place-content-start space-y-14 md:space-y-24 mx-auto pt-20 pb-10 w-[95%] min-h-screen text-center overflow-x-hidden">
       <header className="space-y-5 px-2">
-        <p className="text-primaryRed text-xl font-semibold uppercase">
+        <p className="font-semibold text-primaryRed text-xl uppercase">
           our testimonial
         </p>
-        <h2 className="relative w-fit mx-auto text-3xl md:text-5xl font-semibold text-black mb-2">
+        <h2 className="relative mx-auto mb-2 w-fit font-semibold text-3xl text-black md:text-5xl">
           What Our Customers Say about us
           <Image
             src={"/images/vec.svg"}
             alt="smartmart"
             width={27}
             height={27}
-            className="absolute -right-2 sm:-right-8 -top-4"
+            className="-top-4 -right-2 sm:-right-8 absolute"
           />
         </h2>
       </header>
@@ -38,14 +38,14 @@ export function Reviews() {
           {Array.from({ length: 5 }).map((_, index) => (
             <CarouselItem
               key={index}
-              className="md:basis-1/2 lg:basis-1/3 w-[343px] md:max-w-[363px] rounded-xl border border-medGray relative ml-1 md:ml-7"
+              className="md:basis-1/2 lg:basis-1/3 relative border-medGray ml-1 md:ml-7 border rounded-xl w-[343px] md:max-w-[363px]"
             >
               <Image
                 src={"/images/rev.svg"}
                 alt="smartmart"
                 width={60}
                 height={60}
-                className="absolute -left-2 md:-left-7 -top-7 z-40 w-12 h-12 md:w-[60px] md:h-[60px]"
+                className="-top-7 -left-2 md:-left-7 z-40 absolute w-12 md:w-[60px] h-12 md:h-[60px]"
               />
               <div className="">
                 <Image

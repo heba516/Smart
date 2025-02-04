@@ -83,7 +83,7 @@ const ContactUsForm = () => {
 
     return (
         <Form {...form}>
-            <form className="flex flex-col items-center space-y-3">
+            <form className="flex flex-col items-center space-y-3 px-3">
                 <div className="flex justify-between items-center gap-3">
                     {groupedInputs.map((input, index) => (
                         <FormField

@@ -53,7 +53,7 @@ export default function Questions() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section className="lg:w-[70%] xl:w-[60%] px-4 mx-auto py-20 lg:py-0 text-center space-y-5 duration-300">
+    <section className="space-y-5 mx-auto px-4 py-20 pb-[50px] lg:w-[70%] xl:w-[60%] text-center duration-300">
       <Heading
         label="Frequently Asked Questions"
         desc="Quick answers to questions you may have. Can't find what you're looking for? Check out our full documentation"
@@ -62,22 +62,22 @@ export default function Questions() {
         {(showAll ? questions : questions.slice(0, 5)).map(
           (question, index) => (
             <AccordionItem value={`${index}`} key={index}>
-              <AccordionTrigger className="text-black text-sm md:text-xl font-medium">
-                <div className="flex items-center justify-start space-x-2 md:space-x-4">
+              <AccordionTrigger className="font-medium text-black text-sm md:text-xl">
+                <div className="flex justify-start items-center space-x-2 md:space-x-4">
                   <Image
                     src={"/images/question.svg"}
                     alt="smart"
                     width={30}
                     height={30}
-                    className="w-6 h-6 md:w-[30px] md:h-[30px]"
+                    className="w-6 md:w-[30px] h-6 md:h-[30px]"
                   />
                   <p>{question.title}</p>
                 </div>
-                <span className="text-medGray ml-7 md:ml-0">
+                <span className="ml-7 md:ml-0 text-medGray">
                   {question.itm}
                 </span>
               </AccordionTrigger>
-              <AccordionContent className="text-sm md:text-base font-medium text-medGray w-[90%] mx-auto text-start border-t border-medGray">
+              <AccordionContent className="border-medGray mx-auto border-t w-[90%] font-medium text-medGray text-sm text-start md:text-base">
                 {question.desc}
               </AccordionContent>
             </AccordionItem>
@@ -88,7 +88,7 @@ export default function Questions() {
       <Button
         onClick={() => setShowAll((prev) => !prev)}
         size={"lg"}
-        className="w-full lg:w-3/5 mx-auto bg-transparent text-black border border-black hover:text-primaryRed hover:border-primaryRed rounded-lg text-base font-semibold duration-300"
+        className="hover:border-primaryRed bg-transparent mx-auto border border-black rounded-lg w-full lg:w-3/5 font-semibold text-base text-black hover:text-primaryRed duration-300"
       >
         {!showAll ? "Show All" : "Show Less"}
       </Button>
