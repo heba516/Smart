@@ -4,7 +4,7 @@ import ContactUsForm from "@/components/forms/ContactUsForm";
 
 export default function ContactUs() {
     return (
-        <div>
+        <div className="place-content-center bg-lighGray mx-auto py-10 min-h-screen">
             <header className="mb-12 px-2 text-center">
                 <h2 className="mb-2 font-semibold text-[32px] text-primaryRed md:text-[40px]">
                     Contact Us
@@ -71,7 +71,7 @@ export default function ContactUs() {
                                 width={20}
                                 height={16}
                             />
-                            <p className="w-50 font-normal text-base text-white">
+                            <p className="w-1/2 font-normal text-base text-white">
                                 132 Dartmouth Street Boston, Massachusetts 02156
                                 United States
                             </p>

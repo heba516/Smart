@@ -34,61 +34,66 @@ export default function Home() {
             </Link>
 
             {/* Landing */}
-      <Landing />
+            <Landing />
 
-      {/* About us */}
-      <section
-        id="aboutus"
-        className="lg:w-[90%] mx-auto min-h-screen py-5 flex flex-col lg:flex-row items-center space-y-5 lg:space-y-0"
-      >
-        <Image
-          src={"/images/aboutus.png"}
-          alt="smartmart"
-          width={750}
-          height={700}
-          loading="lazy"
-          className="lg:max-w-[550px] xl:max-w-[800px] md:px-10"
-        />
-        <article className="flex flex-col items-center text-center space-y-5 px-10">
-          <Image
-            src={"/images/logo.png"}
-            alt="smartmart"
-            width={60}
-            height={60}
-            loading="lazy"
-          />
-          <h2 className="capitalize text-3xl lg:text-4xl font-semibold">
-            what is <span className="text-primaryRed">Smart ?</span>
-          </h2>
-          <p className="2xl:w-[90%] text-black text-base xl:text-xl font-medium">
-            Simplify Your Shopping Experience with Smart Technology Our{" "}
-            <span className="font-bold">IoT-Driven Smart Retail System</span> is
-            here to make shopping easier and faster than ever! Through a
-            user-friendly <span className="font-bold">mobile app</span> and{" "}
-            <span className="font-bold">website</span>, customers can scan
-            products, add them to their cart, and complete payments
-            effortlessly. No more long queues or complicated processes , just a
-            smooth shopping experience , Experience the future of retail with
-            smart features that save you time and make every shopping trip more
-            convenient!
-          </p>
-        </article>
-      </section>
+            {/* About us */}
+            <section
+                id="aboutus"
+                className="flex lg:flex-row flex-col items-center space-y-5 lg:space-y-0 mx-auto py-5 lg:w-[90%] min-h-screen"
+            >
+                <Image
+                    src={"/images/aboutus.png"}
+                    alt="smartmart"
+                    width={750}
+                    height={700}
+                    loading="lazy"
+                    className="md:px-10 lg:max-w-[550px] xl:max-w-[800px]"
+                />
+                <article className="flex flex-col items-center space-y-5 px-10 text-center">
+                    <Image
+                        src={"/images/logo.png"}
+                        alt="smartmart"
+                        width={60}
+                        height={60}
+                        loading="lazy"
+                    />
+                    <h2 className="font-semibold text-3xl lg:text-4xl capitalize">
+                        what is <span className="text-primaryRed">Smart ?</span>
+                    </h2>
+                    <p className="2xl:w-[90%] font-medium text-base text-black xl:text-xl">
+                        Simplify Your Shopping Experience with Smart Technology
+                        Our{" "}
+                        <span className="font-bold">
+                            IoT-Driven Smart Retail System
+                        </span>{" "}
+                        is here to make shopping easier and faster than ever!
+                        Through a user-friendly{" "}
+                        <span className="font-bold">mobile app</span> and{" "}
+                        <span className="font-bold">website</span>, customers
+                        can scan products, add them to their cart, and complete
+                        payments effortlessly. No more long queues or
+                        complicated processes , just a smooth shopping
+                        experience , Experience the future of retail with smart
+                        features that save you time and make every shopping trip
+                        more convenient!
+                    </p>
+                </article>
+            </section>
 
             {/* Features */}
-      <div className="min-h-screen mx-auto text-center py-5 space-y-5">
-        <Heading
-          label="Features in Smart"
-          desc="Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur
+            <div className="space-y-5 mx-auto py-5 min-h-screen text-center">
+                <Heading
+                    label="Features in Smart"
+                    desc="Lorem ipsum dolor sit amet consectetur. Sed elementum eget nascetur
         rutrum fames a."
-        />
-        <Features />
-      </div>
+                />
+                <Features />
+            </div>
 
             {/*Special System */}
             <div className="place-content-center mx-auto py-10 min-h-screen text-center">
                 <Heading
-                    title="What Makes Our System Special?"
+                    label="What Makes Our System Special?"
                     desc="Smart Retail Innovations: Enhanced Shopping, Security, and Inventory Management"
                 />
                 <SpecialSystem />
@@ -97,22 +102,20 @@ export default function Home() {
             {/*Ai Features */}
             <div className="place-content-center mx-auto py-10 min-h-screen text-center">
                 <Heading
-                    title="AI-Enhanced Customer Experience & Retail Insights"
+                    label="AI-Enhanced Customer Experience & Retail Insights"
                     desc="Smart Retail Innovations: Enhanced Shopping, Security, and Inventory Management"
                 />
                 <AIFeatures />
             </div>
-            
+
             {/* Reviews */}
-             <Reviews />
+            <Reviews />
 
             {/*Get Our App*/}
-            <div className="xl:flex justify-center items-center gap-10 hidden mx-auto p-20 min-h-screen text-center">
                 <GetOurApp />
-            </div>
-        
-        {/* Questions */}
-      <Questions />
+
+            {/* Questions */}
+            <Questions />
 
             {/*Future Shopping*/}
             <div className="flex flex-col justify-center items-center lg:items-start bg-[url('/images/futureShopping.png')] bg-cover mx-auto my-10 p-12 lg:p-[150px] h-[635px] min-h-screen text-center">
@@ -141,15 +144,10 @@ export default function Home() {
             </div>
 
             {/*Contact Us */}
-            <div className="place-content-center bg-lighGray mx-auto py-10 min-h-screen">
                 <ContactUs />
-            </div>
 
             {/* Footer */}
-            <div className="mx-auto w-full min-h-screen text-center">
                 <Footer />
-            </div>
         </div>
     );
-
-
+}
