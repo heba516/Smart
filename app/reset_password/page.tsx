@@ -1,5 +1,5 @@
 import ForgetPasswordLayout from "@/components/ForgetPasswordLayout";
-import CreateNewPassword from "@/components/forms/CreateNewPassword";
+import CreateNewPassword from "@/app/reset_password/components/CreateNewPassword";
 
 const page = () => {
   return (

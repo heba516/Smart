@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Smart Mart - Signin",
+  title: "Signin",
   description: "",
   icons: {
     icon: "/images/logo.png",

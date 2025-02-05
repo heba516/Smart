@@ -1,17 +1,17 @@
-import Features from "@/components/Features";
-import NavBar from "@/components/NavBar";
 import Image from "next/image";
 import Link from "next/link";
+import Features from "@/app/components/Features";
+import NavBar from "@/app/components/NavBar";
 import Heading from "@/components/Heading";
-import OfferBar from "@/components/OfferBar";
-import Landing from "@/components/Landing";
-import AIFeatures from "@/components/AIFeatures";
-import SpecialSystem from "@/components/SpecialSystem";
-import GetOurApp from "@/components/GetOurApp";
-import ContactUs from "@/components/ContactUs";
-import Footer from "@/components/Footer";
-import Questions from "@/components/Questions";
-import { Reviews } from "@/components/Reviews";
+import OfferBar from "@/app/components/OfferBar";
+import Landing from "@/app/components/Landing";
+import AIFeatures from "@/app/components/AIFeatures";
+import SpecialSystem from "@/app/components/SpecialSystem";
+import GetOurApp from "@/app/components/GetOurApp";
+import ContactUs from "@/app/components/ContactUs";
+import Footer from "@/app/components/Footer";
+import Questions from "@/app/components/Questions";
+import { Reviews } from "@/app/components/Reviews";
 
 export default function Home() {
   return (

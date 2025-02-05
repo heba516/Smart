@@ -12,7 +12,10 @@ const urbanist = Urbanist({
 });
 
 export const metadata: Metadata = {
-  title: "Smart Mart",
+  title: {
+    template: "Smart Mart - %s",
+    default: "Smart Mart",
+  },
   description: "",
   icons: {
     icon: "/images/logo.png",

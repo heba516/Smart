@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button } from "./ui";
+import { Button } from "../../components/ui";
 import Link from "next/link";
 
 const quotes: string[] = [

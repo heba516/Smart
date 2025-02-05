@@ -5,10 +5,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Heading from "./Heading";
+import Heading from "@/components/Heading";
 import { IFeatures } from "@/interfaces";
 import Image from "next/image";
-import { Button } from "./ui";
+import { Button } from "@/components/ui";
 import { useState } from "react";
 
 const questions: IFeatures[] = [

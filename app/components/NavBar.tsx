@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import SmartLogo from "./SmartLogo";
+import SmartLogo from "../../components/SmartLogo";
 import {
   Button,
   DropdownMenu,
@@ -14,7 +14,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui";
+} from "../../components/ui";
 import { Icon } from "@iconify/react";
 import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie";

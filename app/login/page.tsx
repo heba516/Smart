@@ -1,8 +1,7 @@
-import LoginForm from "@/components/forms/LoginForm";
+import LoginForm from "@/app/login/components/LoginForm";
 import SignupWithGoogleBtn from "@/components/SignupWithGoogleBtn";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function page() {
   return (

@@ -15,7 +15,7 @@ import {
   Input,
   Button,
   Checkbox,
-} from "../ui";
+} from "@/components/ui";
 import clsx from "clsx";
 import { login } from "@/app/api/actions/auth";
 import { useState } from "react";

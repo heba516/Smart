@@ -1,4 +1,4 @@
-import SignupForm from "@/components/forms/SignupForm";
+import SignupForm from "@/app/signup/components/SignupForm";
 import SignupWithGoogleBtn from "@/components/SignupWithGoogleBtn";
 import Image from "next/image";
 import Link from "next/link";
