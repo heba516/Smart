@@ -5,6 +5,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function userName(name: string | null | undefined) {
+export function userNameSplitFun(name: string | null | undefined) {
   return name?.split(" ").map((word) => word[0]).join("")
 }

@@ -1,7 +1,11 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { signup } from "@/app/api/actions/auth";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
 import {
   Form,
   FormField,
@@ -14,11 +18,7 @@ import {
   Checkbox,
 } from "@/components/ui";
 import { PasswordValidationChecklist } from "@/components/CheckValidationList";
-import { cn } from "@/lib/utils";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
-import { signup } from "@/app/actions/auth";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
 const formSchema = z
@@ -71,6 +71,7 @@ const groupedInputs: IInput[] = [
     type: "text",
   },
 ];
+
 const inputs: IInput[] = [
   {
     name: "email",
@@ -116,7 +117,7 @@ const SignupForm = () => {
     } catch (error) {
       // throw error;
       console.log(error);
-      toast.error("An account with this email already exists. Please log in");
+      toast.error("An account with this email already exists. Please login");
     } finally {
       setLoading(false);
     }

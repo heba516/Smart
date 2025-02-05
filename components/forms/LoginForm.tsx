@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -18,7 +17,7 @@ import {
   Checkbox,
 } from "../ui";
 import clsx from "clsx";
-import { login } from "@/app/actions/auth";
+import { login } from "@/app/api/actions/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -39,12 +38,7 @@ const formSchema = z.object({
     .regex(/[\W_]/, {
       message: "Password must contain at least one special character.",
     }),
-  // confirmPassword: z.string(),
 });
-// .refine((data) => data.password !== data.confirmPassword, {
-//   message: "Passwords do not match.",
-//   path: ["confirmPassword"],
-// });
 
 interface IInput {
   name: "email" | "password";
@@ -83,14 +77,11 @@ export default function LoginForm() {
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
       setLoading(true);
-      const res = await login(data);
-      console.log(res);
+      await login(data);
       router.push("/");
     } catch (error) {
-      //throw error;
       console.log(error);
-      // setError(true);
-      toast.error("No account found with this email/username. Please sign up");
+      toast.error("No account found with this email/username. Please sign up");
     } finally {
       setLoading(false);
     }

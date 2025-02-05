@@ -17,7 +17,9 @@ import {
 } from "./ui";
 import { Icon } from "@iconify/react";
 import { useSession, signOut } from "next-auth/react";
-import { userName } from "@/lib/utils";
+import Cookies from "js-cookie";
+import { logout } from "@/app/api/actions/auth";
+import { userNameSplitFun } from "@/lib/utils";
 
 interface ILinks {
   label: string;
@@ -55,6 +57,12 @@ const DropDownMenu: ILinks[] = [
 const NavBar = () => {
   const { data: session } = useSession();
 
+  const isLoggedIn = !!Cookies.get("token");
+  const getUserName = Cookies.get("userName");
+  const userName = getUserName ? JSON.parse(getUserName) : null;
+
+  const isAuthenticated = session || isLoggedIn;
+
   return (
     <nav className="w-full flex items-center justify-between h-16 md:h-24 px-5 md:px-7 lg:px-20 bg-white">
       <SmartLogo />
@@ -70,15 +78,19 @@ const NavBar = () => {
       </ul>
 
       <section className="flex space-x-2 md:space-x-[22px] items-center">
-        {session ? (
+        {isAuthenticated ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <div className="flex items-center space-x-2 text-lg md:text-xl font-semibold">
                 <span className="cursor-pointer p-2 md:p-3 bg-primaryRed rounded-full text-white uppercase">
-                  {userName(session?.user?.name)}
+                  {isLoggedIn
+                    ? userNameSplitFun(userName)
+                    : userNameSplitFun(session?.user?.name)}
                 </span>
                 <p className="hidden xl:flex items-center cursor-pointer">
-                  Welcome, {session?.user?.name?.split(" ")[0]}{" "}
+                  Welcome,{" "}
+                  {userName?.split(" ")[0] ||
+                    session?.user?.name?.split(" ")[0]}{" "}
                   <Image
                     className="ml-2"
                     alt="smart"
@@ -101,7 +113,10 @@ const NavBar = () => {
               <DropdownMenuItem>
                 <span
                   className="cursor-pointer w-full"
-                  onClick={() => signOut({ callbackUrl: "/login" })}
+                  onClick={() => {
+                    logout();
+                    signOut({ callbackUrl: "/login" });
+                  }}
                 >
                   Logout
                 </span>
@@ -156,6 +171,7 @@ const NavBar = () => {
               width={51}
               height={51}
               className="cursor-pointer xl:hidden w-10 h-10 md:w-[51px] md:h-[51px]"
+              loading="lazy"
             />
           </SheetTrigger>
           <SheetTitle></SheetTitle>
@@ -176,7 +192,7 @@ const NavBar = () => {
                 </li>
               ))}
             </ul>
-            {!session && (
+            {!isAuthenticated && (
               <section className="py-9 mx-auto space-y-9 border-b border-lightGray">
                 <p className="text-base text-darkGray font-normal">
                   Want to benefit from a personalized experience and access
