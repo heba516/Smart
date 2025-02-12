@@ -2,11 +2,8 @@ import Image from "next/image";
 
 const Footer = () => {
     return (
-        <section
-            id="footer"
-            className="bg-[#2A2A2A] mx-auto mt-[180px] w-full"
-        >
-            <div className="flex md:flex-row flex-col justify-around items-center gap-12 border-white px-5 py-6 border-b lg:ps-20">
+        <section id="footer" className="bg-[#2A2A2A]">
+            <div className="flex md:flex-row flex-col justify-around items-center gap-12 px-5 py-6 lg:ps-20 border-white border-b">
                 <Image
                     className=""
                     src={"/images/logo.png"}
@@ -56,7 +53,7 @@ const Footer = () => {
                     <div className="md:w-full dir-ltr">
                         <input
                             type="text"
-                            className="border-[#8D8D8D] p-2 md:p-2 w-1/2 md:w-full"
+                            className="p-1 md:p-2 border-[#8D8D8D] focus:outline-0 w-1/2 text-sm md:text-base"
                             placeholder="Your email address"
                         />
 
@@ -64,12 +61,13 @@ const Footer = () => {
                             Subscribe
                         </button>
                     </div>
-                    <p className="font-medium text-[13px] text-medGray pe-6">
-                        * Will send you weekly updates for your better tool  management.
+                    <p className="pe-6 font-medium text-[13px] text-medGray">
+                        * Will send you weekly updates for your better tool
+                        management.
                     </p>
                 </div>
             </div>
-            <div className="p-[20px] font-semibold text-center text-sm text-white">
+            <div className="p-[20px] font-semibold text-white text-sm text-center">
                 @2024 Smart | All rights recieved
             </div>
         </section>
