@@ -20,6 +20,7 @@ import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie";
 import { logout } from "@/app/api/actions/auth";
 import { userNameSplitFun } from "@/lib/utils";
+import { useState } from "react";
 
 interface ILinks {
   label: string;
@@ -56,12 +57,25 @@ const DropDownMenu: ILinks[] = [
 
 const NavBar = () => {
   const { data: session } = useSession();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!Cookies.get("token"));
 
-  const isLoggedIn = !!Cookies.get("token");
+  // const isLoggedIn = !!Cookies.get("token");
   const getUserName = Cookies.get("userName");
-  const userName = getUserName ? JSON.parse(getUserName) : null;
+  const userName = isLoggedIn && getUserName ? JSON.parse(getUserName) : null;
 
   const isAuthenticated = session || isLoggedIn;
+
+  console.log({ isLoggedIn });
+  console.log({ userName });
+
+  const logoutFun = () => {
+    if (isLoggedIn) {
+      setIsLoggedIn(false);
+      logout();
+    } else {
+      signOut({ callbackUrl: "/login" });
+    }
+  };
 
   return (
     <nav className="w-full flex items-center justify-between h-16 md:h-24 px-5 md:px-7 lg:px-20 bg-white">
@@ -111,13 +125,7 @@ const NavBar = () => {
               ))}
 
               <DropdownMenuItem>
-                <span
-                  className="cursor-pointer w-full"
-                  onClick={() => {
-                    logout();
-                    signOut({ callbackUrl: "/login" });
-                  }}
-                >
+                <span className="cursor-pointer w-full" onClick={logoutFun}>
                   Logout
                 </span>
               </DropdownMenuItem>
