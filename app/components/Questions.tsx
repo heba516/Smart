@@ -53,7 +53,7 @@ export default function Questions() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <section className="space-y-5 mx-auto px-4 py-20 pb-[50px] lg:w-[70%] xl:w-[60%] text-center duration-300">
+    <section className="space-y-5 mx-auto px-4 py-20 lg:w-[70%] xl:w-[60%] text-center duration-300">
       <Heading
         label="Frequently Asked Questions"
         desc="Quick answers to questions you may have. Can't find what you're looking for? Check out our full documentation"

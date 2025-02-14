@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <div className="flex flex-col items-center mx-auto my- p-5 w-full lg:w-1/2">
+    <div className="flex flex-col items-center mx-auto p-5 w-full lg:w-1/2">
       <div className="flex justify-between items-center w-full">
         <p className="font-medium text-base">
           Already have account ?{" "}
@@ -35,7 +35,7 @@ const page = () => {
           Sign up to start our free journey
         </p>
       </div>
-      <div className="w-full lg:w-3/4">
+      <div className="w-full xl:w-3/4">
         <SignupWithGoogleBtn>Sign up with Google</SignupWithGoogleBtn>
         <div className="inline-flex justify-center items-center w-full">
           <hr className="border-0 bg-medGray my-8 w-full h-px" />
