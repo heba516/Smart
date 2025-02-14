@@ -25,7 +25,7 @@ const aifeatures: IFeatures[] = [
 
 export default function AIFeatures() {
   return (
-    <section className="gap-10 grid grid-cols-1 lg:grid-cols-3 mt-14 px-3 md:px-16 lg:px-20">
+    <section className="gap-10 grid grid-cols-1 lg:grid-cols-3 mt-14 px-5 md:px-16 lg:px-20">
       {aifeatures.map((feature, index) => (
         <div
           className="group flex flex-col items-center space-y-4 bg-[#F7F7F7] hover:bg-[#FF434A] px-5 py-3 rounded-[30px] duration-300"
@@ -33,7 +33,7 @@ export default function AIFeatures() {
         >
           <div className="text-left">
             <div className="flex justify-between items-center ps-1">
-              <h3 className="group-hover:text-white font-bold text-[#ED1C24] text-xl lg:text-[23px] uppercase duration-300">
+              <h3 className="group-hover:text-white font-bold text-[#ED1C24] lg:text-[23px] text-xl uppercase duration-300">
                 {feature.title}
               </h3>
               <Image
@@ -44,7 +44,7 @@ export default function AIFeatures() {
                 alt="up arrow"
               />
             </div>
-            <p className="group-hover:text-white px-2 font-normal text-sm lg:text-[15px]">
+            <p className="group-hover:text-white px-2 font-normal lg:text-[15px] text-sm">
               {feature.desc}
             </p>
           </div>

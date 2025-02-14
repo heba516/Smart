@@ -14,27 +14,27 @@ export default function ContactUs() {
                 </p>
             </header>
 
-            <section className="flex md:flex-row flex-col gap-20 bg-white px-3 md:px-20">
-                <div className="relative flex flex-col gap-5 bg-primaryRed p-1 md:p-8 rounded md:w-[539px] md:h-[647px]">
+            <section className="flex md:flex-row flex-col gap-20 bg-white px-3 md:px-20 ">
+                <div className="relative flex flex-col gap-5 bg-primaryRed  md:p-8 px-0 py-14 rounded md:w-[539px] md:h-[647px]">
                     <Image
-                        className="top-[-50px] lg:top-[-60px] right-0 lg:right-[-15px] absolute"
+                        className="lg:top-[-60px] top-[-50px] right-[-6px] lg:right-[-15px] absolute w-[97px] lg:w-[147px]"
                         src={"/images/contactusBigCircle.svg"}
                         alt="circle"
                         width={147}
                         height={147}
                     />
                     <Image
-                        className="top-[30px] lg:top-[40px] right-0 lg:right-[-15px] absolute"
+                        className="lg:top-[40px] top-[10px] right-[-10px] lg:right-[-15px] absolute w-[73px] lg:w-[103px]"
                         src={"/images/contactusSmallCircle.svg"}
                         alt="circle"
                         width={103}
                         height={103}
                     />
-                    <header className="mb-14 ps-10">
+                    <header className="lg:mb-14 mb-5 lg:ps-10 ps-3">
                         <h2 className="font-semibold text-[28px] text-white">
                             Contact Information
                         </h2>
-                        <p className="font-normal text-lg text-medGray">
+                        <p className="font-normal text-medGray text-lg">
                             Say something to and send it now
                         </p>
                     </header>
@@ -47,7 +47,7 @@ export default function ContactUs() {
                                 width={24}
                                 height={24}
                             />
-                            <p className="font-normal text-base text-white">
+                            <p className="font-normal text-white text-base">
                                 +1012 3456 789
                             </p>
                         </div>
@@ -59,7 +59,7 @@ export default function ContactUs() {
                                 width={20}
                                 height={16}
                             />
-                            <p className="font-normal text-base text-white">
+                            <p className="font-normal text-white text-base">
                                 Smart@gmail.com
                             </p>
                         </div>
@@ -71,7 +71,7 @@ export default function ContactUs() {
                                 width={20}
                                 height={16}
                             />
-                            <p className="md:w-2/3 font-normal text-base text-white">
+                            <p className="md:w-2/3 font-normal text-white text-base">
                                 132 Dartmouth Street Boston, Massachusetts 02156
                                 United States
                             </p>

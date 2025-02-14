@@ -13,11 +13,11 @@ import {
 } from "@/components/ui";
 
 const formSchema = z.object({
-    firstName: z.string().min(1, {
-        message: "must be at least 1 characters.",
+    firstName: z.string().min(3, {
+        message: "must be at least 3 characters.",
     }),
-    lastName: z.string().min(2, {
-        message: "must be at least 2 characters.",
+    lastName: z.string().min(3, {
+        message: "must be at least 3 characters.",
     }),
     email: z.string().email({ message: "Invalid email address." }),
     phone: z
@@ -38,7 +38,7 @@ const groupedInputs: IInput[] = [
     {
         name: "firstName",
         label: "First name",
-        placeholder: "I",
+        placeholder: "joe",
         type: "text",
     },
     {
@@ -98,7 +98,7 @@ const ContactUsForm = () => {
                                     <FormControl>
                                         <input
                                             type={input.type}
-                                            className="border-[#8D8D8D] px-4 border-b w-full"
+                                            className="border-[#8D8D8D] px-4 border-b w-full focus:outline-0"
                                             placeholder={input.placeholder}
                                             {...field}
                                         />
@@ -123,7 +123,7 @@ const ContactUsForm = () => {
                                 <FormControl>
                                     <input
                                         type={input.type}
-                                        className="border-[#8D8D8D] px-2 border-b w-full"
+                                        className="border-[#8D8D8D] px-2 border-b w-full focus:outline-0"
                                         placeholder={input.placeholder}
                                         {...field}
                                     />
