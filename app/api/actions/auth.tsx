@@ -32,6 +32,8 @@ export async function login(data: ILogin) {
       secure: true,
     });
 
+    console.log({ token, firstName, lastName });
+
     return res;
   } catch (error) {
     console.log("Error from login");
