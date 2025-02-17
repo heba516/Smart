@@ -22,7 +22,7 @@ export default function Home() {
       </section>
 
       <Link
-        href={""}
+        href={"/cart"}
         className="top-1/4 right-0 z-50 fixed bg-white shadow-md px-3 py-2 border-2 border-input rounded-l-full w-fit"
       >
         <Image
