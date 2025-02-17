@@ -1,17 +1,24 @@
-// import { decrypt } from '@/app/lib/session';
-// import { cookies } from 'next/headers';
+import { NextRequest, NextResponse } from "next/server";
 
-// export async function GET() {
-//   const sessionCookie = (await cookies()).get('session')?.value;
-//   if (!sessionCookie) {
-//     return Response.json({ session: null }, { status: 401 });
-//   }
 
-//   const session = await decrypt(sessionCookie);
+export default function middleware (request:NextRequest) {
+    console.log("middleware");    
+    const loggedIn = request.cookies.get('token');
+    const userNavigateRoute = request.nextUrl.pathname;
 
-//   return Response.json({ session });
-// }
+    if (loggedIn) { 
+        if (userNavigateRoute === '/login' || userNavigateRoute === '/signup') {
+            return NextResponse.redirect(new URL("/", request.nextUrl.origin));
+        }
+    } else {
+        if (userNavigateRoute !== "/login" && userNavigateRoute !== "/signup" && userNavigateRoute !== "/") {
+            return NextResponse.redirect(new URL("/login", request.nextUrl.origin));
+        }
+        }
+    
+    return NextResponse.next();
+}
 
-export default function middleware () {
-
+export const config = {
+  matcher: ['/cart', '/dashboard', '/login', '/signup'],
 }
