@@ -32,15 +32,11 @@ export async function login(data: ILogin) {
       secure: true,
     });
 
-    console.log({ token, firstName, lastName });
+    console.log(res.data);
 
     return res;
   } catch (error) {
     console.log("Error from login");
     throw error;
   }
-}
-
-export function logout() {
-  Cookies.remove("token");
 }
