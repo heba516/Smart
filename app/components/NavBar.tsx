@@ -18,9 +18,8 @@ import {
 import { Icon } from "@iconify/react";
 import { useSession, signOut } from "next-auth/react";
 import Cookies from "js-cookie";
-import { logout } from "@/app/api/actions/auth";
 import { userNameSplitFun } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface ILinks {
   label: string;
@@ -57,7 +56,15 @@ const DropDownMenu: ILinks[] = [
 
 const NavBar = () => {
   const { data: session } = useSession();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!Cookies.get("token"));
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
+  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!Cookies.get("token"));
+  useEffect(() => {
+    setIsLoggedIn(!!Cookies.get("token"));
+  }, []);
+
+  if (isLoggedIn === null) {
+    return <p>Loading</p>;
+  }
 
   const getUserName = Cookies.get("userName");
   const userName = isLoggedIn && getUserName ? JSON.parse(getUserName) : null;
@@ -70,14 +77,14 @@ const NavBar = () => {
   const logoutFun = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
-      logout();
-    } else {
-      signOut({ callbackUrl: "/login" });
+      Cookies.remove("token");
+      Cookies.remove("userName");
     }
+    signOut({ callbackUrl: "/" });
   };
 
   return (
-    <nav className="flex justify-between items-center bg-white px-5 md:px-7 lg:px-20 w-full h-16 md:h-24">
+    <nav className="flex justify-between items-center bg-white px-5 md:px-7 lg:px-20 w-full h-16 md:h-24 shadow-md">
       <SmartLogo />
       <ul className="xl:flex flex-1 justify-start items-center space-x-9 hidden ml-14">
         {NavLinks.map((link, index) => (
@@ -133,6 +140,7 @@ const NavBar = () => {
         ) : (
           <div className="xl:block space-x-[14px] hidden">
             <Button
+              asChild
               size={"lg"}
               className="bg-primaryRed hover:bg-secondaryRed rounded-lg w-32 duration-300"
             >
@@ -141,6 +149,7 @@ const NavBar = () => {
               </Link>
             </Button>
             <Button
+              asChild
               variant={"outline"}
               size={"lg"}
               className="hover:border-primaryRed hover:bg-transparent rounded-lg w-32 hover:text-primaryRed duration-300"
