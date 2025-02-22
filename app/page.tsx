@@ -22,18 +22,6 @@ export default function Home() {
         <NavBar />
       </section>
 
-      {/* <Link
-        href={"/scan"}
-        className="top-1/4 right-0 z-50 fixed bg-white shadow-md px-3 py-2 border-2 border-input rounded-l-full w-fit"
-      >
-        <Image
-          src={"/images/scanicon.png"}
-          alt="smartmart"
-          width={60}
-          height={60}
-        />
-      </Link> */}
-
       <ScanIcon />
 
       {/* Landing */}
