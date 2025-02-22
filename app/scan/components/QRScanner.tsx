@@ -1,4 +1,4 @@
-"use client"; // Only needed for Next.js App Router
+"use client";
 
 import { useEffect } from "react";
 import { Html5Qrcode } from "html5-qrcode";
@@ -7,6 +7,7 @@ const QRScanner = () => {
   useEffect(() => {
     const html5QrCode = new Html5Qrcode("qr-reader");
     const config = { fps: 10, qrbox: 250 };
+    // let errorCount = 0;
 
     const onScanSuccess = (decodedText: string) => {
       console.log("Scanned:", decodedText);
@@ -19,13 +20,41 @@ const QRScanner = () => {
       }
     };
 
+    // const onScanFailure = (errorMessage: string) => {
+    //   if (errorCount < 5) {
+    //     console.warn("QR Code scan error:", errorMessage);
+    //   }
+    //   errorCount++;
+    // };
+
     Html5Qrcode.getCameras()
       .then((devices) => {
         if (devices.length > 0) {
-          const cameraId = devices[0].id; // Use the first available camera
+          // Prefer the back camera
+          // const backCamera = devices.find((device) =>
+          //   device.label.toLowerCase().includes("back")
+          // );
+          // const cameraId = backCamera ? backCamera.id : devices[0].id;
+
+          const isMobile = /Mobi|Android|iPhone|iPad/i.test(
+            navigator.userAgent
+          );
+
+          let cameraId;
+          if (isMobile) {
+            // Prefer the back camera on mobile
+            const backCamera = devices.find((device) =>
+              device.label.toLowerCase().includes("back")
+            );
+            cameraId = backCamera ? backCamera.id : devices[0].id;
+          } else {
+            // Use the default camera on laptops/desktops
+            cameraId = devices[0].id;
+          }
+
           html5QrCode
             .start(cameraId, config, onScanSuccess, (errorMessage) => {
-              console.error("QR Code scan error:", errorMessage);
+              console.warn("QR Code scan error:", errorMessage);
             })
             .catch((err) => console.error("Camera start error:", err));
         } else {
@@ -41,9 +70,12 @@ const QRScanner = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Scan a QR Code</h2>
-      <div id="qr-reader" style={{ width: "300px", height: "300px" }}></div>
+    <div className="md:w-[90%] lg:w-[60%] min-h-[50vh] mx-auto flex items-center justify-center">
+      <div
+        id="qr-reader"
+        style={{ transform: "scaleX(-1)" }}
+        className="w-full h-full max-w-[500px] max-h-[600px] bg-gray-100 rounded-full shadow-md"
+      ></div>
     </div>
   );
 };
