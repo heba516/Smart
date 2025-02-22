@@ -1,12 +1,15 @@
+import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export default function middleware (request:NextRequest) {
-    console.log("middleware");    
+
+export default async function middleware (request:NextRequest) {
+    const token = await getToken({ req:request, secret: process.env.NEXTAUTH_SECRET });
+
     const loggedIn = request.cookies.get('token');
     const userNavigateRoute = request.nextUrl.pathname;
 
-    if (loggedIn) { 
+    if (loggedIn || token) { 
         if (userNavigateRoute === '/login' || userNavigateRoute === '/signup') {
             return NextResponse.redirect(new URL("/", request.nextUrl.origin));
         }
@@ -20,5 +23,5 @@ export default function middleware (request:NextRequest) {
 }
 
 export const config = {
-  matcher: ['/cart', '/dashboard', '/login', '/signup'],
+  matcher: ['/scan','/cart', '/dashboard', '/login', '/signup'],
 }
