@@ -12,6 +12,7 @@ import ContactUs from "@/app/components/ContactUs";
 import Footer from "@/app/components/Footer";
 import Questions from "@/app/components/Questions";
 import { Reviews } from "@/app/components/Reviews";
+import ScanIcon from "@/components/ScanIcon";
 
 export default function Home() {
   return (
@@ -21,8 +22,8 @@ export default function Home() {
         <NavBar />
       </section>
 
-      <Link
-        href={"/cart"}
+      {/* <Link
+        href={"/scan"}
         className="top-1/4 right-0 z-50 fixed bg-white shadow-md px-3 py-2 border-2 border-input rounded-l-full w-fit"
       >
         <Image
@@ -31,7 +32,9 @@ export default function Home() {
           width={60}
           height={60}
         />
-      </Link>
+      </Link> */}
+
+      <ScanIcon />
 
       {/* Landing */}
       <Landing />
