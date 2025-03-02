@@ -1,27 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
-import Features from "@/app/components/Features";
-import NavBar from "@/app/components/NavBar";
+import Features from "@/app/_components/Features";
 import Heading from "@/components/Heading";
-import OfferBar from "@/app/components/OfferBar";
-import Landing from "@/app/components/Landing";
-import AIFeatures from "@/app/components/AIFeatures";
-import SpecialSystem from "@/app/components/SpecialSystem";
-import GetOurApp from "@/app/components/GetOurApp";
-import ContactUs from "@/app/components/ContactUs";
-import Footer from "@/app/components/Footer";
-import Questions from "@/app/components/Questions";
-import { Reviews } from "@/app/components/Reviews";
+import Landing from "@/app/_components/Landing";
+import AIFeatures from "@/app/_components/AIFeatures";
+import SpecialSystem from "@/app/_components/SpecialSystem";
+import GetOurApp from "@/app/_components/GetOurApp";
+import ContactUs from "@/app/_components/ContactUs";
+import Footer from "@/app/_components/Footer";
+import Questions from "@/app/_components/Questions";
+import { Reviews } from "@/app/_components/Reviews";
 import ScanIcon from "@/components/ScanIcon";
 
 export default function Home() {
   return (
     <div>
-      <section className="top-0 z-50 sticky w-full">
-        <OfferBar />
-        <NavBar />
-      </section>
-
       <ScanIcon />
 
       {/* Landing */}

@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import SessionProvider from "@/providers/SessionProvider";
 import { getServerSession } from "next-auth";
+import LayoutWrapper from "./_components/LayoutWrapper";
 
 const urbanist = Urbanist({
   subsets: ["latin"],
@@ -35,10 +36,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession();
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${urbanist.variable} antialiased`} id="home">
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          <LayoutWrapper />
+          {children}
+        </SessionProvider>
         <Toaster
           position="top-center"
           gutter={12}
