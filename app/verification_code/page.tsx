@@ -1,5 +1,5 @@
 import ForgetPasswordLayout from "@/components/ForgetPasswordLayout";
-import VerificationCode from "@/app/verification_code/components/VerificationCode";
+import VerificationCode from "@/app/verification_code/_components/VerificationCode";
 
 const page = () => {
   return (

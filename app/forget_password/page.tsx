@@ -1,4 +1,4 @@
-import CheckEmailForPasswordReset from "@/app/forget_password/components/CheckEmailForPasswordReset";
+import CheckEmailForPasswordReset from "@/app/forget_password/_components/CheckEmailForPasswordReset";
 import ForgetPasswordLayout from "@/components/ForgetPasswordLayout";
 
 export default function page() {

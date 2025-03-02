@@ -17,7 +17,7 @@ import {
   Button,
   Checkbox,
 } from "@/components/ui";
-import { PasswordValidationChecklist } from "@/app/signup/components/CheckValidationList";
+import { PasswordValidationChecklist } from "@/components/CheckValidationList";
 import { Icon } from "@iconify/react";
 import toast from "react-hot-toast";
 

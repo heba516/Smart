@@ -6,7 +6,7 @@ import { Html5Qrcode } from "html5-qrcode";
 const QRScanner = () => {
   useEffect(() => {
     const html5QrCode = new Html5Qrcode("qr-reader");
-    const config = { fps: 10, qrbox: 250 };
+    const config = { fps: 10, qrbox: 280 };
     // let errorCount = 0;
 
     const onScanSuccess = (decodedText: string) => {
@@ -25,6 +25,10 @@ const QRScanner = () => {
     //     console.warn("QR Code scan error:", errorMessage);
     //   }
     //   errorCount++;
+    // };
+
+    // (errorMessage) => {
+    //   console.warn("QR Code scan error:", errorMessage);
     // };
 
     Html5Qrcode.getCameras()
@@ -70,11 +74,11 @@ const QRScanner = () => {
   }, []);
 
   return (
-    <div className="md:w-[90%] lg:w-[60%] min-h-[50vh] mx-auto flex items-center justify-center">
+    <div className="md:w-[90%] lg:w-[60%] max-h-[40vh] mx-auto flex items-center justify-center">
       <div
         id="qr-reader"
         style={{ transform: "scaleX(-1)" }}
-        className="w-full h-full max-w-[500px] max-h-[600px] bg-gray-100 rounded-full shadow-md"
+        className="w-full h-full max-w-[400px] max-h-[300px] bg-gray-100"
       ></div>
     </div>
   );
