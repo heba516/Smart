@@ -1,8 +1,7 @@
 "use client";
 import { checkAccessToken } from "../app/api/actions/auth";
-import { redirect } from "next/navigation";
-import Image from "next/image";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 const ScanIcon = () => {
   const token = Cookies.get("token") ?? "";
@@ -12,7 +11,7 @@ const ScanIcon = () => {
     <div
       onClick={async () => {
         const res = await checkAccessToken(token);
-        if (res) redirect("/scan");
+        if (res) window.location.href = "/scan";
       }}
       className="top-1/4 right-0 z-50 fixed bg-white shadow-md px-3 py-2 border-2 border-input rounded-l-full w-fit cursor-pointer"
     >
