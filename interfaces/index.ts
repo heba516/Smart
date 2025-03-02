@@ -20,3 +20,17 @@ export interface IFeatures {
   title: string;
   desc: string;
 }
+
+export interface IResetPass {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+export interface IContactUs {
+    firstName: string;
+    lastName: string;
+    email: string
+    phone: string
+    message: string
+}
