@@ -1,4 +1,4 @@
-import { ILogin, ISignup } from "@/interfaces";
+import { IContactUs, ILogin, IResetPass, ISignup } from "@/interfaces";
 import { AxiosInstance } from "@/utils/axiosInstance";
 import Cookies from "js-cookie";
 
@@ -15,7 +15,7 @@ export async function signup(data: ISignup) {
 
 export async function login(data: ILogin) {
   try {
-    const res = await AxiosInstance.post("auth/login", data);
+    const res = await AxiosInstance.post("sessions", data);
     const { token, firstName, lastName } = res.data.data;
 
     Cookies.set("token", token, {
@@ -43,15 +43,7 @@ export async function login(data: ILogin) {
 
 export async function checkAccessToken(refreshToken: string) {
   try {
-    const res = await AxiosInstance.post(
-      "sessions/refresh",
-      {},
-      {
-        headers: {
-          "x-refresh": refreshToken,
-        },
-      }
-    );
+    const res = await AxiosInstance.post("sessions/refresh", refreshToken);
     return res;
   } catch (error) {
     console.log("Error while rechecking access token", error);
@@ -67,12 +59,6 @@ export async function requestResetPassword(email: string) {
   }
 }
 
-interface IResetPass {
-  email: string;
-  password: string;
-  passwordConfirmation: string;
-}
-
 export async function resetPassword(
   id: string,
   code: string,
@@ -86,5 +72,14 @@ export async function resetPassword(
     return res;
   } catch (error) {
     console.log("Error in reset password", error);
+  }
+}
+
+export async function contactUs(data: IContactUs) {
+  try {
+    const res = await AxiosInstance.post("contact", data);
+    return res;
+  } catch (error) {
+    console.log("contact us error", error);
   }
 }
