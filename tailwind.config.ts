@@ -17,7 +17,8 @@ export default {
                 secondaryRed: "hsl(var(--secondary-red))",
                 lightGray: "hsl(var(--light-gray))",
                 medGray: "hsl(var(--medium-gray))",
-                darkGray: "hsl(var(--dark-gray))",
+				darkGray: "hsl(var(--dark-gray))",
+				grayColor: "hsl(var(--gray-color))",				
                 background: "hsl(var(--background))",
                 foreground: "hsl(var(--foreground))",
                 card: {
