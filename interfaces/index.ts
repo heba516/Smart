@@ -16,3 +16,8 @@ export interface IContactUs {
     phone: string
     message: string
 }
+
+export interface ILogin {
+    email: string;
+    password: string;
+}
