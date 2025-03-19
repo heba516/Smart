@@ -1,21 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import Features from "@/app/_components/Features";
+import NavBar from "@/components/NavBar";
+import Features from "@/components/Features";
 import Heading from "@/components/Heading";
-import Landing from "@/app/_components/Landing";
-import AIFeatures from "@/app/_components/AIFeatures";
-import SpecialSystem from "@/app/_components/SpecialSystem";
-import GetOurApp from "@/app/_components/GetOurApp";
-import ContactUs from "@/app/_components/ContactUs";
-import Footer from "@/app/_components/Footer";
-import Questions from "@/app/_components/Questions";
-import { Reviews } from "@/app/_components/Reviews";
-import ScanIcon from "@/components/ScanIcon";
+import Landing from "@/components/Landing";
+import AIFeatures from "@/components/AIFeatures";
+import SpecialSystem from "@/components/SpecialSystem";
+// import GetOurApp from "@/components/GetOurApp";
+import ContactUs from "@/components/ContactUs";
+import Footer from "@/components/Footer";
+import Questions from "@/components/Questions";
+import { Reviews } from "@/components/Reviews";
 
 export default function Home() {
   return (
     <div>
-      <ScanIcon />
+      <NavBar />
 
       {/* Landing */}
       <Landing />
@@ -90,15 +90,20 @@ export default function Home() {
       <Reviews />
 
       {/*Get Our App*/}
-      <div className="hidden xl:flex justify-center items-center gap-10 mx-auto px-20 min-h-screen text-center">
+      {/* <div
+        className="hidden xl:flex justify-center items-center gap-10 mx-auto px-20 min-h-screen text-center"
+      >
         <GetOurApp />
-      </div>
+      </div> */}
 
       {/* Questions */}
       <Questions />
 
       {/*Future Shopping*/}
-      <div className="flex flex-col justify-center items-center lg:items-start bg-[url('/images/futureShopping.png')] bg-cover mx-auto my-10 p-12 lg:p-[150px] h-[635px] min-h-screen text-center">
+      <div
+        id="app"
+        className="flex flex-col justify-center items-center lg:items-start bg-[url('/images/futureShopping.png')] bg-cover mx-auto my-10 p-12 lg:p-[150px] h-[635px] min-h-screen text-center"
+      >
         <h2 className="mb-2 w-full lg:w-[55%] font-extrabold text-[32px] text-white md:text-[64px] uppercase">
           THE FUTURE OF SHOPPING IS HERE START NOW !
         </h2>
@@ -124,7 +129,10 @@ export default function Home() {
       </div>
 
       {/*Contact Us */}
-      <div className="place-content-center bg-lighGray mx-auto py-10 min-h-screen">
+      <div
+        id="contactus"
+        className="place-content-center bg-lighGray mx-auto py-10 min-h-screen"
+      >
         <ContactUs />
       </div>
 
