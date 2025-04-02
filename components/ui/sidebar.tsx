@@ -525,7 +525,7 @@ const SidebarMenuItem = React.forwardRef<
 SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
-  "peer/menu-button font-semibold flex w-full text-center items-center gap-2 overflow-hidden rounded-md p-2 outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-primaryRed hover:text-white focus-visible:ring-2 active:bg-primaryRed active:text-white disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-primaryRed data-[active=true]:font-medium data-[active=true]:text-white data-[state=open]:hover:bg-primaryRed data-[state=open]:hover:text-white group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button font-semibold flex w-full text-center items-center gap-2 overflow-hidden rounded-xl p-2 px-4 outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-primaryRed hover:text-white focus-visible:ring-2 active:bg-primaryRed active:text-white disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-primaryRed data-[active=true]:font-medium data-[active=true]:text-white data-[state=open]:hover:bg-primaryRed data-[state=open]:hover:text-white group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
   {
     variants: {
       variant: {

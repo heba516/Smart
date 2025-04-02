@@ -26,7 +26,7 @@ export function DateAndTime() {
   }).format(currentTime);
 
   return (
-    <div className="flex items-center p-3 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold text-base">
+    <div className="flex items-center py-3 px-5 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold text-base">
       <Image
         className=""
         src={"/images/date.png"}
