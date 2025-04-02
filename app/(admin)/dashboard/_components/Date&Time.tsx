@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export function DateAndTime() {
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -25,7 +26,15 @@ export function DateAndTime() {
   }).format(currentTime);
 
   return (
-    <div className="p-3 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold">
+    <div className="flex items-center p-3 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold">
+      <Image
+        className=""
+        src={"/images/date.png"}
+        width={23}
+        height={23}
+        alt="logo"
+        loading="lazy"
+      />
       <span className="border-r border-grayColor pr-3">{formattedDate}</span>
       <span>{formattedTime}</span>
     </div>
