@@ -9,7 +9,7 @@ import { VerticalSeparator } from "./_components/VerticalSeparator";
 
 export const metadata: Metadata = {
   title: {
-    template: "Dashboard",
+    template: "Dashboard - %s",
     default: "Dashboard",
   },
   description: "",
