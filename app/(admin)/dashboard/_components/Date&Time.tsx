@@ -26,13 +26,13 @@ export function DateAndTime() {
   }).format(currentTime);
 
   return (
-    <div className="flex items-center p-3 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold">
+    <div className="flex items-center p-3 bg-[#FFEDED] rounded-xl space-x-3 text-grayColor font-semibold text-base">
       <Image
         className=""
         src={"/images/date.png"}
         width={23}
         height={23}
-        alt="logo"
+        alt="date"
         loading="lazy"
       />
       <span className="border-r border-grayColor pr-3">{formattedDate}</span>
