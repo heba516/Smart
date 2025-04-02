@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Icon } from "@iconify/react";
 import {
   Sidebar,
   SidebarContent,
@@ -19,42 +19,42 @@ const items = [
   {
     title: "Dashboard",
     url: "/dashboard",
-    icon: Home,
+    icon: "material-symbols-light:home-rounded",
   },
   {
     title: "Customers",
     url: "/dashboard/customers",
-    icon: Inbox,
+    icon: "fa-solid:users",
   },
   {
     title: "Sales",
     url: "/dashboard/sales",
-    icon: Calendar,
+    icon: "healthicons:money-bag",
   },
   {
     title: "Inventory",
     url: "/dashboard/inventory",
-    icon: Search,
+    icon: "solar:box-bold",
   },
   {
     title: "Employee",
     url: "/dashboard/employee",
-    icon: Settings,
+    icon: "basil:user-solid",
   },
   {
     title: "Security",
     url: "/dashboard/security",
-    icon: Settings,
+    icon: "fluent:video-security-24-filled",
   },
   {
     title: "Support & Help",
     url: "/dashboard/support",
-    icon: Settings,
+    icon: "ri:customer-service-fill",
   },
   {
     title: "Settings",
     url: "/dashboard/settings",
-    icon: Settings,
+    icon: "solar:settings-bold",
   },
 ];
 
@@ -82,8 +82,8 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive}>
-                      <a href={item.url}>
-                        <item.icon />
+                      <a href={item.url} className="flex items-center">
+                        <Icon icon={item.icon} width="24" height="24" />
                         <span>{item.title}</span>
                       </a>
                     </SidebarMenuButton>

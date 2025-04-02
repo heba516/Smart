@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { AppSidebar } from "./_components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import React from "react";
 import { DateAndTime } from "./_components/Date&Time";
-import Image from "next/image";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { VerticalSeparator } from "./_components/VerticalSeparator";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: {

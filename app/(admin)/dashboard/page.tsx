@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui";
 import { SidebarSeparator } from "@/components/ui/sidebar";
-import Image from "next/image";
+import { Icon } from "@iconify/react";
 
 const page = () => {
   return (
@@ -15,23 +15,16 @@ const page = () => {
 
         <div className="flex items-center space-x-5">
           <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl h-12">
-            <Image
-              src={"/images/export.png"}
-              width={24}
-              height={24}
-              alt="date"
-              loading="lazy"
-            />
+            <Icon icon="solar:export-bold" width={40} height={40} />
             Export PDF
           </Button>
           <Button className="bg-[#F8F8F8] text-black text-sm font-semibold rounded-xl h-[52px] flex items-center px-4">
             <div className="bg-primaryRed rounded-xl flex items-center justify-center w-8 h-8">
-              <Image
-                src={"/images/export.png"}
-                width={20}
-                height={20}
-                alt="date"
-                loading="lazy"
+              <Icon
+                icon="uis:calender"
+                width="30"
+                height="30"
+                className="text-white"
               />
             </div>
             <div className="flex flex-col justify-center text-start pl-2 leading-tight">
