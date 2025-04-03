@@ -2,62 +2,103 @@ import Image from "next/image";
 
 export interface IStatistics {
     src: string;
-    title: string;
-    desc: string;
+    name: string;
+    score: string;
+    scoreUnite: string;
+    percent: number;
+    percentIncreased: boolean;
 }
 
 const statistics: IStatistics[] = [
     {
-        src: "/images/aiFeature1.png",
-        name: "Personalized Offers",
-        score:"",
-        desc: "The system analyzes customer behavior to offer tailored promotions that match their interests. ",
+        src: "/images/activeUsers.svg",
+        name: "Active users",
+        score: "300",
+        scoreUnite: "users",
+        percent: 7,
+        percentIncreased: true,
     },
     {
-        src: "/images/aiFeature2.png",
-        title: "Stock  Optimization",
-        desc: "AI analyzes browsing and purchase history to recommend relevant products, sales by encouraging more purchases.",
+        src: "/images/totalSales.svg",
+        name: "Total Sales",
+        score: "41,327",
+        scoreUnite: "EGP",
+        percent: 5,
+        percentIncreased: true,
     },
     {
-        src: "/images/aiFeature3.png",
-        title: "Product Suggestions",
-        desc: "AI predicts demand to optimize stock, preventing overstock and stock-outs, while improving availability.",
+        src: "/images/totalProductsSold.svg",
+        name: " Total Products Sold",
+        score: "892",
+        scoreUnite: "products",
+        percent: -3,
+        percentIncreased: false,
+    },
+    {
+        src: "/images/averageBasketValue.svg",
+        name: "Average Basket Value",
+        score: "523",
+        scoreUnite: "EGP",
+        percent: -5,
+        percentIncreased: true,
     },
 ];
 
 export default function Statistics() {
     return (
-        <section className="gap-10 grid grid-cols-1 lg:grid-cols-4 mt-6 px-10 ">
+        <section className="flex justify-evenly my-6 ">
             {statistics.map((box, index) => (
                 <div
-                    className="group flex flex-col items-center space-y-4 bg-[#F7F7F7] hover:bg-[#FF434A] px-5 py-3 rounded-[30px] duration-300"
+                    className=" bg-[#F8F8F8] rounded-[10px]  border-l border-[#999CA0] p-5 space-y-2 w-[250px]"
                     key={index}
                 >
-                    <div className="text-left">
-                        <div className="flex justify-between items-center ps-1">
-                            <h3 className="group-hover:text-white font-bold text-[#ED1C24] lg:text-[23px] text-xl uppercase duration-300">
-                                {box.title}
-                            </h3>
+                    <div className="text-left ">
+                        <div className="flex justify-between items-start gap-6">
+                            <div className="space-y-2">
+                                <h4 className=" font-semibold text-base text-grayColor  ">
+                                    {box.name}
+                                </h4>
+                                <p className="font-medium text-sm text-[#999CA0] ">
+                                    <span className="font-bold text-black text-2xl me-1">
+                                        {box.score}
+                                    </span>
+                                    {box.scoreUnite}
+                                </p>
+                            </div>
                             <Image
-                                className="group-hover:rotate-45 duration-300"
-                                src="images/aiUpArrow.svg"
-                                width={55}
-                                height={55}
-                                alt="up arrow"
+                                className=""
+                                src={box.src}
+                                width={44}
+                                height={44}
+                                alt="box image"
                             />
                         </div>
-                        <p className="group-hover:text-white px-2 font-normal lg:text-[15px] text-sm">
-                            {box.desc}
-                        </p>
                     </div>
-                    <div>
+                    <div className="flex space-x-1 ">
                         <Image
-                            className="px-2 w-full"
-                            src={box.src}
-                            width={337}
-                            height={355}
-                            alt="AI Feature"
+                            className=""
+                            src={`${
+                                box.percentIncreased == true
+                                    ? "images/increasingArrow.svg"
+                                    : "images/decreasingArrow.svg"
+                            }`}
+                            width={24}
+                            height={24}
+                            alt="arrow"
                         />
+                        <span
+                            className={`${
+                                box.percentIncreased == true
+                                    ? "text-[#16A34A]"
+                                    : "text-[#ED1C24]"
+                            } font-medium text-base`}
+                        >
+                            {box.percent > 0 ? "+" : ""}
+                            {box.percent}%
+                        </span>
+                        <p className="font-medium text-base text-grayColor ms-2">
+                            (since last week)
+                        </p>
                     </div>
                 </div>
             ))}

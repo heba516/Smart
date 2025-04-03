@@ -6,8 +6,8 @@ import React from "react";
 
 export default function page() {
     return (
-        <div className="gap-[170px] grid grid-cols-1 lg:grid-cols-2 px-10 py-6  h-screen font-urban justify-center ">
-            <div className="relative flex flex-col gap-5 bg-primaryRed  px-4 py-8 rounded-lg w-[677px] h-[802px] shadow-xl">
+        <div className="gap-12 flex pt-5 font-urban justify-evenly items-center ">
+            <div className="relative flex flex-col gap-5 bg-primaryRed  px-4 pt-8 pb-12 rounded-lg w-[627px] shadow-xl">
                 <Image
                     className="top-[-50px] right-[-20px] absolute "
                     src={"/images/loginBigCircle.svg"}
@@ -26,15 +26,15 @@ export default function page() {
                     className="bottom-[-50px] left-[-20px] absolute "
                     src={"/images/loginBigCircle.svg"}
                     alt="circle"
-                    width={209}
-                    height={209}
+                    width={159}
+                    height={159}
                 />
                 <Image
                     className="bottom-[50px] left-[-65px] absolute"
                     src={"/images/loginMediumCircle.svg"}
                     alt="circle"
-                    width={135}
-                    height={135}
+                    width={85}
+                    height={85}
                 />
 
         <Image
@@ -44,8 +44,8 @@ export default function page() {
           width={23}
           height={23}
         />
-        <header className=" mb-7  ps-10 space-y-2">
-          <h1 className="font-semibold text-[48px] text-white">
+        <header className=" ps-10 space-y-2">
+          <h1 className="font-semibold text-[45px] text-white">
             Welcome to <br /> SMART Dashboard
           </h1>
           <div className="font-normal text-[#FFCFCF] text-[24px]">
@@ -58,36 +58,36 @@ export default function page() {
             />
           </div>
         </header>
-        <div className="px-2">
-          <div className="flex gap-3 px-6">
+        <div className="flex flex-col items-center">
+          <div className="flex justify-evenly w-full">
             <Image
               className=""
               src={"/images/revenueChart.svg"}
               alt="phone"
-              width={182}
-              height={155}
+              width={142}
+              height={115}
             />
             <Image
               className=""
               src={"/images/footfallChart.svg"}
               alt="footfall"
-              width={182}
-              height={155}
+              width={142}
+              height={115}
             />
             <Image
               className=""
               src={"/images/cartValueChart.svg"}
               alt="cartValue"
-              width={182}
-              height={155}
+              width={142}
+              height={115}
             />
           </div>
           <Image
             className="mt-6"
             src={"/images/overallEarningChart.svg"}
             alt="overallEarning"
-            width={630}
-            height={220}
+            width={580}
+            height={170}
           />
         </div>
       </div>
@@ -114,7 +114,7 @@ export default function page() {
                         <LoginForm />
                     </div>
                 </div>
-                <p className="font-medium text-[14px] text-medGray text-center mt-[200px]">
+                <p className="font-medium text-[14px] text-medGray text-center mt-[80px] mb-4">
                     2024@ SMART All Right Reseved
                 </p>
             </div>
