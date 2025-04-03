@@ -7,7 +7,7 @@ import React from "react";
 export default function page() {
     return (
         <div className="gap-[170px] grid grid-cols-1 lg:grid-cols-2 px-10 py-6  h-screen font-urban justify-center ">
-            <div className="relative flex flex-col gap-5 bg-primaryRed  px-4 py-8 rounded-lg w-[677px] h-[802px] shadow-xl">
+            <div className="relative flex flex-col gap-5 bg-primaryRed  px-4 py-8 rounded-lg w-[677px] shadow-xl">
                 <Image
                     className="top-[-50px] right-[-20px] absolute "
                     src={"/images/loginBigCircle.svg"}
@@ -102,9 +102,9 @@ export default function page() {
                             height={70}
                             alt="logo"
                         />
-                        <h1 className="font-bold text-[36px] text-primaryRed leading-9 mb-6 ">
+                        <h2 className="font-bold text-[36px] text-primaryRed leading-9 mb-6 ">
                             Log in
-                        </h1>
+                        </h2>
                         <p className="font-medium text-medGray leading-4 ">
                             Log in to Smart’s powerful dashboard for real-time
                             insights
@@ -114,7 +114,7 @@ export default function page() {
                         <LoginForm />
                     </div>
                 </div>
-                <p className="font-medium text-[14px] text-medGray text-center mt-[200px]">
+                <p className="font-medium text-[14px] text-medGray text-center mt-10">
                     2024@ SMART All Right Reseved
                 </p>
             </div>
