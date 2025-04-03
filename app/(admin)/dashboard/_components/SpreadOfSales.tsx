@@ -1,6 +1,13 @@
 "use client";
 
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import {
+  CartesianGrid,
+  LabelList,
+  Line,
+  LineChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -48,14 +55,25 @@ export function SpreadOfSales() {
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent indicator="line" />}
             />
             <Line
               dataKey="sales"
               type="natural"
               stroke="#F94144"
               strokeWidth={2}
-              dot={false}
+              dot={{
+                fill: "var(--color-desktop)",
+              }}
+              activeDot={{
+                r: 6,
+              }}
+            />
+            <LabelList
+              position="top"
+              offset={12}
+              className="fill-foreground"
+              fontSize={12}
             />
           </LineChart>
         </ChartContainer>
