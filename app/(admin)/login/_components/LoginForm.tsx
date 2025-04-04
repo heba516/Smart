@@ -95,9 +95,7 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="">
-        <div className="flex items-center justify-between gap-3"></div>
-
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         {inputs.map((input, index) => (
           <FormField
             key={index}
@@ -105,7 +103,7 @@ export default function LoginForm() {
             name={input.name}
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="font-semibold text-base ">
+                <FormLabel className="font-semibold text-base">
                   {input.label}
                 </FormLabel>
                 <FormControl>
@@ -150,26 +148,23 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <div className="flex justify-between item-center">
-          <FormItem className="space-x-1.5 ">
-            <FormControl></FormControl>
-            <FormLabel className="text-[16px] text-center">
-              keep me signed in
-              <Icon
-                icon="rivet-icons:question-mark-solid"
-                className="text-gray-400 inline ms-1.5"
-                width="16"
-                height="16"
-              />
-            </FormLabel>
-          </FormItem>
+        <FormItem className="flex justify-between item-center space-y-0">
+          <FormLabel className="text-base text-center">
+            keep me signed in
+            <Icon
+              icon="rivet-icons:question-mark-solid"
+              className="text-gray-400 inline ml-1.5"
+              width="16"
+              height="16"
+            />
+          </FormLabel>
           <Link
-            className="text-primaryRed hover:text-secondaryRed underline"
+            className="text-primaryRed underline hover:text-secondaryRed"
             href="/forget_password"
           >
             Forget password ?
           </Link>
-        </div>
+        </FormItem>
 
         {/* {error && (
                     <div className="my-2">
