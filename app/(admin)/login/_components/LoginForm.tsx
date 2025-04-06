@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { Icon } from "@iconify/react";
 import { z } from "zod";
@@ -15,10 +14,11 @@ import {
   Input,
   Button,
 } from "@/components/ui";
-import clsx from "clsx";
 import { login } from "@/app/api/actions/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import clsx from "clsx";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -72,6 +72,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  // const [error, setError] = useState<string>("");
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
@@ -79,10 +80,12 @@ export default function LoginForm() {
       console.log(data);
 
       await login(data);
-      router.push("/");
+
+      router.push("/dashboard");
     } catch (error) {
       console.log(error);
-      toast.error("No account found with this email/username. Please sign up");
+      // setError("Invalid Email Or Password");
+      toast.error("Invalid Email Or Password");
     } finally {
       setLoading(false);
     }
@@ -167,12 +170,12 @@ export default function LoginForm() {
         </FormItem>
 
         {/* {error && (
-                    <div className="my-2">
-                        <p className="text-center text-primaryRed">
-                            Could’nt find Your account
-                        </p>
-                    </div>
-                )} */}
+          <div className="my-2">
+            <p className="text-center text-primaryRed">
+              Invalid Email Or Password
+            </p>
+          </div>
+        )} */}
 
         <Button
           disabled={loading}

@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { AppSidebar } from "./_components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DateAndTime } from "./_components/Date&Time";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { VerticalSeparator } from "./_components/VerticalSeparator";
 import Image from "next/image";
+import { AdminProfile } from "./_components/AdminProfile";
 
 export const metadata: Metadata = {
   title: {
@@ -80,16 +80,7 @@ export default async function RootLayout({
 
           <VerticalSeparator />
 
-          <div className="flex items-center space-x-3 text-base font-semibold text-medGray">
-            Hello, <span className="text-grayColor ml-1">Heba</span>
-            <Avatar className="h-[50px] w-[50px]">
-              <AvatarImage
-                src="/images/avatar.avif"
-                alt="@shadcn"
-                className="border-2 border-primaryRed rounded-full"
-              />
-            </Avatar>
-          </div>
+          <AdminProfile />
         </header>
         {children}
       </main>
