@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export interface IStockStatus {
   src: string;
@@ -10,21 +11,21 @@ export interface IStockStatus {
 
 const stockStatus: IStockStatus[] = [
   {
-    src: "/images/availableProductsBox.svg",
+    src: "/images/availableProduct.png",
     name: "available products",
     number: 2310,
     numberColor: "#24A855",
     arrowImg: "/images/availableProductsArrow.svg",
   },
   {
-    src: "/images/lowStockBox.svg",
+    src: "/images/lowStock.png",
     name: "low stock",
     number: 310,
     numberColor: "#F99141",
     arrowImg: "/images/lowStockArrow.svg",
   },
   {
-    src: "/images/outofStockBox.svg",
+    src: "/images/outofStock.png",
     name: "out of stock",
     number: 64,
     numberColor: "#ED1C24",
@@ -35,7 +36,7 @@ export default function StockStatus() {
   return (
     <section className="flex flex-col space-y-8 py-4">
       {stockStatus.map((stock, index) => (
-        <div className="mx-3" key={index}>
+        <Link href={"/dashboard/inventory"} className="mx-3" key={index}>
           <div className="flex justify-between">
             <div className="flex items-start space-x-3">
               <Image src={stock.src} width={30} height={23} alt="stock box" />
@@ -54,7 +55,7 @@ export default function StockStatus() {
               <Image src={stock.arrowImg} width={12} height={24} alt="arrow" />
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </section>
   );
