@@ -27,20 +27,6 @@ const page = () => {
                         <Icon icon="solar:export-bold" width={40} height={40} />
                         Export PDF
                     </Button>
-                    {/* <Button className="bg-[#F8F8F8] text-black text-sm font-semibold rounded-xl h-[52px] flex items-center px-4">
-            <div className="bg-primaryRed rounded-xl flex items-center justify-center w-8 h-8">
-              <Icon
-                icon="uis:calender"
-                width="30"
-                height="30"
-                className="text-white"
-              />
-            </div>
-            <div className="flex flex-col justify-center text-start pl-2 leading-tight">
-              <span>Filter Period</span>
-              <span className="font-medium">2 Jan 2025 - 4 Mar 2025</span>
-            </div>
-          </Button> */}
 
                     <CalendarDateRangePicker />
                 </div>
@@ -89,6 +75,23 @@ const page = () => {
             </section>
         </div>
     );
+    // =======
+    //         <ChartBoxes title="Stock Status" desc="Secondary text">
+    //           <StockStatus />
+    //           <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl h-10 w-full hover:bg-secondaryRed">
+    //             View Stock
+    //             <Image
+    //               src="/images/viewStockArrow.svg"
+    //               width={19}
+    //               height={19}
+    //               alt="arrow"
+    //             />
+    //           </Button>
+    //         </ChartBoxes>
+    //       </section>
+    //     </div>
+    //   );
+    // >>>>>>> 44dbbd75843e488b294f93841da7315be62a0ae1
 };
 
 export default page;

@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -13,6 +14,8 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { logout } from "@/app/api/actions/auth";
+import { useRouter } from "next/navigation";
 
 // Menu items.
 const items = [
@@ -60,6 +63,12 @@ const items = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const onLogOut = () => {
+    logout();
+    console.log("logout");
+    router.push("/login");
+  };
   return (
     <Sidebar>
       <SidebarContent className="py-9">
@@ -74,7 +83,7 @@ export function AppSidebar() {
               loading="lazy"
             />
           </SidebarGroupLabel>
-          <SidebarSeparator className="mt-9" />
+          <SidebarSeparator className="mt-5" />
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
@@ -91,6 +100,13 @@ export function AppSidebar() {
                 );
               })}
             </SidebarMenu>
+
+            <SidebarFooter className="p-1 mt-1">
+              <SidebarMenuButton onClick={onLogOut}>
+                <Icon icon="tabler:logout" width="24" height="24" />
+                <span>LogOut</span>
+              </SidebarMenuButton>
+            </SidebarFooter>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>

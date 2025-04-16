@@ -34,7 +34,7 @@ const data = [
 
 export function TopProducts() {
   return (
-    <ResponsiveContainer width="100%" height={250} className="-ml-5">
+    <ResponsiveContainer width="100%" height={200} className="-ml-5">
       <BarChart data={data}>
         <XAxis
           dataKey="name"
