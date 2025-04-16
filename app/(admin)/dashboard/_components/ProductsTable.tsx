@@ -408,7 +408,18 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "categories",
-    header: "Categories",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Categories
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("categories")}</div>
     ),
