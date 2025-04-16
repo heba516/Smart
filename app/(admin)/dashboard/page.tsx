@@ -75,7 +75,7 @@ const page = () => {
 
                 <ChartBoxes title="Stock Status" desc="Secondary text">
                     <StockStatus />
-                    <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[280px]">
+                    <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[270px] mt-12 ">
                         View Stock
                         <Image
                             className=""
