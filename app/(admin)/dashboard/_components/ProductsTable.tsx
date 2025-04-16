@@ -315,7 +315,7 @@ export const columns: ColumnDef<Product>[] = [
         className={cn(
           "lowercase",
           row.getValue("status") === "Out" && "text-primaryRed",
-          row.getValue("status") === "Low" && "text-orange-500"
+          row.getValue("status") === "Low" && "text-[#FF8714]"
         )}
       >
         {row.getValue("productName")}
@@ -330,7 +330,7 @@ export const columns: ColumnDef<Product>[] = [
         className={cn(
           "capitalize",
           row.getValue("status") === "Out" && "text-primaryRed",
-          row.getValue("status") === "Low" && "text-orange-500"
+          row.getValue("status") === "Low" && "text-[#FF8714]"
         )}
       >
         {row.getValue("productId")}
@@ -390,7 +390,7 @@ export const columns: ColumnDef<Product>[] = [
           className={cn(
             "font-medium flex items-center",
             formatted === "0" && "text-primaryRed",
-            row.getValue("status") === "Low" && "text-orange-500"
+            row.getValue("status") === "Low" && "text-[#FF8714]"
           )}
         >
           {formatted === "0" && (
@@ -421,7 +421,7 @@ export const columns: ColumnDef<Product>[] = [
         className={cn(
           "capitalize flex items-center text-white w-fit rounded-lg",
           row.getValue("status") === "Available" && "text-green-500",
-          row.getValue("status") === "Low" && "bg-orange-400 px-2 py-1",
+          row.getValue("status") === "Low" && "bg-[#FF8714] px-2 py-1",
           row.getValue("status") === "Out" && "bg bg-primaryRed px-2 py-1"
         )}
       >
