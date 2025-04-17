@@ -8,6 +8,7 @@ import { SpreadOfSales } from "./_components/SpreadOfSales";
 import Statistics from "./_components/Statistics";
 import StockStatus from "./_components/StockStatus";
 import Image from "next/image";
+import Link from "next/link";
 
 const page = () => {
     return (
@@ -61,16 +62,18 @@ const page = () => {
 
                 <ChartBoxes title="Stock Status" desc="Secondary text">
                     <StockStatus />
-                    <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[270px] mt-12 ">
-                        View Stock
-                        <Image
-                            className=""
-                            src="/images/viewStockArrow.svg"
-                            width={19}
-                            height={19}
-                            alt="arrow"
-                        />
-                    </Button>
+                    <Link href={"/dashboard/inventory"} className="mx-3">
+                        <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[270px] mt-12 ">
+                            View Stock
+                            <Image
+                                className=""
+                                src="/images/viewStockArrow.svg"
+                                width={19}
+                                height={19}
+                                alt="arrow"
+                            />
+                        </Button>
+                    </Link>
                 </ChartBoxes>
             </section>
         </div>
