@@ -46,7 +46,7 @@ const statistics: IStatistics[] = [
 
 export default function Statistics() {
     return (
-        <section className="grid grid-cols-4 my-6 mx-auto gap-6">
+        <section className="grid grid-cols-4 my-6 mx-auto gap-4">
             {statistics.map((box, index) => (
                 <div
                     className=" rounded-xl border border-[#D8DADC] py-6 px-8 space-y-3 "
