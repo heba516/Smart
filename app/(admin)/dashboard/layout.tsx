@@ -33,7 +33,7 @@ export default async function RootLayout({
     <SidebarProvider>
       <AppSidebar />
       <main className="w-10/12 p-6">
-        <header className="flex items-center justify-center space-x-9">
+        <header className="flex items-center justify-center space-x-3 xl:space-x-9">
           <div className="relative">
             <div className="absolute inset-y-0 start-2 flex items-center ps-3 pointer-events-none">
               <svg
@@ -54,7 +54,7 @@ export default async function RootLayout({
             </div>
             <input
               type="search"
-              className=" w-[450px] h-[45px] bg-[#F2F2F2] rounded-xl outline-none px-12"
+              className="w-[350px] xl:w-[450px] h-[45px] bg-[#F2F2F2] rounded-xl outline-none px-12"
               placeholder="Search Here..."
             />
           </div>
@@ -65,7 +65,7 @@ export default async function RootLayout({
 
           <VerticalSeparator />
 
-          <div className="relative p-3 bg-[#FFDBDB] rounded-xl">
+          <div className="relative p-2 xl:p-3 bg-[#FFDBDB] rounded-xl">
             <span className="absolute -right-1 -top-1 flex items-center justify-center bg-primaryRed w-5 h-5 text-white text-[13px] font-semibold rounded-full">
               12
             </span>

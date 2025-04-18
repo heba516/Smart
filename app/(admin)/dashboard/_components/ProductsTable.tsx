@@ -12,15 +12,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal, Plus } from "lucide-react";
+import { Eye, MoreHorizontal, PenIcon, Plus, Trash } from "lucide-react";
 import {
   Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
   Table,
   TableBody,
@@ -35,7 +33,7 @@ import { DataTablePagination } from "../_components/Pagination";
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
 
-const products: Product[] = [
+const data: Product[] = [
   {
     productName: "Lay's Classic Potato Chips",
     productId: "#CHP12345678",
@@ -465,22 +463,24 @@ export const columns: ColumnDef<Product>[] = [
 
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger className="hover:bg-transparent" asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(product.productId)}
             >
-              Copy payment ID
+              <Eye /> View
             </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem>
+              <PenIcon /> Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Trash /> Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -497,7 +497,7 @@ export function DataTableDemo() {
     React.useState<VisibilityState>({});
   //   const [rowSelection, setRowSelection] = React.useState({});
 
-  const [data, setData] = React.useState<Product[]>(products);
+  // const [data, setData] = React.useState<Product[]>(products);
 
   const table = useReactTable({
     data,
