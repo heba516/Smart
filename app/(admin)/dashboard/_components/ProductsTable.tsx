@@ -32,8 +32,10 @@ import {
 import { DataTablePagination } from "../_components/Pagination";
 import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { IProduct } from "@/interfaces";
 
-const data: Product[] = [
+const data: IProduct[] = [
   {
     productName: "Lay's Classic Potato Chips",
     productId: "#CHP12345678",
@@ -284,16 +286,16 @@ const data: Product[] = [
   },
 ];
 
-export type Product = {
-  productName: string;
-  productId: string;
-  price: number;
-  stock: number;
-  categories: string;
-  status: "Available" | "Out" | "Low";
-};
+// export type Product = {
+//   productName: string;
+//   productId: string;
+//   price: number;
+//   stock: number;
+//   categories: string;
+//   status: "Available" | "Out" | "Low";
+// };
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "productName",
     header: ({ column }) => {
@@ -567,8 +569,10 @@ export function DataTableDemo() {
             Export
           </Button>
 
-          <Button className="bg-primaryRed rounded-lg">
-            <Plus /> Add New Product
+          <Button className="bg-primaryRed rounded-lg" asChild>
+            <Link href={"/dashboard/inventory/add"}>
+              <Plus /> Add New Product
+            </Link>
           </Button>
         </div>
       </div>

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
-    template: "Inventory",
-    default: "Inventory",
+    template: "%s - Inventory",
+    default: "%s - Inventory",
   },
   description: "",
   icons: {

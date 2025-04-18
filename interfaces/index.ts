@@ -21,3 +21,12 @@ export interface ILogin {
     email: string;
     password: string;
 }
+
+export interface IProduct {
+  productName: string;
+  productId: string;
+  price: number;
+  stock: number;
+  categories: string;
+  status: "Available" | "Out" | "Low";
+};
