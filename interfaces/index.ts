@@ -30,3 +30,13 @@ export interface IProduct {
   categories: string;
   status: "Available" | "Out" | "Low";
 };
+
+export interface IStatusData {
+    src: string;
+    name: string;
+    number: string;
+    numberColor: string;
+    numberUnite: string;
+    percent: number;
+    percentIncreased: boolean;
+}
