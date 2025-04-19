@@ -8,7 +8,7 @@ import { AdminProfile } from "./_components/AdminProfile";
 
 export const metadata: Metadata = {
   title: {
-    template: "Dashboard - %s",
+    template: "%s",
     default: "Dashboard",
   },
   description: "",

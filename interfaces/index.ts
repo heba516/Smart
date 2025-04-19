@@ -23,10 +23,26 @@ export interface ILogin {
 }
 
 export interface IProduct {
-  productName: string;
-  productId: string;
+  _id: string;
+  title: string;
   price: number;
+  image_url?: string;
   stock: number;
-  categories: string;
+  categories: string[];
   status: "Available" | "Out" | "Low";
 };
+
+export interface IProductInfo {
+  title: string;
+  description?: string;
+  highlights?: string;
+  image_url: string;
+  price: number;
+  discount?: number;
+  discountType?: string;
+  barcode: string;
+  stock: number;
+  brand: string;
+  categoryId?: string;
+  subCategoryId?: string;
+}

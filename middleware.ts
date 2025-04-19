@@ -9,7 +9,7 @@ export default async function middleware(request: NextRequest) {
     }
     
     
-    if (userNavigateRoute === "/dashboard" && !userToken) {
+    if (userNavigateRoute.startsWith("/dashboard") && !userToken) {
         return NextResponse.redirect(new URL("/login", request.nextUrl.origin));
     }
     
