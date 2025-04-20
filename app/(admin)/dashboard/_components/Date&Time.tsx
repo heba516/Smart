@@ -26,7 +26,7 @@ export function DateAndTime() {
   }).format(currentTime);
 
   return (
-    <div className="flex items-center p-3 xl:px-5 bg-input rounded-xl space-x-1 xl:space-x-3 text-grayColor font-semibold text-base">
+    <div className="flex items-center p-3 2xl:px-5 bg-input rounded-xl space-x-1 xl:space-x-3 text-grayColor font-semibold text-base">
       <Image
         src={"/images/date.png"}
         width={23}

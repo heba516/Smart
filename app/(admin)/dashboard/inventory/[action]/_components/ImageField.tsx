@@ -23,6 +23,7 @@ export function ImageField<T extends FieldValues>({
   name,
 }: ImageFieldProps<T>) {
   const [imageURL, setImageURL] = useState<string | null>(null);
+
   return (
     <FormField
       control={control}
@@ -68,10 +69,10 @@ export function ImageField<T extends FieldValues>({
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  field.onChange(file?.name);
                   if (file) {
                     const tempUrl = URL.createObjectURL(file);
                     setImageURL(tempUrl);
+                    field.onChange(tempUrl);
                   }
                 }}
               />

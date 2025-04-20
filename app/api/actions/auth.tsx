@@ -31,13 +31,14 @@ export async function login(data: ILogin) {
 
     const adminName = firstName + " " + lastName;
 
-    // Cookies.set("adminName", JSON.stringify(adminName), {
-    //   secure: process.env.NODE_ENV === "production",
-    //   sameSite: "lax",
-    //   // expires: 1, // Expires in 1 day
-    // });
+    Cookies.set("adminName", JSON.stringify(adminName), {
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
 
-    localStorage.setItem("adminName", JSON.stringify(adminName));
+    console.log("name", Cookies.get("adminName"));
+
+    // localStorage.setItem("adminName", JSON.stringify(adminName));
     console.log(res.data);
     return res;
   } catch (error) {
@@ -49,8 +50,8 @@ export async function login(data: ILogin) {
 
 export function logout() {
   Cookies.remove("token");
-  // Cookies.remove("adminName");
-  localStorage.clear();
+  Cookies.remove("adminName");
+  // localStorage.clear();
 }
 
 export async function refreshAccessToken() {

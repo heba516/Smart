@@ -28,5 +28,5 @@ export default function ProductPage() {
 
   if (loading) return <div>Loading...</div>;
 
-  //   return <DataTableDemo data={products} />;
+  return <DataTableDemo data={products || []} />;
 }

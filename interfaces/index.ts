@@ -45,4 +45,5 @@ export interface IProductInfo {
   brand: string;
   categoryId?: string;
   subCategoryId?: string;
+  item_weight?: string;
 }
