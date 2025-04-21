@@ -13,9 +13,8 @@ export default function ProductPage() {
       try {
         setLoading(true);
         const res = await getAllProducts();
-        console.log(res);
 
-        setProducts(res?.data);
+        setProducts(res?.data.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -28,5 +27,5 @@ export default function ProductPage() {
 
   if (loading) return <div>Loading...</div>;
 
-  return <DataTableDemo data={products || []} />;
+  return <DataTableDemo data={products} />;
 }

@@ -163,7 +163,7 @@ const FormComponent = ({ action }: IProps) => {
                 optional={false}
                 placeholder="Product Brand"
                 options={[
-                  { label: "type1", value: "type1" },
+                  { label: "Eldoha", value: "Eldoha" },
                   { label: "type2", value: "type2" },
                   { label: "type3", value: "type3" },
                 ]}
@@ -175,7 +175,7 @@ const FormComponent = ({ action }: IProps) => {
                 optional={false}
                 placeholder="Product Categoires"
                 options={[
-                  { label: "87987", value: "87987" },
+                  { label: "snacks", value: "snacks" },
                   {
                     label: "67f05d585cf9bb7600e810f3",
                     value: "67f05d585cf9bb7600e810f3",
@@ -193,7 +193,7 @@ const FormComponent = ({ action }: IProps) => {
                 optional={false}
                 placeholder="Product Subcategoires"
                 options={[
-                  { label: "8787", value: "8787" },
+                  { label: "chocolate", value: "chocolate" },
                   {
                     label: "68002d17c5a01d0b460d7c54",
                     value: "68002d17c5a01d0b460d7c54",
