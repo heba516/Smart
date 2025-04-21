@@ -90,7 +90,7 @@ export function AppSidebar() {
                 const isActive =
                   pathname === item.url ||
                   pathname === `${item.url}/add` ||
-                  pathname === `${item.url}/edit`;
+                  pathname.startsWith(`${item.url}/edit`);
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive}>
