@@ -34,6 +34,9 @@ import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IProduct } from "@/interfaces";
+import { useEffect } from "react";
+import { getAllProducts } from "@/app/api/actions/productActions";
+import { ProductTableSkeleton } from "./ProductTableSkeleton";
 
 function getStatusVal(row: Row<IProduct>) {
   const stock: number = row.getValue("stock");
@@ -182,9 +185,7 @@ export const columns: ColumnDef<IProduct>[] = [
     accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const stock: number = row.getValue("stock");
       const statusVal = getStatusVal(row);
-      console.log({ stock, statusVal });
 
       return (
         <div
@@ -240,8 +241,13 @@ export const columns: ColumnDef<IProduct>[] = [
             >
               <Eye /> View
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <PenIcon /> Edit
+            <DropdownMenuItem asChild>
+              <Link
+                className="flex items-center"
+                href={`/dashboard/inventory/edit/${row.getValue("_id")}`}
+              >
+                <PenIcon className="mr-2" /> Edit
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Trash /> Delete
@@ -253,17 +259,34 @@ export const columns: ColumnDef<IProduct>[] = [
   },
 ];
 
-export function DataTableDemo({ data }: { data: IProduct[] }) {
+export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const [data, setProducts] = React.useState<IProduct[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setLoading(true);
+        const res = await getAllProducts();
+        console.log(res?.data.data);
+
+        setProducts(res?.data.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-
-  //   const [rowSelection, setRowSelection] = React.useState({});
-
-  // const [data, setData] = React.useState<Product[]>(products);
 
   const table = useReactTable({
     data,
@@ -275,18 +298,14 @@ export function DataTableDemo({ data }: { data: IProduct[] }) {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    // onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
-      //   rowSelection,
     },
   });
 
-  // if (!data) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) return <ProductTableSkeleton />;
 
   return (
     <div className="w-full">
