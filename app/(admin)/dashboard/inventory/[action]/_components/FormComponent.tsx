@@ -1,30 +1,32 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, Button, SidebarSeparator } from "@/components/ui";
-import Box from "../_components/Box";
 import { formSchema } from "../_components/schema";
 import { IProductInfo } from "@/interfaces";
-import FormHeader from "../_components/FormHeader";
 import { TextInputField } from "../_components/InputField";
 import { SelectField } from "../_components/SelectField";
-import { addProduct } from "@/app/api/actions/productActions";
+import { addProduct, getProduct } from "@/app/api/actions/productActions";
 import { ImageField } from "../_components/ImageField";
+import Box from "../_components/Box";
+import FormHeader from "../_components/FormHeader";
+import FormComponentSkeleton from "./FormComponentSkeleton";
 
 interface IProps {
   action: "add" | "edit";
   id?: string;
 }
 
-const FormComponent = ({ action }: IProps) => {
-  //   if (action === "edit" && !id) {
-  //     redirect("/dashboard/inventory");
-  //   }
+const FormComponent = ({ action, id }: IProps) => {
+  if (action === "edit" && !id) {
+    redirect("/dashboard/inventory");
+  }
 
-  const defaultValues: IProductInfo = {
-    title: action === "edit" ? "Sample Product" : "",
+  const [defaultValues, setDefaultValues] = useState<IProductInfo>({
+    title: "",
     description: "",
     highlights: "",
     image_url: "",
@@ -37,17 +39,61 @@ const FormComponent = ({ action }: IProps) => {
     categoryId: "",
     subCategoryId: "",
     item_weight: "",
-  };
+  });
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (action === "edit" && id) {
+      setLoading(true);
+      const productId = id;
+
+      async function productInfo() {
+        const res = await getProduct(productId);
+
+        const product = res?.data.data;
+        const values = {
+          title: product.title,
+          description: product.description,
+          highlights: product.highlights,
+          image_url: product.image_url,
+          price: product.price,
+          discount: product.discount,
+          discountType: product.discountType,
+          barcode: product.barcode,
+          stock: product.stock,
+          brand: product.brand,
+          categoryId: product.categoryId,
+          subCategoryId: product.subCategoryId,
+          item_weight: product.item_weight,
+        };
+        setDefaultValues(values);
+        form.reset(values);
+        setLoading(false);
+      }
+      productInfo();
+      setLoading(false);
+    } else {
+    }
+  }, [action, id]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: defaultValues,
+    defaultValues,
   });
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     console.log(data);
     const res = await addProduct(data);
+    form.reset();
     console.log(res);
+  }
+
+  const imageUrl = defaultValues.image_url;
+
+  console.log(imageUrl);
+
+  if (loading) {
+    <FormComponentSkeleton />;
   }
 
   return (
@@ -92,10 +138,23 @@ const FormComponent = ({ action }: IProps) => {
                 control={form.control}
                 inputType="Textarea"
               />
+
+              <TextInputField
+                name="highlights"
+                label="product highlights"
+                placeholder="Enter Product Highlights"
+                optional={true}
+                control={form.control}
+                inputType="Textarea"
+              />
             </Box>
 
             <Box title="Product Images" className="w-[40%]">
-              <ImageField name="image_url" control={form.control} />
+              <ImageField
+                src={imageUrl}
+                name="image_url"
+                control={form.control}
+              />
             </Box>
           </section>
 
@@ -148,6 +207,15 @@ const FormComponent = ({ action }: IProps) => {
                 name="stock"
                 label="Stock Quantity"
                 placeholder="Enter Product Quantity"
+                optional={false}
+                control={form.control}
+                inputType="Input"
+              />
+
+              <TextInputField
+                name="item_weight"
+                label="Product Weight"
+                placeholder="Enter Product Weight"
                 optional={false}
                 control={form.control}
                 inputType="Input"

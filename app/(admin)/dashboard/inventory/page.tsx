@@ -1,6 +1,6 @@
 import React from "react";
 import InventoryStatus from "../_components/InventoryStatus";
-import ProductPage from "../_components/FetchProducts";
+import { DataTableDemo } from "../_components/ProductsTable";
 
 const page = async () => {
   return (
@@ -9,7 +9,7 @@ const page = async () => {
         Inventory
       </h1>
       <InventoryStatus />
-      <ProductPage />
+      <DataTableDemo />
     </div>
   );
 };

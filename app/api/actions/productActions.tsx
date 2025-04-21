@@ -11,6 +11,16 @@ export async function getAllProducts() {
   }
 }
 
+export async function getProduct(id: string) {
+  try {
+    const res = await AxiosInstance.get(`api/product/${id}`);
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching products", error);
+  }
+}
+
 export async function addProduct(data: IProductInfo) {
   try {
     const res = await AxiosInstance.post("api/product", data);

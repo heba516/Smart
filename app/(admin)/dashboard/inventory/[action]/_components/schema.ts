@@ -13,5 +13,5 @@ export const formSchema = z.object({
   brand: z.string().min(1,{message: "Please select a brand"}),
   categoryId: z.string().min(1,{message: "Please select a category"}),
   subCategoryId: z.string().min(1, { message: "Please select a subcategory" }),
-  item_weight: z.string().optional(),
+  item_weight: z.string(),
 });

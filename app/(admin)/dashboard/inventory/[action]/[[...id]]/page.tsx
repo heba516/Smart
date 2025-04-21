@@ -31,7 +31,7 @@ const Page = async ({ params }: { params: Promise<IParams> }) => {
     redirect("/dashboard/inventory");
   }
 
-  return <FormComponent action={action} />;
+  return <FormComponent action={action} id={id} />;
 };
 
 export default Page;

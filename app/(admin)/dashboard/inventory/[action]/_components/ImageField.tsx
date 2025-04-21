@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Control, FieldPath, FieldValues } from "react-hook-form";
 import {
   FormField,
@@ -16,13 +16,20 @@ import { Icon } from "@iconify/react";
 interface ImageFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: FieldPath<T>;
+  src: string;
 }
 
 export function ImageField<T extends FieldValues>({
   control,
   name,
+  src,
 }: ImageFieldProps<T>) {
   const [imageURL, setImageURL] = useState<string | null>(null);
+
+  useEffect(() => {
+    setImageURL(src);
+  }, [src]);
+  console.log(imageURL);
 
   return (
     <FormField
