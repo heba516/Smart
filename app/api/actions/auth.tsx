@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 
 export async function contactUs(data: IContactUs) {
   try {
-    const res = await AxiosInstance.post("contact", data);
+    const res = await AxiosInstance.post("api/contact", data);
     return res;
   } catch (error) {
     console.log("contact us error", error);
@@ -13,7 +13,7 @@ export async function contactUs(data: IContactUs) {
 
 export async function login(data: ILogin) {
   try {
-    const res = await AxiosInstance.post("sessions", data);
+    const res = await AxiosInstance.post("api/sessions", data);
     console.log(res);
 
     const { accessToken, firstName, lastName, role } = res.data;
@@ -56,7 +56,7 @@ export function logout() {
 export async function refreshAccessToken() {
   try {
     // This assumes your backend sets refresh_token as HttpOnly cookie
-    const response = await AxiosInstance.post("sessions/refresh");
+    const response = await AxiosInstance.post("api/sessions/refresh");
 
     const { accessToken } = response.data;
 

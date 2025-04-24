@@ -4,17 +4,17 @@ export interface ITems {
 }
 
 export interface IFeatures {
-  itm: string;
-  title: string;
-  desc: string;
+    itm: string;
+    title: string;
+    desc: string;
 }
 
 export interface IContactUs {
     firstName: string;
     lastName: string;
-    email: string
-    phone: string
-    message: string
+    email: string;
+    phone: string;
+    message: string;
 }
 
 export interface ILogin {
@@ -23,14 +23,30 @@ export interface ILogin {
 }
 
 export interface IProduct {
-  productName: string;
-  productId: string;
-  price: number;
-  stock: number;
-  categories: string;
-  status: "Available" | "Out" | "Low";
-};
+    _id: string;
+    title: string;
+    price: number;
+    image_url?: string;
+    stock: number;
+    categories: string[];
+    status: "Available" | "Out" | "Low";
+}
 
+export interface IProductInfo {
+    title: string;
+    description?: string[];
+    highlights?: string;
+    image_url: string;
+    price: number;
+    discount?: number;
+    discountType?: string;
+    barcode: string;
+    stock: number;
+    weight?:string;
+    brand: string;
+    categoryId?: string;
+    subCategoryId?: string;
+}
 export interface IStatusData {
     src: string;
     name: string;

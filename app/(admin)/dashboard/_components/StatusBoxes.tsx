@@ -10,7 +10,7 @@ export default function StatusBoxes(props: StatusBoxesProps) {
     const { statusData } = props;
 
     return (
-        <section className="flex my-8 justify-evenly mx-auto gap-3">
+        <section className="flex my-8 justify-evenly mx-auto gap-3 flex-wrap xl:flex-nowrap ">
             {statusData.map((box, index) => (
                 <div
                     className="rounded-xl border border-[#D8DADC] py-6 px-6 space-y-3"
@@ -23,7 +23,7 @@ export default function StatusBoxes(props: StatusBoxesProps) {
                             </h4>
                             <p className="font-medium text-sm text-[#999CA0]">
                                 <span
-                                    className="font-bold text-black text-2xl me-1"
+                                    className="font-bold text-black lg:text-2xl text-xl me-1 "
                                     style={{ color: box.numberColor }}
                                 >
                                     {box.number}

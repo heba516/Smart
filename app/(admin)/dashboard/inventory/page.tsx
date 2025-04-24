@@ -1,6 +1,7 @@
 import React from "react";
 import { DataTableDemo } from "../_components/ProductsTable";
 import StatusBoxes from "../_components/StatusBoxes";
+import ViewProduct from "../_components/ViewProduct";
 import { IStatusData } from "@/interfaces";
 
 
@@ -42,7 +43,8 @@ const Page = () => {
                 Inventory
             </h1>
             <StatusBoxes statusData={InventoryStatusData} />
-            <DataTableDemo />
+            {/* <DataTableDemo /> */}
+            <ViewProduct/>
         </div>
     );
 };
