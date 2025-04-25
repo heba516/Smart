@@ -1,6 +1,6 @@
 import React from "react";
 import InventoryStatus from "../_components/InventoryStatus";
-import { DataTableDemo } from "../_components/ProductsTable";
+import { DataTableDemo } from "./[action]/_components/ProductsTable";
 
 const page = async () => {
   return (
