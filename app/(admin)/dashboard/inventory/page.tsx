@@ -1,10 +1,8 @@
 import React from "react";
 import { DataTableDemo } from "../_components/ProductsTable";
 import StatusBoxes from "../_components/StatusBoxes";
-import ViewProduct from "../_components/ViewProduct";
+import ViewProduct from "./[action]/_components/ViewProduct";
 import { IStatusData } from "@/interfaces";
-
-
 
 const InventoryStatusData: IStatusData[] = [
     {
@@ -43,8 +41,8 @@ const Page = () => {
                 Inventory
             </h1>
             <StatusBoxes statusData={InventoryStatusData} />
-            {/* <DataTableDemo /> */}
-            <ViewProduct/>
+            <DataTableDemo />
+            <ViewProduct />
         </div>
     );
 };

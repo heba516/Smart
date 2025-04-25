@@ -3,6 +3,7 @@ import * as React from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -33,287 +34,16 @@ import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IProduct } from "@/interfaces";
+import { useEffect } from "react";
+import { getAllProducts } from "@/app/api/actions/productActions";
+import { ProductTableSkeleton } from "./ProductTableSkeleton";
 
-// const data: IProduct[] = [
-//   {
-//     title: "Lay's Classic Potato Chips",
-//     _id: "#CHP12345678",
-//     price: 15,
-//     stock: 120,
-//     categories: ["Snacks"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Pepsi 2L Bottle",
-//     _id: "#PEPSI24680",
-//     price: 25,
-//     stock: 5,
-//     categories: ["Beverages"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Nescafé Classic 50g",
-//     _id: "#COFFEE13579",
-//     price: 45,
-//     stock: 0,
-//     categories: ["Coffee"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Heinz Ketchup 500g",
-//     _id: "#KETCHUP1122",
-//     price: 55,
-//     stock: 32,
-//     categories: ["Condiments"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Doritos Nacho Cheese",
-//     _id: "#DORITOS3344",
-//     price: 18,
-//     stock: 2,
-//     categories: ["Snacks"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Red Bull Energy Drink",
-//     _id: "#REDBULL5566",
-//     price: 35,
-//     stock: 0,
-//     categories: ["Beverages"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Nutella Hazelnut Spread",
-//     _id: "#NUTELLA7788",
-//     price: 95,
-//     stock: 15,
-//     categories: ["Spread"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Pringles Original",
-//     _id: "#PRINGLES9900",
-//     price: 30,
-//     stock: 1,
-//     categories: ["Snacks"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Lindt Excellence 70% Cocoa",
-//     _id: "#LINDT112233",
-//     price: 65,
-//     stock: 0,
-//     categories: ["Chocolate"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Quaker Oats 1kg",
-//     _id: "#OATS445566",
-//     price: 75,
-//     stock: 28,
-//     categories: ["Breakfast"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Coca-Cola Zero 1.5L",
-//     _id: "#COKE778899",
-//     price: 22,
-//     stock: 3,
-//     categories: ["Beverages"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Kellogg's Corn Flakes",
-//     _id: "#CORNFLAKES001",
-//     price: 85,
-//     stock: 0,
-//     categories: ["Breakfast"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Toblerone Milk Chocolate",
-//     _id: "#TOBLERONE002",
-//     price: 50,
-//     stock: 42,
-//     categories: ["Chocolate"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "M&M's Peanut",
-//     _id: "#MMPEANUT003",
-//     price: 20,
-//     stock: 4,
-//     categories: ["Candy"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "KitKat Chunky",
-//     _id: "#KITKAT004",
-//     price: 15,
-//     stock: 0,
-//     categories: ["Chocolate"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Philadelphia Cream Cheese",
-//     _id: "#PHILLY005",
-//     price: 65,
-//     stock: 18,
-//     categories: ["Dairy"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Oreo Original Cookies",
-//     _id: "#OREO006",
-//     price: 25,
-//     stock: 2,
-//     categories: ["Biscuits"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Twix Chocolate Bar",
-//     _id: "#TWIX007",
-//     price: 12,
-//     stock: 0,
-//     categories: ["Chocolate"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Nestlé Pure Life Water 1.5L",
-//     _id: "#WATER008",
-//     price: 10,
-//     stock: 56,
-//     categories: ["Water"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Cheetos Crunchy",
-//     _id: "#CHEETOS009",
-//     price: 16,
-//     stock: 1,
-//     categories: ["Snacks"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Milka Alpine Milk Chocolate",
-//     _id: "#MILKA010",
-//     price: 30,
-//     stock: 0,
-//     categories: ["Chocolate"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Hellmann's Mayonnaise",
-//     _id: "#MAYO011",
-//     price: 45,
-//     stock: 22,
-//     categories: ["Condiments"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Snickers Chocolate Bar",
-//     _id: "#SNICKERS012",
-//     price: 12,
-//     stock: 3,
-//     categories: ["Chocolate"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Mountain Dew 1L",
-//     _id: "#DEW013",
-//     price: 18,
-//     stock: 0,
-//     categories: ["Beverages"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Cadbury Dairy Milk",
-//     _id: "#CADBURY014",
-//     price: 28,
-//     stock: 37,
-//     categories: ["Chocolate"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Pringles Sour Cream",
-//     _id: "#PRINGLES015",
-//     price: 30,
-//     stock: 2,
-//     categories: ["Snacks"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "7UP 1.5L",
-//     _id: "#7UP016",
-//     price: 20,
-//     stock: 0,
-//     categories: ["Beverages"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Kinder Bueno",
-//     _id: "#KINDER017",
-//     price: 25,
-//     stock: 19,
-//     categories: ["Chocolate"],
-//     status: "Available",
-//     image_url: "",
-//   },
-//   {
-//     title: "Lipton Yellow Label Tea",
-//     _id: "#TEA018",
-//     price: 55,
-//     stock: 4,
-//     categories: ["Tea"],
-//     status: "Low",
-//     image_url: "",
-//   },
-//   {
-//     title: "Fanta Orange 1L",
-//     _id: "#FANTA019",
-//     price: 15,
-//     stock: 0,
-//     categories: ["Beverages"],
-//     status: "Out",
-//     image_url: "",
-//   },
-//   {
-//     title: "Hershey's Chocolate Syrup",
-//     _id: "#HERSHEYS020",
-//     price: 40,
-//     stock: 12,
-//     categories: ["Condiments"],
-//     status: "Available",
-//   },
-// ];
+function getStatusVal(row: Row<IProduct>) {
+  const stock: number = row.getValue("stock");
+  if (stock >= 100) return "Available";
+  else if (stock > 0) return "Low";
+  else return "Out";
+}
 
 export const columns: ColumnDef<IProduct>[] = [
   {
@@ -330,32 +60,38 @@ export const columns: ColumnDef<IProduct>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => (
-      <div
-        className={cn(
-          "lowercase",
-          row.getValue("status") === "Out" && "text-primaryRed",
-          row.getValue("status") === "Low" && "text-[#FF8714]"
-        )}
-      >
-        {row.getValue("title")}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const statusVal = getStatusVal(row);
+      return (
+        <div
+          className={cn(
+            "lowercase",
+            statusVal === "Out" && "text-primaryRed",
+            statusVal === "Low" && "text-[#FF8714]"
+          )}
+        >
+          {row.getValue("title")}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "_id",
     header: "Product ID",
-    cell: ({ row }) => (
-      <div
-        className={cn(
-          "capitalize",
-          row.getValue("status") === "Out" && "text-primaryRed",
-          row.getValue("status") === "Low" && "text-[#FF8714]"
-        )}
-      >
-        {row.getValue("_id")}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const statusVal = getStatusVal(row);
+      return (
+        <div
+          className={cn(
+            "capitalize",
+            statusVal === "Out" && "text-primaryRed",
+            statusVal === "Low" && "text-[#FF8714]"
+          )}
+        >
+          {row.getValue("_id")}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "price",
@@ -404,13 +140,14 @@ export const columns: ColumnDef<IProduct>[] = [
       const formatted = new Intl.NumberFormat("en-US", {
         style: "decimal",
       }).format(amount);
-
+      const statusVal = getStatusVal(row);
       return (
         <div
           className={cn(
             "font-medium flex items-center",
             formatted === "0" && "text-primaryRed",
-            row.getValue("status") === "Low" && "text-[#FF8714]"
+            statusVal === "Low" && "text-[#FF8714]",
+            statusVal === "Out" && "text-primaryRed"
           )}
         >
           {formatted === "0" && (
@@ -447,34 +184,38 @@ export const columns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <div
-        className={cn(
-          "capitalize flex items-center text-white w-fit rounded-lg",
-          row.getValue("status") === "Available" && "text-green-500",
-          row.getValue("status") === "Low" && "bg-[#FF8714] px-2 py-1",
-          row.getValue("status") === "Out" && "bg bg-primaryRed px-2 py-1"
-        )}
-      >
-        {row.getValue("status") === "Low" && (
-          <Icon
-            icon="si:warning-line"
-            width="17"
-            height="17"
-            className="mr-1.5"
-          />
-        )}
-        {row.getValue("status") === "Out" && (
-          <Icon
-            icon="fluent-mdl2:error-badge"
-            width="17"
-            height="17"
-            className="mr-1.5"
-          />
-        )}
-        {row.getValue("status")}
-      </div>
-    ),
+    cell: ({ row }) => {
+      const statusVal = getStatusVal(row);
+
+      return (
+        <div
+          className={cn(
+            "capitalize flex items-center text-white w-fit rounded-lg",
+            statusVal === "Available" && "text-green-500",
+            statusVal === "Low" && "bg-[#FF8714] px-2 py-1",
+            statusVal === "Out" && "bg-primaryRed px-2 py-1"
+          )}
+        >
+          {statusVal === "Low" && (
+            <Icon
+              icon="si:warning-line"
+              width="17"
+              height="17"
+              className="mr-1.5"
+            />
+          )}
+          {statusVal === "Out" && (
+            <Icon
+              icon="fluent-mdl2:error-badge"
+              width="17"
+              height="17"
+              className="mr-1.5"
+            />
+          )}
+          {statusVal}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "Actions",
@@ -500,8 +241,13 @@ export const columns: ColumnDef<IProduct>[] = [
             >
               <Eye /> View
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <PenIcon /> Edit
+            <DropdownMenuItem asChild>
+              <Link
+                className="flex items-center"
+                href={`/dashboard/inventory/edit/${row.getValue("_id")}`}
+              >
+                <PenIcon className="mr-2" /> Edit
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Trash /> Delete
@@ -513,17 +259,34 @@ export const columns: ColumnDef<IProduct>[] = [
   },
 ];
 
-export function DataTableDemo({ data }: { data: IProduct[] }) {
+export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
+  const [data, setProducts] = React.useState<IProduct[]>([]);
+  const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        setLoading(true);
+        const res = await getAllProducts();
+        console.log(res?.data.data);
+
+        setProducts(res?.data.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-
-  //   const [rowSelection, setRowSelection] = React.useState({});
-
-  // const [data, setData] = React.useState<Product[]>(products);
 
   const table = useReactTable({
     data,
@@ -535,18 +298,14 @@ export function DataTableDemo({ data }: { data: IProduct[] }) {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    // onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
-      //   rowSelection,
     },
   });
 
-  // if (!data) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) return <ProductTableSkeleton />;
 
   return (
     <div className="w-full">
@@ -627,28 +386,31 @@ export function DataTableDemo({ data }: { data: IProduct[] }) {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell
-                      key={cell.id}
-                      className={cn(
-                        "font-medium text-base",
-                        cell.row.getValue("status") === "Low" && "bg-[#FFF3E9]",
-                        cell.row.getValue("status") === "Out" && "bg-[#FFEDED]"
-                      )}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) => {
+                const statusVal = getStatusVal(row);
+                return (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell
+                        key={cell.id}
+                        className={cn(
+                          "font-medium text-base",
+                          statusVal === "Low" && "bg-[#FFF3E9]",
+                          statusVal === "Out" && "bg-[#FFEDED]"
+                        )}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell

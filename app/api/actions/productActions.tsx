@@ -3,8 +3,17 @@ import AxiosInstance from "@/utils/axiosInstance";
 
 export async function getAllProducts() {
   try {
-    const res = await AxiosInstance.get("product");
-    console.log(res);
+    const res = await AxiosInstance.get("api/product");
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching products", error);
+  }
+}
+
+export async function getProduct(id: string) {
+  try {
+    const res = await AxiosInstance.get(`api/product/${id}`);
 
     return res;
   } catch (error) {
@@ -19,6 +28,6 @@ export async function addProduct(data: IProductInfo) {
 
     return res;
   } catch (error) {
-    console.log("error while fetching products", error);
+    console.log("error while adding product", error);
   }
 }

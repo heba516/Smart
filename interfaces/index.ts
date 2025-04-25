@@ -34,7 +34,7 @@ export interface IProduct {
 
 export interface IProductInfo {
     title: string;
-    description?: string[];
+    description?: string;
     highlights?: string;
     image_url: string;
     price: number;
@@ -42,11 +42,12 @@ export interface IProductInfo {
     discountType?: string;
     barcode: string;
     stock: number;
-    weight?:string;
     brand: string;
     categoryId?: string;
     subCategoryId?: string;
+    item_weight?: string;
 }
+
 export interface IStatusData {
     src: string;
     name: string;

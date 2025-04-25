@@ -12,5 +12,6 @@ export const formSchema = z.object({
   stock: z.coerce.number().min(0, { message: "Must be at least 0 item." }),
   brand: z.string().min(1,{message: "Please select a brand"}),
   categoryId: z.string().min(1,{message: "Please select a category"}),
-  subCategoryId: z.string().min(1,{message: "Please select a subcategory"}),
+  subCategoryId: z.string().min(1, { message: "Please select a subcategory" }),
+  item_weight: z.string(),
 });
