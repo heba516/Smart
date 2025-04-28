@@ -5,6 +5,7 @@ import { DateAndTime } from "./_components/Date&Time";
 import { VerticalSeparator } from "./_components/VerticalSeparator";
 import Image from "next/image";
 import { AdminProfile } from "./_components/AdminProfile";
+import TheftAlert from "./_components/TheftAlert";
 
 export const metadata: Metadata = {
   title: {
@@ -31,6 +32,7 @@ export default async function RootLayout({
 }>) {
   return (
     <SidebarProvider>
+      <TheftAlert />
       <AppSidebar />
       <main className="w-10/12 p-6">
         <header className="flex items-center justify-center space-x-3 2xl:space-x-9">

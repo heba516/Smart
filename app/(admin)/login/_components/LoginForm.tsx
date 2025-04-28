@@ -86,7 +86,6 @@ export default function LoginForm() {
       console.log(error);
       // setError("Invalid Email Or Password");
       toast.error("Invalid Email Or Password");
-    } finally {
       setLoading(false);
     }
   }
