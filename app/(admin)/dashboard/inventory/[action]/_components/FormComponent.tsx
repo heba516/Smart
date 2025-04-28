@@ -138,15 +138,6 @@ const FormComponent = ({ action, id }: IProps) => {
                 control={form.control}
                 inputType="Textarea"
               />
-
-              <TextInputField
-                name="highlights"
-                label="product highlights"
-                placeholder="Enter Product Highlights"
-                optional={true}
-                control={form.control}
-                inputType="Textarea"
-              />
             </Box>
 
             <Box title="Product Images" className="w-[40%]">
@@ -211,15 +202,6 @@ const FormComponent = ({ action, id }: IProps) => {
                 control={form.control}
                 inputType="Input"
               />
-
-              <TextInputField
-                name="item_weight"
-                label="Product Weight"
-                placeholder="Enter Product Weight"
-                optional={false}
-                control={form.control}
-                inputType="Input"
-              />
             </Box>
           </section>
 
@@ -273,6 +255,26 @@ const FormComponent = ({ action, id }: IProps) => {
                 ]}
               />
             </div>
+          </Box>
+
+          <Box title="Additional Fields" className="w-full">
+            <TextInputField
+              name="highlights"
+              label="product highlights"
+              placeholder="Enter Product Highlights"
+              optional={true}
+              control={form.control}
+              inputType="Textarea"
+            />
+
+            <TextInputField
+              name="item_weight"
+              label="Product Weight"
+              placeholder="Enter Product Weight"
+              optional={false}
+              control={form.control}
+              inputType="Input"
+            />
           </Box>
         </form>
       </Form>
