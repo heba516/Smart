@@ -6,7 +6,7 @@ const FormHeader = ({
     children,
 }: {
     action: "add" | "edit" | "view";
-    children: ReactNode;
+    children: ReactNode |undefined;
 }) => {
     return (
         <header className="flex items-center justify-between mt-8">

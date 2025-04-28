@@ -1,8 +1,13 @@
 import React from "react";
-import { DataTableDemo } from "../_components/ProductsTable";
+// import { DataTableDemo } from "../_components/ProductsTable";
 import StatusBoxes from "../_components/StatusBoxes";
-import ViewProduct from "./[action]/_components/ViewProduct";
+import ViewProduct from "../_components/ViewProduct";
 import { IStatusData } from "@/interfaces";
+// import InventoryStatus from "../_components/InventoryStatus";
+import { DataTableDemo } from "./[action]/_components/ProductsTable";
+import { AddProductConfirm } from "../_components/AddProductConfirm";
+import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 const InventoryStatusData: IStatusData[] = [
     {
@@ -42,7 +47,16 @@ const Page = () => {
             </h1>
             <StatusBoxes statusData={InventoryStatusData} />
             <DataTableDemo />
-            <ViewProduct />
+            <Dialog>
+                        <DialogContent className="max-w-2xl">
+                            <VisuallyHidden.Root>
+                                <DialogTitle>View Product Details</DialogTitle>
+                            </VisuallyHidden.Root>
+                            <ViewProduct id="68014e41e3f3a3034148f8da" />
+                        </DialogContent>
+                    </Dialog>
+            
+            <AddProductConfirm/>
         </div>
     );
 };

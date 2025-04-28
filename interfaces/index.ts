@@ -32,6 +32,14 @@ export interface IProduct {
     status: "Available" | "Out" | "Low";
 }
 
+export interface ISecurity {
+    title: string;
+    loction: string;
+    time: number;
+    date: number;
+    status: "Resolved" | "Critical" | "Under Review";
+}
+
 export interface IProductInfo {
     title: string;
     description?: string;
