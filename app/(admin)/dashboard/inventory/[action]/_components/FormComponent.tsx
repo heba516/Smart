@@ -97,188 +97,189 @@ const FormComponent = ({ action, id }: IProps) => {
   }
 
   return (
-    <div>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <FormHeader action={action}>
-            <div className="flex items-center space-x-4">
-              <Button
-                onClick={() => form.reset()}
-                className="w-48 h-10 rounded-xl bg-input text-lg text-grayColor font-semibold"
+      <div>
+          <Form {...form}>
+              <form
+                  onSubmit={form.handleSubmit(onSubmit)}
+                  className="space-y-8"
               >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                className="w-48 h-10 rounded-xl bg-primaryRed text-lg text-white font-semibold"
-              >
-                Save
-              </Button>
-            </div>
-          </FormHeader>
+                  <FormHeader action={action}>
+                      <div className="flex items-center space-x-4">
+                          <Button
+                              onClick={() => form.reset()}
+                              className="w-48 h-10 rounded-xl bg-input text-lg text-grayColor font-semibold"
+                          >
+                              Cancel
+                          </Button>
+                          <Button
+                              type="submit"
+                              className="w-48 h-10 rounded-xl bg-primaryRed text-lg text-white font-semibold"
+                          >
+                              Save
+                          </Button>
+                      </div>
+                  </FormHeader>
 
-          <SidebarSeparator />
+                  <SidebarSeparator />
 
-          <section className="w-full h-full flex space-x-5">
-            <Box title="general information" className="w-[60%]">
-              <TextInputField
-                name="title"
-                label="Product Name"
-                placeholder="Enter Product Name"
-                optional={false}
-                control={form.control}
-                inputType="Input"
-              />
+                  <section className="w-full h-full flex space-x-5">
+                      <Box title="general information" className="w-[60%]">
+                          <TextInputField
+                              name="title"
+                              label="Product Name"
+                              placeholder="Enter Product Name"
+                              optional={false}
+                              control={form.control}
+                              inputType="Input"
+                          />
 
-              <TextInputField
-                name="description"
-                label="product description"
-                placeholder="Enter Product Description"
-                optional={true}
-                control={form.control}
-                inputType="Textarea"
-              />
-            </Box>
+                          <TextInputField
+                              name="description"
+                              label="product description"
+                              placeholder="Enter Product Description"
+                              optional={true}
+                              control={form.control}
+                              inputType="Textarea"
+                          />
 
-            <Box title="Product Images" className="w-[40%]">
-              <ImageField
-                src={imageUrl}
-                name="image_url"
-                control={form.control}
-              />
-            </Box>
-          </section>
+                          <TextInputField
+                              name="highlights"
+                              label="product highlights"
+                              placeholder="Enter Product Highlights"
+                              optional={true}
+                              control={form.control}
+                              inputType="Textarea"
+                          />
+                      </Box>
 
-          <section className="w-full h-full flex space-x-5">
-            <Box title="pricing" className="w-[60%]">
-              <TextInputField
-                name="price"
-                label="product price"
-                placeholder="$ price"
-                optional={false}
-                control={form.control}
-                inputType="Input"
-              />
+                      <Box title="Product Images" className="w-[40%]">
+                          <ImageField
+                              src={imageUrl}
+                              name="image_url"
+                              control={form.control}
+                          />
+                      </Box>
+                  </section>
 
-              <section className="flex items-center space-x-5">
-                <TextInputField
-                  name="discount"
-                  label="discount Percentage"
-                  placeholder="25 %"
-                  optional={true}
-                  control={form.control}
-                  inputType="Input"
-                />
+                  <section className="w-full h-full flex space-x-5">
+                      <Box title="pricing" className="w-[60%]">
+                          <TextInputField
+                              name="price"
+                              label="product price"
+                              placeholder="$ price"
+                              optional={false}
+                              control={form.control}
+                              inputType="Input"
+                          />
 
-                <SelectField
-                  name="discountType"
-                  label="discount Type"
-                  optional={true}
-                  placeholder="Discount Type"
-                  options={[
-                    { label: "type1", value: "type1" },
-                    { label: "type2", value: "type2" },
-                    { label: "type3", value: "type3" },
-                  ]}
-                />
-              </section>
-            </Box>
+                          <section className="flex items-center space-x-5">
+                              <TextInputField
+                                  name="discount"
+                                  label="discount Percentage"
+                                  placeholder="25 %"
+                                  optional={true}
+                                  control={form.control}
+                                  inputType="Input"
+                              />
 
-            <Box title="inventory" className="w-[40%]">
-              <TextInputField
-                name="barcode"
-                label="Product Barcode"
-                placeholder="23489q73qq493809"
-                optional={false}
-                control={form.control}
-                inputType="Input"
-              />
+                              <SelectField
+                                  name="discountType"
+                                  label="discount Type"
+                                  optional={true}
+                                  placeholder="Discount Type"
+                                  options={[
+                                      { label: "type1", value: "type1" },
+                                      { label: "type2", value: "type2" },
+                                      { label: "type3", value: "type3" },
+                                  ]}
+                              />
+                          </section>
+                      </Box>
 
-              <TextInputField
-                name="stock"
-                label="Stock Quantity"
-                placeholder="Enter Product Quantity"
-                optional={false}
-                control={form.control}
-                inputType="Input"
-              />
-            </Box>
-          </section>
+                      <Box title="inventory" className="w-[40%]">
+                          <TextInputField
+                              name="barcode"
+                              label="Product Barcode"
+                              placeholder="23489q73qq493809"
+                              optional={false}
+                              control={form.control}
+                              inputType="Input"
+                          />
 
-          <Box title="Category" className="w-full">
-            <div className="flex space-x-5">
-              <SelectField
-                name="brand"
-                label="product brand"
-                optional={false}
-                placeholder="Product Brand"
-                options={[
-                  { label: "Eldoha", value: "Eldoha" },
-                  { label: "type2", value: "type2" },
-                  { label: "type3", value: "type3" },
-                ]}
-              />
+                          <TextInputField
+                              name="stock"
+                              label="Stock Quantity"
+                              placeholder="Enter Product Quantity"
+                              optional={false}
+                              control={form.control}
+                              inputType="Input"
+                          />
 
-              <SelectField
-                name="categoryId"
-                label="product Categoires"
-                optional={false}
-                placeholder="Product Categoires"
-                options={[
-                  { label: "snacks", value: "snacks" },
-                  {
-                    label: "67f05d585cf9bb7600e810f3",
-                    value: "67f05d585cf9bb7600e810f3",
-                  },
-                  {
-                    label: "67f05d585cf9bb7600e810f5",
-                    value: "67f05d585cf9bb7600e810f5",
-                  },
-                ]}
-              />
+                          <TextInputField
+                              name="item_weight"
+                              label="Product Weight"
+                              placeholder="Enter Product Weight"
+                              optional={false}
+                              control={form.control}
+                              inputType="Input"
+                          />
+                      </Box>
+                  </section>
 
-              <SelectField
-                name="subCategoryId"
-                label="product Subcategoires"
-                optional={false}
-                placeholder="Product Subcategoires"
-                options={[
-                  { label: "chocolate", value: "chocolate" },
-                  {
-                    label: "68002d17c5a01d0b460d7c54",
-                    value: "68002d17c5a01d0b460d7c54",
-                  },
-                  {
-                    label: "68002d17c5a01d0b460d7c55",
-                    value: "68002d17c5a01d0b460d7c55",
-                  },
-                ]}
-              />
-            </div>
-          </Box>
+                  <Box title="Category" className="w-full">
+                      <div className="flex space-x-5">
+                          <SelectField
+                              name="brand"
+                              label="product brand"
+                              optional={false}
+                              placeholder="Product Brand"
+                              options={[
+                                  { label: "Eldoha", value: "Eldoha" },
+                                  { label: "type2", value: "type2" },
+                                  { label: "type3", value: "type3" },
+                              ]}
+                          />
 
-          <Box title="Additional Fields" className="w-full">
-            <TextInputField
-              name="highlights"
-              label="product highlights"
-              placeholder="Enter Product Highlights"
-              optional={true}
-              control={form.control}
-              inputType="Textarea"
-            />
+                          <SelectField
+                              name="categoryId"
+                              label="product Categoires"
+                              optional={false}
+                              placeholder="Product Categoires"
+                              options={[
+                                  { label: "snacks", value: "snacks" },
+                                  {
+                                      label: "67f05d585cf9bb7600e810f3",
+                                      value: "67f05d585cf9bb7600e810f3",
+                                  },
+                                  {
+                                      label: "67f05d585cf9bb7600e810f5",
+                                      value: "67f05d585cf9bb7600e810f5",
+                                  },
+                              ]}
+                          />
 
-            <TextInputField
-              name="item_weight"
-              label="Product Weight"
-              placeholder="Enter Product Weight"
-              optional={false}
-              control={form.control}
-              inputType="Input"
-            />
-          </Box>
-        </form>
-      </Form>
-    </div>
+                          <SelectField
+                              name="subCategoryId"
+                              label="product Subcategoires"
+                              optional={false}
+                              placeholder="Product Subcategoires"
+                              options={[
+                                  { label: "chocolate", value: "chocolate" },
+                                  {
+                                      label: "68002d17c5a01d0b460d7c54",
+                                      value: "68002d17c5a01d0b460d7c54",
+                                  },
+                                  {
+                                      label: "68002d17c5a01d0b460d7c55",
+                                      value: "68002d17c5a01d0b460d7c55",
+                                  },
+                              ]}
+                          />
+                      </div>
+                  </Box>
+              </form>
+          </Form>
+      </div>
   );
 };
 

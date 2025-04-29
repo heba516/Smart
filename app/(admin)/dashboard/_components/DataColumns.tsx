@@ -1,16 +1,22 @@
+"use client";
+import { useState } from "react";
+import { ColumnDef, Row } from "@tanstack/react-table";
+import { cn } from "@/lib/utils";
+import { IProduct, ISecurity } from "@/interfaces";
+import Link from "next/link";
 import {
   Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  Dialog,
+  DialogContent,
+  DialogTitle,
 } from "@/components/ui";
-import { ColumnDef, Row } from "@tanstack/react-table";
 import { Icon } from "@iconify/react";
-import { IProduct, ISecurity } from "@/interfaces";
-import { cn } from "@/lib/utils";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
-import Link from "next/link";
+import { ProductDialog } from "../inventory/[action]/_components/ProductDialog";
 
 ////////////Products Columns////////////
 export function productStatus(row: Row<IProduct>) {
@@ -198,50 +204,51 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const product = row.original;
+      const [isDialogOpen, setIsDialogOpen] = useState(false);
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-            asChild
-          >
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(product._id)}
+        <>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+              asChild
             >
-              <Eye /> View
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link
-                className="flex items-center"
-                href={`/dashboard/inventory/edit/${row.getValue("_id")}`}
-              >
-                <PenIcon className="mr-2" /> Edit
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Trash /> Delete
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onSelect={() => setIsDialogOpen(true)}>
+                <Eye /> View
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link
+                  className="flex items-center"
+                  href={`/dashboard/inventory/edit/${row.getValue("_id")}`}
+                >
+                  <PenIcon /> Edit
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Trash /> Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          /////////////متحطيش dialog هنا ع طول هيبقي في زحمه كملي بال component
+          ده //////////////////
+          <ProductDialog
+            id={row.getValue("_id")}
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+          />
+        </>
       );
     },
   },
 ];
 
 ////////////Security Columns////////////
-// export function securityStatus(row: Row<ISecurity>) {
-//   const status = row.getValue("status");
-//   if (status === "Under Review") return "Under Review";
-//   else if (status === "Critical") return "Critical";
-//   else return "Resolved";
-// }
-
 const securityStatus = (
   row: Row<ISecurity>
 ): "Resolved" | "Critical" | "Under Review" => {
