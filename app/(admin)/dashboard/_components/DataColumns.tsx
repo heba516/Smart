@@ -207,42 +207,44 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       const [isDialogOpen, setIsDialogOpen] = useState(false);
 
       return (
-        <>
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-              asChild
-            >
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onSelect={() => setIsDialogOpen(true)}>
-                <Eye /> View
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  className="flex items-center"
-                  href={`/dashboard/inventory/edit/${row.getValue("_id")}`}
-                >
-                  <PenIcon /> Edit
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Trash /> Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          /////////////متحطيش dialog هنا ع طول هيبقي في زحمه كملي بال component
-          ده //////////////////
-          <ProductDialog
-            id={row.getValue("_id")}
-            open={isDialogOpen}
-            onOpenChange={setIsDialogOpen}
-          />
-        </>
+          <>
+              <ProductDialog
+                  id={row.getValue("_id")}
+                  open={isDialogOpen}
+                  onOpenChange={setIsDialogOpen}
+              />
+              <DropdownMenu>
+                  <DropdownMenuTrigger
+                      className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+                      asChild
+                  >
+                      <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal />
+                      </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                      <DropdownMenuItem onSelect={() => setIsDialogOpen(true)}>
+                          <Eye /> View
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                          <Link
+                              className="flex items-center"
+                              href={`/dashboard/inventory/edit/${row.getValue(
+                                  "_id"
+                              )}`}
+                          >
+                              <PenIcon /> Edit
+                          </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                          <Trash /> Delete
+                      </DropdownMenuItem>
+                  </DropdownMenuContent>
+              </DropdownMenu>
+              {/* /////////////متحطيش dialog هنا ع طول هيبقي في زحمه كملي بال component
+          ده ////////////////// */}
+          </>
       );
     },
   },
