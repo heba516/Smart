@@ -1,13 +1,9 @@
 import React from "react";
 import StatusBoxes from "../_components/StatusBoxes";
-import ViewProduct from "../_components/ViewProduct";
 import { IStatusData } from "@/interfaces";
 import { DataTableDemo } from "./[action]/_components/ProductsTable";
 import { AddProductConfirm } from "./[action]/_components/AddProductConfirm";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui";
-// import { DataTableDemo } from "../_components/ProductsTable";
-// import InventoryStatus from "../_components/InventoryStatus";
-// import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
+import FormHeader from "./[action]/_components/FormHeader";
 
 const InventoryStatusData: IStatusData[] = [
   {
@@ -41,20 +37,10 @@ const InventoryStatusData: IStatusData[] = [
 
 const Page = () => {
   return (
-    <div>
-      <h1 className="text-black text-[32px] font-semibold border-l-4 border-primaryRed px-4 my-2">
-        Inventory
-      </h1>
+    <div className="py-5">
+      <FormHeader page={"inventory"} />
       <StatusBoxes statusData={InventoryStatusData} />
       <DataTableDemo />
-      <Dialog>
-        <DialogContent className="max-w-2xl">
-          {/* <VisuallyHidden.Root> */}
-          <DialogTitle>View Product Details</DialogTitle>
-          {/* </VisuallyHidden.Root> */}
-          <ViewProduct id="68014e41e3f3a3034148f8da" />
-        </DialogContent>
-      </Dialog>
 
       <AddProductConfirm />
     </div>

@@ -104,5 +104,5 @@ export function SecurityTable() {
 
   // if (loading) return <ProductTableSkeleton />;
 
-  return <DataTables table={table} />;
+  return <DataTables table={table} edit={false} />;
 }

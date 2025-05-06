@@ -1,38 +1,42 @@
 "use client";
 import { Row, Table, flexRender } from "@tanstack/react-table";
-import { Plus } from "lucide-react";
 import {
   Button,
+  DataTable,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-  DataTable,
+  Input,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
-  Input,
 } from "@/components/ui";
 import { DataTablePagination } from "../_components/Pagination";
-import { Icon } from "@iconify/react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import { IProduct, ISecurity } from "@/interfaces";
 import { productStatus } from "./DataColumns";
+import { Icon } from "@iconify/react";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 type DataTablesProps<T> = {
   table: Table<T>;
+  edit: boolean;
 };
 
 const DataTables = <T extends IProduct | ISecurity>({
   table,
+  edit,
 }: DataTablesProps<T>) => {
   return (
     <div className="w-full">
       <div className="flex items-center py-4">
-        <h2 className="text-xl font-semibold mr-5">Products</h2>
+        <h2 className="text-xl font-semibold mr-5">
+          {edit ? "Products" : "Security Incidents Log"}
+        </h2>
         <Input
           placeholder="Search Products..."
           value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
@@ -76,11 +80,13 @@ const DataTables = <T extends IProduct | ISecurity>({
             Export
           </Button>
 
-          <Button className="bg-primaryRed rounded-lg" asChild>
-            <Link href={"/dashboard/inventory/add"}>
-              <Plus /> Add New Product
-            </Link>
-          </Button>
+          {edit && (
+            <Button className="bg-primaryRed rounded-lg" asChild>
+              <Link href={"/dashboard/inventory/add"}>
+                <Plus /> Add New Product
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
       <div className="rounded-md border">

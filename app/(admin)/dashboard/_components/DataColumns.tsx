@@ -1,5 +1,3 @@
-"use client";
-import { useState } from "react";
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
 import { IProduct, ISecurity } from "@/interfaces";
@@ -10,13 +8,10 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  Dialog,
-  DialogContent,
-  DialogTitle,
 } from "@/components/ui";
 import { Icon } from "@iconify/react";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
-import { ProductDialog } from "../inventory/[action]/_components/ProductDialog";
+import { RowActions } from "./RowActions";
 
 ////////////Products Columns////////////
 export function productStatus(row: Row<IProduct>) {
@@ -202,51 +197,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     accessorKey: "Actions",
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      const product = row.original;
-      const [isDialogOpen, setIsDialogOpen] = useState(false);
-
-      return (
-          <>
-              <ProductDialog
-                  id={row.getValue("_id")}
-                  open={isDialogOpen}
-                  onOpenChange={setIsDialogOpen}
-              />
-              <DropdownMenu>
-                  <DropdownMenuTrigger
-                      className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
-                      asChild
-                  >
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal />
-                      </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                      <DropdownMenuItem onSelect={() => setIsDialogOpen(true)}>
-                          <Eye /> View
-                      </DropdownMenuItem>
-                      <DropdownMenuItem asChild>
-                          <Link
-                              className="flex items-center"
-                              href={`/dashboard/inventory/edit/${row.getValue(
-                                  "_id"
-                              )}`}
-                          >
-                              <PenIcon /> Edit
-                          </Link>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem>
-                          <Trash /> Delete
-                      </DropdownMenuItem>
-                  </DropdownMenuContent>
-              </DropdownMenu>
-              {/* /////////////متحطيش dialog هنا ع طول هيبقي في زحمه كملي بال component
-          ده ////////////////// */}
-          </>
-      );
-    },
+    cell: ({ row }) => <RowActions id={row.getValue("_id")} />,
   },
 ];
 
@@ -268,7 +219,7 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Product Name
+          Title
           <Icon icon="fa6-solid:sort" width="14" height="14" />
         </Button>
       );
@@ -321,7 +272,7 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Categories
+          Location
           <Icon icon="fa6-solid:sort" width="14" height="14" />
         </Button>
       );
@@ -366,7 +317,7 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Stock
+          Date
           <Icon icon="fa6-solid:sort" width="14" height="14" />
         </Button>
       );

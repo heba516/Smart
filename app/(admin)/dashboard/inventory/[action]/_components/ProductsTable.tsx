@@ -1,5 +1,10 @@
 "use client";
-import * as React from "react";
+import React, { useEffect } from "react";
+import { IProduct } from "@/interfaces";
+import { getAllProducts } from "@/app/api/actions/productActions";
+import { ProductTableSkeleton } from "../../../_components/ProductTableSkeleton";
+import DataTables from "../../../_components/DataTable";
+import { productsColumns as columns } from "../../../_components/DataColumns";
 import {
   ColumnFiltersState,
   SortingState,
@@ -10,12 +15,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { IProduct } from "@/interfaces";
-import { useEffect } from "react";
-import { getAllProducts } from "@/app/api/actions/productActions";
-import { ProductTableSkeleton } from "../../../_components/ProductTableSkeleton";
-import DataTables from "../../../_components/DataTable";
-import { productsColumns as columns } from "../../../_components/DataColumns";
 
 export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -66,5 +65,5 @@ export function DataTableDemo() {
 
   if (loading) return <ProductTableSkeleton />;
 
-  return <DataTables table={table} />;
+  return <DataTables table={table} edit={true} />;
 }
