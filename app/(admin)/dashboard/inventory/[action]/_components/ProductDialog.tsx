@@ -11,7 +11,6 @@ import { IProductInfo } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { getProduct } from "@/app/api/actions/productActions";
 import { Edit, Trash2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import FormComponentSkeleton from "./FormComponentSkeleton";
 import Link from "next/link";
@@ -34,7 +33,6 @@ export function ProductDialog({
         image_url: "",
         price: 0,
         discount: 0,
-        discountType: "",
         barcode: "",
         stock: 0,
         brand: "",
@@ -77,8 +75,8 @@ export function ProductDialog({
 
     console.log(product);
     const getStockStatus = (stock: number) => {
-        if (stock < 50) return "LOW";
-        if (stock < 100) return "MEDIUM";
+        if (stock <= 50) return "OUT";
+        if (stock <= 100) return "LOW";
         return "AVAILABLE";
     };
 
@@ -88,7 +86,7 @@ export function ProductDialog({
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-5xl">
+            <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
                     <DialogTitle className="text-2xl font-bold">
                         <FormHeader action="view" />
@@ -97,159 +95,205 @@ export function ProductDialog({
 
                 <Separator className="my-4" />
 
-                <div className="flex justify-between items-start gap-5">
-                    <div>
+                <div className="flex justify-between items-start gap-6">
+                    <div className=" ">
                         {product.image_url && (
-                            <Image
-                                className="p-2 border border-[#D8DADC]"
-                                src={product.image_url}
-                                width={290}
-                                height={384}
-                                alt="product image"
-                            />
+                            <div
+                                className="p-2 border border-[#D8DADC] rounded-[10px] mb-4"
+                                style={{ width: 240, height: 334 }}
+                            >
+                                <Image
+                                    src={product.image_url}
+                                    width={240}
+                                    height={334}
+                                    alt="product image"
+                                    className="object-contain w-full h-full"
+                                />
+                            </div>
+                        )}
+
+                        {product.image_url && (
+                            <div className="flex justify-evenly items-center ">
+                                <div className="p-2 border border-[#D8DADC] rounded-[10px]">
+                                    <Image
+                                        src={product.image_url}
+                                        width={60}
+                                        height={81}
+                                        alt="product image"
+                                    />
+                                </div>
+                                <div className="p-2 border border-[#D8DADC] rounded-[10px]">
+                                    <Image
+                                        src={product.image_url}
+                                        width={60}
+                                        height={81}
+                                        alt="product image"
+                                    />
+                                </div>
+                            </div>
                         )}
                     </div>
 
                     <div>
-                        <div className="flex justify-between items-start">
-                            <div>
+                        <div className="space-y-4">
+                            <div className=" flex justify-between items-center">
                                 <h2 className="text-[#ED1C24] text-2xl">
                                     {product.title}
                                 </h2>
-                                <div className="flex items-center gap-2 text-sm">
-                                    <span className="font-medium">
-                                        {product.categoryId}
-                                    </span>
-                                    <Image
-                                        className="mx-3"
-                                        src="/images/viewProductArrow.svg"
-                                        width={7}
-                                        height={2}
-                                        alt="view product arrow"
-                                    />
-                                    <span className="font-medium">
-                                        {product.subCategoryId}
-                                    </span>
-                                    <Image
-                                        className="mx-3"
-                                        src="/images/viewProductArrow.svg"
-                                        width={7}
-                                        height={2}
-                                        alt="view product arrow"
-                                    />
-                                    <span className="font-medium">
-                                        {product.brand}
-                                    </span>
+
+                                <div className="flex gap-4">
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        asChild
+                                        className="bg-[#F8F8F8] px-6"
+                                    >
+                                        <Link
+                                            href={`/dashboard/inventory/edit/${id}`}
+                                        >
+                                            <Edit className="h-4 w-4 mr-2" />
+                                            Edit
+                                        </Link>
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        size="sm"
+                                        className="bg-secondaryRed text-white px-6"
+                                    >
+                                        <Trash2 className="h-4 w-4 mr-2" />
+                                        Delete
+                                    </Button>
                                 </div>
                             </div>
-                            <div className="flex gap-2">
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    asChild
-                                    className="bg-[#F8F8F8]"
-                                >
-                                    <Link
-                                        href={`/dashboard/inventory/edit/${id}`}
-                                    >
-                                        <Edit className="h-4 w-4 mr-2" />
-                                        Edit
-                                    </Link>
-                                </Button>
-                                <Button
-                                    variant="outline"
-                                    size="sm"
-                                    className="bg-secondaryRed text-white"
-                                >
-                                    <Trash2 className="h-4 w-4 mr-2" />
-                                    Delete
-                                </Button>
+
+                            <div className="flex items-center gap-2 text-sm">
+                                <span className="font-medium">
+                                    {product.categoryId}
+                                </span>
+                                <Image
+                                    className="mx-2"
+                                    src="/images/viewProductArrow.svg"
+                                    width={7}
+                                    height={2}
+                                    alt="view product arrow"
+                                />
+                                <span className="font-medium">
+                                    {product.subCategoryId}
+                                </span>
+                                <Image
+                                    className="mx-2"
+                                    src="/images/viewProductArrow.svg"
+                                    width={7}
+                                    height={2}
+                                    alt="view product arrow"
+                                />
+                                <span className="font-medium">
+                                    {product.brand}
+                                </span>
                             </div>
                         </div>
 
                         <Separator className="my-4" />
 
-                        <div className="space-y-6">
+                        <div className="space-y-6 pe-6 pb-7">
                             <div>
-                                <h3 className="font-semibold mb-2">
+                                <h3 className="font-medium text-lg mb-2 text-grayColor">
                                     Product Description
                                 </h3>
-                                <div className="p-3 space-y-1 bg-[#F8F8F8] border border-[#D8DADC] rounded-[10px]">
+                                <div className="font-medium p-3 space-y-1 bg-[#F8F8F8] border border-[#D8DADC] rounded-[10px]">
                                     {product.description}
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-2 gap-8">
-                                <div>
-                                    <h3 className="font-semibold mb-2">
-                                        Pricing
-                                    </h3>
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-lg font-bold">
-                                            {product.discount &&
-                                            product.discountType ===
-                                                "percentage"
-                                                ? (
-                                                      product.price *
-                                                      (1 -
-                                                          product.discount /
-                                                              100)
-                                                  ).toFixed(2)
-                                                : product.price}{" "}
-                                            EGP
-                                        </span>
-                                        {product.discount && (
-                                            <>
-                                                <span className="line-through text-gray-500">
-                                                    {product.price} EGP
+                            <div className="flex flex-col justify-between">
+                                <div className="space-y-6">
+                                    <div className="flex items-center gap-[100px]">
+                                        <div className="space-x-3">
+                                            <span className="font-medium text-lg mb-2 text-grayColor me-2">
+                                                Price :
+                                            </span>
+                                            <span className="font-medium  p-2 space-y-1 bg-[#F8F8F8] border border-[#D8DADC] rounded-[10px]">
+                                                {product.discount &&
+                                                    (
+                                                        product.price *
+                                                        (1 -
+                                                            product.discount /
+                                                                100)
+                                                    ).toFixed(2)}
+                                                <span className="ms-1">
+                                                    EGP
                                                 </span>
-                                                <Badge variant="destructive">
-                                                    {product.discount}% OFF
-                                                </Badge>
-                                            </>
+                                            </span>
+                                            <span className="line-through text-gray-500 font-medium">
+                                                {product.price} EGP
+                                            </span>
+                                        </div>
+                                        {product.discount && (
+                                            <div className="bg-[#24A855] text-white font-medium text-lg p-2 rounded-[10px]">
+                                                discount: {product.discount}%
+                                            </div>
                                         )}
                                     </div>
-                                </div>
+                                    <div className="space-x-1">
+                                        <span className="font-medium text-lg mb-2 text-grayColor me-2">
+                                            Weight:{" "}
+                                        </span>
+                                        <span className="font-medium  p-2 space-y-1 bg-[#F8F8F8] border border-[#D8DADC] rounded-[10px]">
+                                            {product.item_weight || "N/A"}
+                                        </span>
+                                    </div>
 
-                                <div>
-                                    <h3 className="font-semibold mb-2">
-                                        Inventory
-                                    </h3>
-                                    <div className="space-y-2">
-                                        <div>
-                                            <span className="text-gray-600">
-                                                Weight:{" "}
-                                            </span>
-                                            <span>
-                                                {product.item_weight || "N/A"}
-                                            </span>
-                                        </div>
-                                        <div>
-                                            <span className="text-gray-600">
+                                    <div className="flex  justify-between items-center w-full">
+                                        <div className="space-x-1">
+                                            <span className="font-medium text-lg mb-2 text-grayColor me-2">
                                                 Barcode:{" "}
                                             </span>
-                                            <span>{product.barcode}</span>
+                                            <span className="font-medium  p-2 space-y-1 bg-[#F8F8F8] border border-[#D8DADC] rounded-[10px]">
+                                                {product.barcode}
+                                            </span>
                                         </div>
-                                        <div>
-                                            <span className="text-gray-600">
+                                        <div className=" flex justify-between items-center ">
+                                            <span className="font-medium text-lg text-grayColor me-1">
                                                 Stock quantity:{" "}
                                             </span>
-                                            <span>
-                                                {product.stock} pieces{" "}
-                                                <Badge
-                                                    variant={
+                                            <span
+                                                className={`${
+                                                    getStockStatus(
+                                                        product.stock
+                                                    ) == "LOW"
+                                                        ? "text-[#F99141] bg-[#FFF3E9]"
+                                                        : getStockStatus(
+                                                              product.stock
+                                                          ) == "OUT"
+                                                        ? "text-[#ED1C24] bg-[#FFEDED]"
+                                                        : "text-[#24A855] bg-[#DBFFEB]"
+                                                } 
+                                                gap-3 flex justify-between items-center p-2 rounded-[10px]`}
+                                            >
+                                                <Image
+                                                    className={``}
+                                                    src={`${
                                                         getStockStatus(
                                                             product.stock
-                                                        ) === "LOW"
-                                                            ? "destructive"
-                                                            : "outline"
-                                                    }
-                                                >
+                                                        ) == "LOW"
+                                                            ? "/images/inventoryLowOfStock.svg"
+                                                            : getStockStatus(
+                                                                  product.stock
+                                                              ) == "OUT"
+                                                            ? "/images/inventoryOutofStock.svg"
+                                                            : "/images/inventoryAvailableProducts.svg"
+                                                    }`}
+                                                    width={35}
+                                                    height={35}
+                                                    alt="product status"
+                                                />
+                                                <span>
+                                                    {product.stock} pieces (
                                                     {getStockStatus(
                                                         product.stock
                                                     ).toLowerCase()}{" "}
-                                                    stock
-                                                </Badge>
+                                                    stock)
+                                                </span>
                                             </span>
                                         </div>
                                     </div>
