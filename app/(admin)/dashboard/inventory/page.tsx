@@ -37,7 +37,7 @@ const InventoryStatusData: IStatusData[] = [
 
 const Page = () => {
   return (
-    <div className="py-5">
+    <div className="py-5 space-y-10">
       <FormHeader page={"inventory"} />
       <StatusBoxes statusData={InventoryStatusData} />
       <DataTableDemo />

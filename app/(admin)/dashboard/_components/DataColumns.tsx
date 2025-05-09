@@ -237,9 +237,9 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
       return (
         <div
           className={cn(
-            "capitalize flex items-center text-white w-fit rounded-lg",
-            statusVal === "Under Review" && "bg-[#FF8714] px-2 py-1",
-            statusVal === "Critical" && "bg-primaryRed px-2 py-1"
+            "capitalize flex items-center w-fit rounded-lg",
+            statusVal === "Under Review" && "bg-[#FF8714] px-2 py-1 text-white",
+            statusVal === "Critical" && "bg-primaryRed px-2 py-1 text-white"
           )}
         >
           {statusVal === "Under Review" && (
