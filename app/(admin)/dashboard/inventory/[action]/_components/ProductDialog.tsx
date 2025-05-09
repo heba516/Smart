@@ -5,7 +5,6 @@ import Image from "next/image";
 import { IProductInfo } from "@/interfaces";
 import { getProduct } from "@/app/api/actions/productActions";
 import { Edit, Trash2 } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import FormComponentSkeleton from "./FormComponentSkeleton";
 import FormHeader from "../_components/FormHeader";
 import {
@@ -15,7 +14,6 @@ import {
   DialogHeader,
   DialogTitle,
   Separator,
-  Badge,
 } from "@/components/ui/";
 
 export function ProductDialog({
@@ -79,7 +77,7 @@ export function ProductDialog({
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            <FormHeader action="view" />
+            <FormHeader action="view" page={""} />
           </DialogTitle>
         </DialogHeader>
 
@@ -90,7 +88,7 @@ export function ProductDialog({
             {product.image_url && (
               <div
                 className="p-2 border border-[#D8DADC] rounded-[10px] mb-4"
-                style={{ width: 240, height: 334 }}
+                style={{ inlineSize: 240, blockSize: 334 }}
               >
                 <Image
                   src={product.image_url}
