@@ -16,7 +16,7 @@ import {
 } from "@/components/ui";
 import { DataTablePagination } from "../_components/Pagination";
 import { cn } from "@/lib/utils";
-import { IProduct, ISecurity } from "@/interfaces";
+import { ICustomer, IProduct, ISecurity } from "@/interfaces";
 import { productStatus } from "./DataColumns";
 import { Icon } from "@iconify/react";
 import { Plus } from "lucide-react";
@@ -24,18 +24,18 @@ import Link from "next/link";
 
 type DataTablesProps<T> = {
   table: Table<T>;
-  edit: boolean;
+  page: "products" | "security" | "customers";
 };
 
-const DataTables = <T extends IProduct | ISecurity>({
+const DataTables = <T extends IProduct | ISecurity | ICustomer>({
   table,
-  edit,
+  page
 }: DataTablesProps<T>) => {
   return (
     <div className="w-full">
       <div className="flex items-center pb-4">
         <h2 className="text-xl font-semibold mr-5">
-          {edit ? "Products" : "Security Incidents Log"}
+          {page === "products" ? "Products" : page === "security" ? "Security Incidents Log" : "Customers"}
         </h2>
         <Input
           placeholder="Search Products..."
@@ -80,7 +80,7 @@ const DataTables = <T extends IProduct | ISecurity>({
             Export
           </Button>
 
-          {edit && (
+          {page === "products" && (
             <Button className="bg-primaryRed rounded-lg" asChild>
               <Link href={"/dashboard/inventory/add"}>
                 <Plus /> Add New Product

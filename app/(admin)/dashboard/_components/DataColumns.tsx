@@ -1,6 +1,6 @@
 import { ColumnDef, Row } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-import { IProduct, ISecurity } from "@/interfaces";
+import { ICustomer, IProduct, ISecurity } from "@/interfaces";
 import Link from "next/link";
 import {
   Button,
@@ -380,4 +380,141 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
       );
     },
   },
+];
+
+
+
+////////////Customers Columns////////////
+export const customersColumns: ColumnDef<ICustomer>[] = [
+  {
+    accessorKey: "title",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Customer Name
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      return <div>{row.getValue("title")}</div>;
+    },
+  },
+  {
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+       <div className="p-0 text-black text-base font-semibold">Customer ID</div>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("id")}</div>
+    ),
+  },
+  {
+    accessorKey: "total_orders",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Total Orders
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const total_orders: number = row.getValue("total_orders");
+
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }).format(total_orders);  
+
+      return <div className="font-medium pl-10">{formatted}</div>;
+    },
+  },
+  {
+    accessorKey: "phone",
+    header: ({ column }) => {
+      return (
+        <div className="p-0 text-black text-base font-semibold">Phone Number</div>
+      );
+    },
+    cell: ({ row }) => {
+      const phone: string = row.getValue("phone");
+
+      return (
+        <div className="font-medium flex items-center">
+          {phone}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ row }) => {
+      const statusVal = row.getValue("status");
+      return (
+        <div
+          className={cn(
+            "capitalize flex items-center w-fit rounded-lg",
+            statusVal === "Active" && "text-green-500",
+            statusVal === "Inactive" && "text-grayColor",
+            statusVal === "VIP" && "text-[#8407E3]"
+          )}
+        >
+          {statusVal === "VIP" && (
+            <Icon
+              icon="mingcute:vip-1-fill"
+              width="18"
+              height="18"
+              className="mr-1 text-[#8407E3]"
+            />
+          )}
+          {statusVal as string}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "Actions",
+    id: "actions",
+    enableHiding: false,
+    cell: () => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+            asChild
+          >
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem>
+              <Eye /> View
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link className="flex items-center" href={`/dashboard/security`}>
+                <PenIcon className="mr-2" /> Edit
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Trash /> Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+  }
 ];
