@@ -8,7 +8,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui";
-import { Progress } from "@/components/ui/progress";
 
 const products = [
     { id: "01", name: "Edita Molto Croissant", popularity: 70, sales: 45 },
@@ -20,41 +19,37 @@ const products = [
 export function SalesTopProducts() {
     return (
         <div className="space-y-4">
-            <h2 className="text-lg font-semibold">Top Products</h2>
-            <div className="rounded-lg border">
+            <div className="rounded-lg border py-5">
+                        <h2 className="text-lg font-semibold px-10 py-3">Top Products</h2>
                 <DataTable>
-                    <TableHeader className="bg-muted/50">
-                        <TableRow>
-                            <TableHead className="w-[60px]">#</TableHead>
-                            <TableHead>Name</TableHead>
-                            <TableHead className="w-[150px]">
-                                Popularity
+                    <TableHeader className="">
+                        <TableRow className="text-[#96A5B8]">
+                            <TableHead className="w-1/12">#</TableHead>
+                            <TableHead className="w-5/12">Name</TableHead>
+                            <TableHead className="w-4/12">Popularity</TableHead>
+                            <TableHead className="w-2/12 ps-10">
+                                Sales
                             </TableHead>
-                            <TableHead className="w-[100px]">Sales</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {products.map((product) => {
-                            // Define color pairs (main color and light version)
-                            const colorStyles = {
-                                bg: "",
-                                bgLight: "",
-                            };
+                            // Determine colors based on popularity
+                            let barColor = "";
+                            let bgColor = "";
 
                             if (product.popularity >= 70) {
-                                colorStyles.bg = "bg-[#0095FF]";
-                                colorStyles.bgLight = "bg-[#CDE7FF]";
+                                barColor = "[#0095FF]";
+                                bgColor = "[#CDE7FF]";
                             } else if (product.popularity >= 60) {
-                                colorStyles.bg = "bg-[#00E096]";
-                                colorStyles.bgLight = "bg-[#8CFAC7]";
+                                barColor = "[#00E096]";
+                                bgColor = "[#8CFAC7]";
                             } else if (product.popularity >= 50) {
-                                colorStyles.bg = "bg-[#FF8714]";
-                                colorStyles.bgLight =
-                                    "bg-[rgba(255, 135, 20, 0.24)]";
+                                barColor = "[#FF8714]";
+                                bgColor = "[#FFD9B8]";
                             } else {
-                                colorStyles.bg = "bg-[#E8E400]";
-                                colorStyles.bgLight =
-                                    "bg-[rgba(232, 228, 0, 0.3)]";
+                                barColor = "[#E8E400]";
+                                bgColor = "[#F9F8B8]";
                             }
 
                             return (
@@ -62,25 +57,29 @@ export function SalesTopProducts() {
                                     <TableCell className="font-medium">
                                         {product.id}
                                     </TableCell>
-                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell className="whitespace-nowrap">
+                                        {product.name}
+                                    </TableCell>
                                     <TableCell>
-                                        <div className="relative w-full">
-                                            {/* Background (unfilled portion) */}
+                                        <div className="relative w-full h-2 rounded-full overflow-hidden">
+                                            {/* Background (full width, light color) */}
                                             <div
-                                                className={`absolute h-2 w-full rounded-full ${colorStyles.bg}`}
-                                            >
-
-                                            {/* Filled portion */}
-                                            <Progress
-                                                value={product.popularity}
-                                                className={`h-2 relative ${colorStyles.bgLight}`}
-                                            />
-                                            </div>
+                                                className={`absolute inset-0 bg-${bgColor}`}
+                                            ></div>
+                                            {/* Progress bar (colored portion) */}
+                                            <div
+                                                className={`absolute inset-y-0 left-0 bg-${barColor}`}
+                                                style={{
+                                                    width: `${product.popularity}%`,
+                                                }}
+                                            ></div>
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        <div className="flex justify-center">
-                                            <span className="text-sm font-medium px-3 py-1 border border-gray-300 bg-gray-100 rounded-md">
+                                        <div className="flex justify-center ps-5">
+                                            <span
+                                                className={`text-sm font-medium w-full text-center  py-1 border border-${barColor} text-${barColor} bg-${bgColor} rounded-full`}
+                                            >
                                                 {product.sales}%
                                             </span>
                                         </div>
