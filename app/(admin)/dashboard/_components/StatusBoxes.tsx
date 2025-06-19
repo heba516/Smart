@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { IStatusData } from "@/interfaces";
-import { Dot } from "lucide-react";
 
 interface StatusBoxesProps {
     statusData: IStatusData[];
@@ -53,11 +52,12 @@ export default function StatusBoxes(props: StatusBoxesProps) {
                         />
                     </div>
                     {box.numberUnite == "camera of" ? (
-                        <div>
-                            <Dot
-                                size={48}
-                                color="#24a855"
-                                strokeWidth={3}
+                        <div className="space-x-1">
+                            <Image
+                                src="/images/onlineDot.svg"
+                                width={12}
+                                height={12}
+                                alt="dot"
                                 className="inline"
                             />
                             <span className="text-[#24A855] text-lg">

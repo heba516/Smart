@@ -8,14 +8,13 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export function AddProductConfirm() {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="outline">save</Button>
+                <p>Save</p>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader className="flex flex-col items-center justify-center gap-4">

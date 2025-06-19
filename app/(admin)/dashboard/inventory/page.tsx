@@ -2,7 +2,6 @@ import React from "react";
 import StatusBoxes from "../_components/StatusBoxes";
 import { IStatusData } from "@/interfaces";
 import { DataTableDemo } from "./[action]/_components/ProductsTable";
-import { AddProductConfirm } from "./[action]/_components/AddProductConfirm";
 import FormHeader from "./[action]/_components/FormHeader";
 
 const InventoryStatusData: IStatusData[] = [
@@ -41,8 +40,6 @@ const Page = () => {
       <FormHeader page={"inventory"} />
       <StatusBoxes statusData={InventoryStatusData} />
       <DataTableDemo />
-
-      <AddProductConfirm />
     </div>
   );
 };
