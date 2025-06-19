@@ -3,7 +3,7 @@ import AxiosInstance from "@/utils/axiosInstance";
 
 export async function getAllProducts() {
   try {
-    const res = await AxiosInstance.get("api/product");
+    const res = await AxiosInstance.get("api/product?limit=50");
 
     return res;
   } catch (error) {

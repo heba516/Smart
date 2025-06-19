@@ -40,6 +40,15 @@ export interface ISecurity {
     status: "Resolved" | "Critical" | "Under Review";
 }
 
+export interface ICustomer {
+    title: string;
+    id: string;
+    total_orders: number;
+    phone: string;
+    status: "Active" | "Inactive" | "VIP";
+}
+
+
 export interface IProductInfo {
     title: string;
     description?: string;

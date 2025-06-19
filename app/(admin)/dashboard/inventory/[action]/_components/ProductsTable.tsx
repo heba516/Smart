@@ -65,5 +65,5 @@ export function DataTableDemo() {
 
   if (loading) return <ProductTableSkeleton />;
 
-  return <DataTables table={table} edit={true} />;
+  return <DataTables table={table} page={"products"} />;
 }
