@@ -13,6 +13,7 @@ import { Icon } from "@iconify/react";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
 import { RowActions } from "./RowActions";
 
+
 ////////////Products Columns////////////
 export function productStatus(row: Row<IProduct>) {
   const stock: number = row.getValue("stock");
@@ -381,8 +382,6 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
     },
   },
 ];
-
-
 
 ////////////Customers Columns////////////
 export const customersColumns: ColumnDef<ICustomer>[] = [

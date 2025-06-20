@@ -15,6 +15,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+// import { socket } from '@/socket';
+import { io, Socket } from "socket.io-client";
+
+
 
 export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -42,6 +46,33 @@ export function DataTableDemo() {
 
     loadProducts();
   }, []);
+
+  
+  useEffect(() => {
+    const socketInstance = io("https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app", {
+      transports: ['websocket']
+    });
+
+    
+    socketInstance.on("connect", () => {
+      console.log("Socket connected successfully:", socketInstance.id);
+    });
+
+    socketInstance.on('shelf-state-update', (updatedProduct: IProduct) => {
+      setProducts(prev =>
+        prev.map(product =>
+          product._id === updatedProduct._id
+            ? { ...product, ...updatedProduct }
+            : product
+        )
+    );
+    });
+
+    return () => {
+      socketInstance.disconnect();
+  };
+  },[])
+
 
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
