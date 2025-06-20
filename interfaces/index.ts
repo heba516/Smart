@@ -23,13 +23,15 @@ export interface ILogin {
 }
 
 export interface IProduct {
-    _id: string;
+    _id?: string;
     title: string;
+    barcode: string;
+    shelf_no?: string;
     price: number;
     image_url?: string;
     stock: number;
     categories: string[];
-    status: "Available" | "Out" | "Low";
+    state: "Available" | "Out" | "Low";
 }
 
 export interface ISecurity {

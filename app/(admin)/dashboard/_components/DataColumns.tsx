@@ -13,15 +13,7 @@ import { Icon } from "@iconify/react";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
 import { RowActions } from "./RowActions";
 
-
 ////////////Products Columns////////////
-export function productStatus(row: Row<IProduct>) {
-  const stock: number = row.getValue("stock");
-  if (stock >= 100) return "Available";
-  else if (stock > 0) return "Low";
-  else return "Out";
-}
-
 export const productsColumns: ColumnDef<IProduct>[] = [
   {
     accessorKey: "title",
@@ -38,13 +30,13 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       );
     },
     cell: ({ row }) => {
-      const statusVal = productStatus(row);
+      const statusVal = row.getValue("state");
       return (
         <div
           className={cn(
             "lowercase",
-            statusVal === "Out" && "text-primaryRed",
-            statusVal === "Low" && "text-[#FF8714]"
+            statusVal === "out" && "text-primaryRed",
+            statusVal === "low" && "text-[#FF8714]"
           )}
         >
           {row.getValue("title")}
@@ -53,19 +45,37 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     },
   },
   {
-    accessorKey: "_id",
-    header: "Product ID",
+    accessorKey: "shelf_no",
+    header: "Shelf Number",
     cell: ({ row }) => {
-      const statusVal = productStatus(row);
+      const statusVal = row.getValue("state");
       return (
         <div
           className={cn(
             "capitalize",
-            statusVal === "Out" && "text-primaryRed",
-            statusVal === "Low" && "text-[#FF8714]"
+            statusVal === "out" && "text-primaryRed",
+            statusVal === "low" && "text-[#FF8714]"
           )}
         >
-          {row.getValue("_id")}
+          {row.getValue("shelf_no")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "barcode",
+    header: "Barcode",
+    cell: ({ row }) => {
+      const statusVal = row.getValue("state");
+      return (
+        <div
+          className={cn(
+            "capitalize",
+            statusVal === "out" && "text-primaryRed",
+            statusVal === "low" && "text-[#FF8714]"
+          )}
+        >
+          {row.getValue("barcode")}
         </div>
       );
     },
@@ -117,14 +127,14 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       const formatted = new Intl.NumberFormat("en-US", {
         style: "decimal",
       }).format(amount);
-      const statusVal = productStatus(row);
+      const statusVal = row.getValue("state");
       return (
         <div
           className={cn(
             "font-medium flex items-center",
             formatted === "0" && "text-primaryRed",
-            statusVal === "Low" && "text-[#FF8714]",
-            statusVal === "Out" && "text-primaryRed"
+            statusVal === "low" && "text-[#FF8714]",
+            statusVal === "out" && "text-primaryRed"
           )}
         >
           {formatted === "0" && (
@@ -149,7 +159,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Categories
+          Category
           <Icon icon="fa6-solid:sort" width="14" height="14" />
         </Button>
       );
@@ -159,21 +169,21 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     ),
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "state",
+    header: "State",
     cell: ({ row }) => {
-      const statusVal = productStatus(row);
+      const statusVal = row.getValue("state");
 
       return (
         <div
           className={cn(
-            "capitalize flex items-center text-white w-fit rounded-lg",
-            statusVal === "Available" && "text-green-500",
-            statusVal === "Low" && "bg-[#FF8714] px-2 py-1",
-            statusVal === "Out" && "bg-primaryRed px-2 py-1"
+            "capitalize flex items-center text-black w-fit rounded-lg",
+            statusVal === "available" && "text-green-500",
+            statusVal === "low" && "bg-[#FF8714] px-2 py-1",
+            statusVal === "out" && "bg-primaryRed px-2 py-1"
           )}
         >
-          {statusVal === "Low" && (
+          {statusVal === "low" && (
             <Icon
               icon="si:warning-line"
               width="17"
@@ -181,7 +191,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
               className="mr-1.5"
             />
           )}
-          {statusVal === "Out" && (
+          {statusVal === "out" && (
             <Icon
               icon="fluent-mdl2:error-badge"
               width="17"
@@ -189,7 +199,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
               className="mr-1.5"
             />
           )}
-          {statusVal}
+          {row.getValue("state")}
         </div>
       );
     },
@@ -198,7 +208,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     accessorKey: "Actions",
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => <RowActions id={row.getValue("_id")} />,
+    cell: ({ row }) => <RowActions id={row.getValue("barcode")} />,
   },
 ];
 
@@ -405,14 +415,14 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
   },
   {
     accessorKey: "id",
-    header: ({ column }) => {
+    header: () => {
       return (
-       <div className="p-0 text-black text-base font-semibold">Customer ID</div>
+        <div className="p-0 text-black text-base font-semibold">
+          Customer ID
+        </div>
       );
     },
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("id")}</div>
-    ),
+    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "total_orders",
@@ -434,26 +444,24 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
       // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "decimal",
-      }).format(total_orders);  
+      }).format(total_orders);
 
       return <div className="font-medium pl-10">{formatted}</div>;
     },
   },
   {
     accessorKey: "phone",
-    header: ({ column }) => {
+    header: () => {
       return (
-        <div className="p-0 text-black text-base font-semibold">Phone Number</div>
+        <div className="p-0 text-black text-base font-semibold">
+          Phone Number
+        </div>
       );
     },
     cell: ({ row }) => {
       const phone: string = row.getValue("phone");
 
-      return (
-        <div className="font-medium flex items-center">
-          {phone}
-        </div>
-      );
+      return <div className="font-medium flex items-center">{phone}</div>;
     },
   },
   {
@@ -515,5 +523,5 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
         </DropdownMenu>
       );
     },
-  }
+  },
 ];

@@ -2,8 +2,8 @@
 import { Button } from "@/components/ui";
 import { X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+import { ViewTheft } from "../security/_components/ViewTheft";
 
 const TheftAlert = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -99,7 +99,8 @@ const TheftAlert = () => {
         onClick={handleClose}
         asChild
       >
-        <Link href={"/dashboard/security"}>View Camera</Link>
+        {/* <Link href={"/dashboard/security"}>View Camera</Link> */}
+        <ViewTheft/>
       </Button>
       <X
         className="absolute top-5 right-10 cursor-pointer"

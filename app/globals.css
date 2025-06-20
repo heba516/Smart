@@ -12,7 +12,8 @@ body {
     :root {
         --primary-red: 358 89% 52%;
         --secondary-red: 356 98% 41%;
-        --light-gray: 210 10% 85%;
+        /* --light-gray: 210 10% 85%; */
+        --light-gray: 0 0% 97%;
         --medium-gray: 0 1% 59%;
         --dark-gray: 0 0% 40%;
         --gray-color: 216 6% 30%;

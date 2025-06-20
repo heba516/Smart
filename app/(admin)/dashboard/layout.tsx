@@ -67,7 +67,7 @@ export default async function RootLayout({
 
           <VerticalSeparator />
 
-          <div className="relative p-2 2xl:p-3 bg-[#FFDBDB] rounded-xl">
+          <div className="relative p-2 2xl:p-3 bg-lightGray rounded-xl">
             <span className="absolute -right-1 -top-1 flex items-center justify-center bg-primaryRed w-5 h-5 text-white text-[13px] font-semibold rounded-full">
               12
             </span>

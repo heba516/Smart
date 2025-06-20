@@ -1,5 +1,5 @@
 "use client";
-import { Row, Table, flexRender } from "@tanstack/react-table";
+import { Table, flexRender } from "@tanstack/react-table";
 import {
   Button,
   DataTable,
@@ -17,7 +17,7 @@ import {
 import { DataTablePagination } from "../_components/Pagination";
 import { cn } from "@/lib/utils";
 import { ICustomer, IProduct, ISecurity } from "@/interfaces";
-import { productStatus } from "./DataColumns";
+// import { productStatus } from "./DataColumns";
 import { Icon } from "@iconify/react";
 import { Plus } from "lucide-react";
 import Link from "next/link";
@@ -29,13 +29,17 @@ type DataTablesProps<T> = {
 
 const DataTables = <T extends IProduct | ISecurity | ICustomer>({
   table,
-  page
+  page,
 }: DataTablesProps<T>) => {
   return (
     <div className="w-full">
       <div className="flex items-center pb-4">
         <h2 className="text-xl font-semibold mr-5">
-          {page === "products" ? "Products" : page === "security" ? "Security Incidents Log" : "Customers"}
+          {page === "products"
+            ? "Products"
+            : page === "security"
+            ? "Security Incidents Log"
+            : "Customers"}
         </h2>
         <Input
           placeholder="Search Products..."
@@ -115,10 +119,11 @@ const DataTables = <T extends IProduct | ISecurity | ICustomer>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
-                let statusVal = row.getValue("status") as string;
-                if ("_id" in row.original) {
-                  statusVal = productStatus(row as Row<IProduct>);
-                }
+                const statusVal = row.getValue("state") as string;
+                // if ("_id" in row.original) {
+                //   statusVal = row.getValue("state");
+                //   // statusVal = productStatus(row as Row<IProduct>);
+                // }
 
                 return (
                   <TableRow
@@ -130,7 +135,7 @@ const DataTables = <T extends IProduct | ISecurity | ICustomer>({
                         key={cell.id}
                         className={cn(
                           "font-medium text-base",
-                          statusVal?.endsWith("Low") && "bg-[#FFF3E9]",
+                          statusVal?.endsWith("low") && "bg-[#FFF3E9]",
                           ["Out", "Critical", "Under Review"].includes(
                             statusVal
                           ) && "bg-[#FFEDED]"

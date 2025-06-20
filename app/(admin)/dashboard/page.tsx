@@ -9,6 +9,8 @@ import { ChartBoxes } from "./_components/ChartBoxes";
 import { SpreadOfSales } from "./_components/SpreadOfSales";
 import StockStatus from "./_components/StockStatus";
 import StatusBoxes from "./_components/StatusBoxes";
+import { SalesLineChart } from "./sales/components/SalesLineChart";
+import { SalesTopProducts } from "./sales/components/SalesTopProducts";
 
 const DashboardStatusData: IStatusData[] = [
   {
@@ -73,6 +75,15 @@ const page = () => {
       <SidebarSeparator className="w-[75%] mx-auto" />
 
       <StatusBoxes statusData={DashboardStatusData} />
+
+      <section className="flex space-x-4">
+        <Link href={"/dashboard/sales"} className="w-full">
+          <SalesLineChart />
+        </Link>
+        <Link href={"/dashboard/sales"} className="h-full">
+          <SalesTopProducts />
+        </Link>
+      </section>
 
       <section className="grid grid-cols-2 xl:grid-cols-3 gap-6 mt-10">
         <ChartBoxes title="Spread of sales" desc="Secondary text">
