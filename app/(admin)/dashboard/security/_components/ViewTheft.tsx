@@ -9,9 +9,46 @@ import {
     DialogTrigger,
 } from "@/components/ui/";
 import { Plus, Siren } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ITheftInfo } from "@/interfaces";
+import { getAllTheft, getTheftInfo } from "@/app/api/actions/securityAction";
+import FormComponentSkeleton from "../../inventory/[action]/_components/FormComponentSkeleton";
 
 export function ViewTheft() {
-    const image_url = "/images/viewTheftImage.png";
+    // const image_url = "/images/viewTheftImage.png";
+
+    const [theft, setTheft] = useState<ITheftInfo>({
+        image_url: "",
+        status: "",
+        timestamp: "",
+    });
+    const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        async function loadProductInfo() {
+
+            setLoading(true);
+            try {
+                const res = await getTheftInfo();
+                if (res?.data?.data) {
+                    setTheft(res.data.data);
+                }
+            } catch (error) {
+                console.error("Error loading product:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        loadProductInfo();
+    }, []);
+
+    console.log(theft);
+    
+
+    if (loading) {
+        return <FormComponentSkeleton />;
+    }
 
     return (
         <Dialog>
@@ -40,10 +77,10 @@ export function ViewTheft() {
                             </p>
                             <p className="text-darkGray text-xl font-medium">
                                 Details:{" "}
-                                <p>
+                                <span className="block">
                                     Motion detected near exit without checkout
                                     confirmation. Security notified.
-                                </p>
+                                </span>
                             </p>
                         </div>
                     </DialogTitle>
@@ -77,13 +114,13 @@ export function ViewTheft() {
                             </Button>
                         </div>
                     </div>
-                    {image_url && (
+                    {theft.image_url && (
                         <div className="space-y-3">
                             <p className="text-xl text-[#989797] font-semibold">
                                 Cam 1
                             </p>
                             <Image
-                                src={image_url}
+                                src={theft.image_url}
                                 width={680}
                                 height={300}
                                 alt="Theft image"
