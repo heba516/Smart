@@ -15,6 +15,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+// import { socket } from '@/socket';
+import { io } from "socket.io-client";
 
 export function DataTableDemo() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -41,6 +43,57 @@ export function DataTableDemo() {
     }
 
     loadProducts();
+  }, []);
+
+  useEffect(() => {
+    console.log("🔌 Initializing socket...");
+
+    const socket = io(
+      "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app",
+      {
+        transports: ["websocket"], // Critical for fallback
+      }
+    );
+
+    socket.on("connect", () => {
+      console.log("🔗 Connected to shelf socket: ", socket.id);
+    });
+
+    // Listen for shelf updates
+    socket.on("shelf-state-update", (response) => {
+      if (response.success) {
+        console.log("Shelf updated:", {
+          productId: response.product._id,
+          state: response.product.shelfState,
+          weight: response.product.weight,
+        });
+      } else {
+        console.error("Shelf update failed:", response);
+      }
+    });
+
+    // socket.on("shelf-state-update", (updatedProduct: IProduct) => {
+    //   setProducts((prev) =>
+    //     prev.map((product) =>
+    //       product._id === updatedProduct._id
+    //         ? { ...product, ...updatedProduct }
+    //         : product
+    //     )
+    //   );
+    // });
+
+    socket.io.on("error", (err) => {
+      console.error("Socket.IO error:", err);
+    });
+
+    // Handle disconnection
+    socket.on("disconnect", () => {
+      console.log("Disconnected from shelf socket");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   const [columnVisibility, setColumnVisibility] =

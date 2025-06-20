@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
+import * as React from "react";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -9,15 +9,15 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 
-export const description = "An interactive line chart"
+// export const description = "An interactive line chart"
 
 const chartData = [
   { date: "2024-04-01", desktop: 222 },
@@ -113,7 +113,6 @@ const chartData = [
   { date: "2024-06-30", desktop: 446 },
 ];
 
-
 const chartConfig = {
   views: {
     label: "Page Views",
@@ -122,27 +121,25 @@ const chartConfig = {
     label: "Desktop",
     color: "var(--chart-1)",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function SalesLineChart() {
   const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop")
+    React.useState<keyof typeof chartConfig>("desktop");
 
-  const total = React.useMemo(
-    () => ({
-      desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
-    }),
-    []
-  )
+  // const total = React.useMemo(
+  //   () => ({
+  //     desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
+  //   }),
+  //   []
+  // )
 
   return (
-    <Card className="py-4 sm:py-0 border border-input">
+    <Card className="py-4 border border-input">
       <CardHeader className="py-4">
         <div className="flex items-center space-x-3">
           <CardTitle>Revenue trend</CardTitle>
-          <CardDescription>
-            March 15 - March 21
-          </CardDescription>
+          <CardDescription>March 15 - March 21</CardDescription>
         </div>
       </CardHeader>
       <CardContent className="py-6 pr-3">
@@ -166,21 +163,23 @@ export function SalesLineChart() {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value)
+                const date = new Date(value);
                 return date.toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
-                })
+                });
               }}
-                      />
-         <YAxis
-            tickLine={false}
-            axisLine={false}
-            tickMargin={8}
-            minTickGap={5}
-            tickFormatter={(value) =>
-                `$${value.toLocaleString("en-US", { maximumFractionDigits: 0 })}`
-            }
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              minTickGap={5}
+              tickFormatter={(value) =>
+                `$${value.toLocaleString("en-US", {
+                  maximumFractionDigits: 0,
+                })}`
+              }
             />
 
             <ChartTooltip
@@ -193,7 +192,7 @@ export function SalesLineChart() {
                       month: "short",
                       day: "numeric",
                       year: "numeric",
-                    })
+                    });
                   }}
                 />
               }
@@ -209,5 +208,5 @@ export function SalesLineChart() {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

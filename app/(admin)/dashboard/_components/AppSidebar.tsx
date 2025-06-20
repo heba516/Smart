@@ -39,21 +39,21 @@ const items = [
     url: "/dashboard/inventory",
     icon: "solar:box-bold",
   },
-  {
-    title: "Employee",
-    url: "/dashboard/employee",
-    icon: "basil:user-solid",
-  },
+  // {
+  //   title: "Employee",
+  //   url: "/dashboard/employee",
+  //   icon: "basil:user-solid",
+  // },
   {
     title: "Security",
     url: "/dashboard/security",
     icon: "fluent:video-security-24-filled",
   },
-  {
-    title: "Support & Help",
-    url: "/dashboard/support",
-    icon: "ri:customer-service-fill",
-  },
+  // {
+  //   title: "Support & Help",
+  //   url: "/dashboard/support",
+  //   icon: "ri:customer-service-fill",
+  // },
   {
     title: "Settings",
     url: "/dashboard/settings",
@@ -71,8 +71,8 @@ export function AppSidebar() {
   };
   return (
     <Sidebar>
-      <SidebarContent className="py-9">
-        <SidebarGroup>
+      <SidebarContent className="py-9 h-full">
+        <SidebarGroup className="flex flex-col h-full">
           <SidebarGroupLabel>
             <Image
               className="mx-auto w-9 h-9 md:w-11 md:h-11"
@@ -84,7 +84,7 @@ export function AppSidebar() {
             />
           </SidebarGroupLabel>
           <SidebarSeparator className="mt-5" />
-          <SidebarGroupContent>
+          <SidebarGroupContent className="flex flex-col h-full justify-between">
             <SidebarMenu>
               {items.map((item) => {
                 const isActive =
