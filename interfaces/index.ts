@@ -26,7 +26,7 @@ export interface IProduct {
     _id?: string;
     title: string;
     barcode: string;
-    shelf_no?: string;
+    shelfNumber?: string;
     price: number;
     image_url?: string;
     stock: number;
@@ -39,7 +39,7 @@ export interface ISecurity {
     loction: string;
     time: number;
     date: number;
-    status: "Resolved" | "Critical" | "Under Review";
+    state: "Resolved" | "Critical" | "Under Review";
 }
 
 export interface ICustomer {
@@ -47,7 +47,7 @@ export interface ICustomer {
     id: string;
     total_orders: number;
     phone: string;
-    status: "Active" | "Inactive" | "VIP";
+    state: "Active" | "Inactive" | "VIP";
 }
 
 

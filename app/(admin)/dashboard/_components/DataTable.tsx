@@ -117,7 +117,7 @@ const DataTables = <T extends IProduct | ISecurity | ICustomer>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => {
                 const statusVal = row.getValue("state") as string;
                 // if ("_id" in row.original) {

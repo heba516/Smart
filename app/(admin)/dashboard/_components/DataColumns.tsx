@@ -45,7 +45,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     },
   },
   {
-    accessorKey: "shelf_no",
+    accessorKey: "shelfNumber",
     header: "Shelf Number",
     cell: ({ row }) => {
       const statusVal = row.getValue("state");
@@ -57,7 +57,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
             statusVal === "low" && "text-[#FF8714]"
           )}
         >
-          {row.getValue("shelf_no")}
+          {row.getValue("shelfNumber")}
         </div>
       );
     },
@@ -216,7 +216,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
 const securityStatus = (
   row: Row<ISecurity>
 ): "Resolved" | "Critical" | "Under Review" => {
-  const status = row.getValue("status");
+  const status = row.getValue("state");
   return (status as "Resolved" | "Critical" | "Under Review") || "Resolved";
 };
 
@@ -240,8 +240,8 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "state",
+    header: "State",
     cell: ({ row }) => {
       const statusVal = securityStatus(row);
 
@@ -465,10 +465,10 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
     },
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "state",
+    header: "State",
     cell: ({ row }) => {
-      const statusVal = row.getValue("status");
+      const statusVal = row.getValue("state");
       return (
         <div
           className={cn(
