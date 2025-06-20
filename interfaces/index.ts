@@ -36,7 +36,7 @@ export interface IProduct {
 
 export interface ISecurity {
     title: string;
-    loction: string;
+    location: string;
     time: number;
     date: number;
     state: "Resolved" | "Critical" | "Under Review";
