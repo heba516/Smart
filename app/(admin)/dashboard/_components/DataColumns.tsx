@@ -177,7 +177,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       return (
         <div
           className={cn(
-            "capitalize flex items-center text-black w-fit rounded-lg",
+            "capitalize flex items-center text-white w-fit rounded-lg",
             statusVal === "available" && "text-green-500",
             statusVal === "low" && "bg-[#FF8714] px-2 py-1",
             statusVal === "out" && "bg-primaryRed px-2 py-1"
