@@ -9,46 +9,46 @@ import {
     DialogTrigger,
 } from "@/components/ui/";
 import { Plus, Siren } from "lucide-react";
-import { useEffect, useState } from "react";
-import { ITheftInfo } from "@/interfaces";
-import { getAllTheft, getTheftInfo } from "@/app/api/actions/securityAction";
-import FormComponentSkeleton from "../../inventory/[action]/_components/FormComponentSkeleton";
+// import { useEffect, useState } from "react";
+// import { ITheftInfo } from "@/interfaces";
+// import { getAllTheft, getTheftInfo } from "@/app/api/actions/securityAction";
+// import FormComponentSkeleton from "../../inventory/[action]/_components/FormComponentSkeleton";
 
 export function ViewTheft() {
-    // const image_url = "/images/viewTheftImage.png";
+    const image_url = "/images/viewTheftImage.png";
 
-    const [theft, setTheft] = useState<ITheftInfo>({
-        image_url: "",
-        status: "",
-        timestamp: "",
-    });
-    const [loading, setLoading] = useState<boolean>(false);
+    // const [theft, setTheft] = useState<ITheftInfo>({
+    //     image_url: "",
+    //     status: "",
+    //     timestamp: "",
+    // });
+    // const [loading, setLoading] = useState<boolean>(false);
 
-    useEffect(() => {
-        async function loadProductInfo() {
+    // useEffect(() => {
+    //     async function loadProductInfo() {
 
-            setLoading(true);
-            try {
-                const res = await getTheftInfo();
-                if (res?.data?.data) {
-                    setTheft(res.data.data);
-                }
-            } catch (error) {
-                console.error("Error loading product:", error);
-            } finally {
-                setLoading(false);
-            }
-        }
+    //         setLoading(true);
+    //         try {
+    //             const res = await getTheftInfo();
+    //             if (res?.data?.data) {
+    //                 setTheft(res.data.data);
+    //             }
+    //         } catch (error) {
+    //             console.error("Error loading product:", error);
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     }
 
-        loadProductInfo();
-    }, []);
+    //     loadProductInfo();
+    // }, []);
 
-    console.log(theft);
+    // console.log(theft);
     
 
-    if (loading) {
-        return <FormComponentSkeleton />;
-    }
+    // if (loading) {
+    //     return <FormComponentSkeleton />;
+    // }
 
     return (
         <Dialog>
@@ -114,13 +114,13 @@ export function ViewTheft() {
                             </Button>
                         </div>
                     </div>
-                    {theft.image_url && (
+                    {image_url && (
                         <div className="space-y-3">
                             <p className="text-xl text-[#989797] font-semibold">
                                 Cam 1
                             </p>
                             <Image
-                                src={theft.image_url}
+                                src={image_url}
                                 width={680}
                                 height={300}
                                 alt="Theft image"

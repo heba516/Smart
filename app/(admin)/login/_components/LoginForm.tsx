@@ -150,8 +150,8 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <FormItem className="flex justify-between item-center space-y-0">
-          <FormLabel className="text-base text-center">
+        <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
+          <FormLabel className="text-base lg:text-center">
             keep me signed in
             <Icon
               icon="rivet-icons:question-mark-solid"
@@ -179,7 +179,7 @@ export default function LoginForm() {
         <Button
           disabled={loading}
           variant={"default"}
-          className="w-full p-[10px] text-xl leading-4 font-semibold rounded-lg bg-primaryRed mt-4"
+          className="w-full p-[10px] text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
           type="submit"
         >
           Log in

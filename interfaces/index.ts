@@ -76,9 +76,3 @@ export interface IStatusData {
     percent: number;
     percentIncreased: boolean;
 }
-
-export interface ITheftInfo {
-    image_url: string;
-    status: string;
-    timestamp: string;
-}
