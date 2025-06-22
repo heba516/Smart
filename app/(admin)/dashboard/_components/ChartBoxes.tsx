@@ -9,7 +9,7 @@ interface IChart {
 
 export const ChartBoxes = ({ title, desc, children }: IChart) => {
   return (
-    <div className="shadow-xl rounded-2xl overflow-hidden flex flex-col">
+    <div className="shadow-md rounded-2xl overflow-hidden flex flex-col">
       <header className="w-full p-6 flex items-center justify-between border-b border-input">
         <div>
           <h2 className="text-xl font-medium">{title}</h2>
