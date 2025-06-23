@@ -25,9 +25,10 @@ const TheftAlert = () => {
       const data = snapshot.val();
       const id = snapshot.key;
 
-      console.log(id);
-      console.log(data.status);
-      console.log(data.status !== "Shoplifting");
+      console.log({ id });
+      console.log({ data });
+      console.log(typeof data.status);
+      console.log(!data || !id);
 
       if (!data || !id) return;
 
