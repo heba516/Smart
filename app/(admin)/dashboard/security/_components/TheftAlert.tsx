@@ -176,14 +176,14 @@ const TheftAlert = () => {
 
     document.body.style.overflow = "hidden";
 
-    if (!alarmRef.current) {
-      alarmRef.current = new Audio("/sounds/mixkit-classic-alarm-995.wav");
-      alarmRef.current.loop = true;
-    }
+    // if (!alarmRef.current) {
+    //   alarmRef.current = new Audio("/sounds/mixkit-classic-alarm-995.wav");
+    //   alarmRef.current.loop = true;
+    // }
 
-    alarmRef.current
-      .play()
-      .catch((e) => console.error("🔇 Audio play failed:", e));
+    // alarmRef.current
+    //   .play()
+    //   .catch((e) => console.error("🔇 Audio play failed:", e));
 
     return () => {
       document.body.style.overflow = "";
@@ -200,35 +200,35 @@ const TheftAlert = () => {
   if (!isOpen) return null;
 
   return (
-      <>
-          <div className="fixed inset-0 z-50 bg-[#0000005e] opacity-60 pointer-events-auto"></div>
+    <>
+      <div className="fixed inset-0 z-50 bg-[#0000005e] opacity-60 pointer-events-auto"></div>
 
-          <div className="fixed inset-0 h-36 z-50 p-2 px-28 bg-[#FEE] flex items-center justify-between border-t-8 border-primaryRed shadow-md">
-              <div className="flex items-center space-x-8">
-                  <Image
-                      src={"/images/alert.png"}
-                      width={76}
-                      height={76}
-                      alt="security alert"
-                      loading="lazy"
-                  />
-                  <TheftDetailsAndTime latestAlert={latestAlert!} />
-              </div>
-              <Button
-                  className="bg-primaryRed text-white text-xl"
-                  size={"lg"}
-                  onClick={handleClose}
-                  asChild
-              >
-                  <ViewTheft latestAlert={latestAlert!} />
-              </Button>
-              <X
-                  className="absolute top-5 right-10 cursor-pointer"
-                  size={25}
-                  onClick={handleClose}
-              />
-          </div>
-      </>
+      <div className="fixed inset-0 h-36 z-50 p-2 px-28 bg-[#FEE] flex items-center justify-between border-t-8 border-primaryRed shadow-md">
+        <div className="flex items-center space-x-8">
+          <Image
+            src={"/images/alert.png"}
+            width={76}
+            height={76}
+            alt="security alert"
+            loading="lazy"
+          />
+          <TheftDetailsAndTime latestAlert={latestAlert!} />
+        </div>
+        <Button
+          className="bg-primaryRed text-white text-xl"
+          size={"lg"}
+          onClick={handleClose}
+          asChild
+        >
+          <ViewTheft latestAlert={latestAlert!} />
+        </Button>
+        <X
+          className="absolute top-5 right-10 cursor-pointer"
+          size={25}
+          onClick={handleClose}
+        />
+      </div>
+    </>
   );
 };
 
