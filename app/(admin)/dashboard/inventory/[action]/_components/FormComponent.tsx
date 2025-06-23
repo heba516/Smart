@@ -6,15 +6,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, Button, SidebarSeparator } from "@/components/ui";
 import { formSchema } from "../_components/schema";
+import { addProduct, getProduct } from "@/app/api/actions/productActions";
 import { IProductInfo } from "@/interfaces";
 import { TextInputField } from "../_components/InputField";
 import { SelectField } from "../_components/SelectField";
-import { addProduct, getProduct } from "@/app/api/actions/productActions";
 import { ImageField } from "../_components/ImageField";
+import { AddProductConfirm } from "./AddProductConfirm";
 import Box from "../_components/Box";
 import FormHeader from "../_components/FormHeader";
 import FormComponentSkeleton from "./FormComponentSkeleton";
-import { AddProductConfirm } from "./AddProductConfirm";
 import Link from "next/link";
 
 interface IProps {
@@ -48,12 +48,16 @@ const FormComponent = ({ action, id }: IProps) => {
   > | null>(null);
 
   useEffect(() => {
+    console.log(action, id);
+
     if (action === "edit" && id) {
       setLoading(true);
       const productId = id;
 
       async function productInfo() {
+        console.log(productId);
         const res = await getProduct(productId);
+        console.log(res);
 
         const product = res?.data.data;
         const values = {
@@ -123,21 +127,7 @@ const FormComponent = ({ action, id }: IProps) => {
                       form.reset();
                       console.log(res);
                       setPendingData(null);
-                      //   setDefaultValues({
-                      //     title: "",
-                      //     description: "",
-                      //     highlights: "",
-                      //     image_url: "",
-                      //     price: 0,
-                      //     discount: 0,
-                      //     discountType: "",
-                      //     barcode: "",
-                      //     stock: 0,
-                      //     brand: "",
-                      //     categoryId: "",
-                      //     subCategoryId: "",
-                      //     item_weight: "",
-                      //   });
+                      redirect("/dashboard/inventory");
                     }
                   }}
                 />

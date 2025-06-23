@@ -208,7 +208,10 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     accessorKey: "Actions",
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => <RowActions id={row.getValue("barcode")} />,
+    cell: ({ row }) => {
+      const id = row.original._id as string;
+      return <RowActions id={id} />;
+    },
   },
 ];
 
