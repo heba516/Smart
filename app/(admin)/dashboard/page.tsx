@@ -14,42 +14,42 @@ import { SalesTopProducts } from "./sales/components/SalesTopProducts";
 import { SecurityTable } from "./security/_components/SecurityTable";
 
 const DashboardStatusData: IStatusData[] = [
-  {
-    src: "/images/activeUsers.svg",
-    name: "Active users",
-    number: "300",
-    numberUnite: "users",
-    numberColor: "black",
-    percent: 7,
-    percentIncreased: true,
-  },
-  {
-    src: "/images/totalSales.svg",
-    name: "Total Sales",
-    number: "41,327",
-    numberUnite: "EGP",
-    numberColor: "black",
-    percent: 5,
-    percentIncreased: true,
-  },
-  {
-    src: "/images/totalProductsSold.svg",
-    name: " Total Products Sold",
-    number: "892",
-    numberUnite: "products",
-    numberColor: "black",
-    percent: -3,
-    percentIncreased: false,
-  },
-  {
-    src: "/images/averageBasketValue.svg",
-    name: "Average Basket Value",
-    number: "523",
-    numberUnite: "EGP",
-    numberColor: "black",
-    percent: -5,
-    percentIncreased: true,
-  },
+    {
+        src: "/images/dashboardActiveCustomers.svg",
+        name: "Active Customers",
+        number: "300",
+        numberUnite: "users",
+        numberColor: "#24A855",
+        percent: 7,
+        percentIncreased: true,
+    },
+    {
+        src: "/images/dashboardTotalCustomers.svg",
+        name: "Total Customers",
+        number: "2321",
+        numberUnite: "users",
+        numberColor: "#24A855",
+        percent: 7,
+        percentIncreased: true,
+    },
+    {
+        src: "/images/dashboardTotalProductssaled.svg",
+        name: " Total Products saled",
+        number: "892",
+        numberUnite: "products",
+        numberColor: "#24A855",
+        percent: -3,
+        percentIncreased: false,
+    },
+    {
+        src: "/images/dashboardTotalSales.svg",
+        name: "Total Sales",
+        number: "32.123",
+        numberUnite: "EGP",
+        numberColor: "#24A855",
+        percent: 7,
+        percentIncreased: true,
+    },
 ];
 
 const page = () => {
@@ -86,9 +86,9 @@ const page = () => {
         </Link>
       </section>
 
-      <section className="flex mt-10 space-x-4">
+      <section className="flex mt-10 space-x-4 flex-col xl:flex-row">
         <SecurityTable />
-        <aside className="flex flex-col space-y-2 w-[29%]">
+        <aside className="flex flex-col space-y-2 xl:w-[29%]">
           <ChartBoxes title="Stock Status" desc="Secondary text">
             <StockStatus />
             <Button
