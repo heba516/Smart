@@ -151,6 +151,8 @@ const TheftAlert = () => {
       const data = snapshot.val();
       const id = snapshot.key;
 
+      console.log(id);
+
       if (!data || !id || data.status !== "Shoplifting") return;
 
       const alertTime = new Date(data.timestamp).getTime();
