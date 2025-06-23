@@ -124,7 +124,7 @@ import { Button } from "@/components/ui";
 import { X } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
-import { ref, onChildAdded } from "firebase/database";
+import { ref, onChildAdded, limitToLast, query } from "firebase/database";
 import { database } from "@/utils/firebase";
 import { ViewTheft } from "./ViewTheft";
 import TheftDetailsAndTime from "./TheftDetailsAndTime";
@@ -139,20 +139,23 @@ const TheftAlert = () => {
   const alarmRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const alertsRef = ref(database, "/alerts");
+    // const alertsRef = ref(database, "/alerts");
+    const alertsRef = query(ref(database, "/alerts"), limitToLast(1));
 
     const unsubscribe = onChildAdded(alertsRef, (snapshot) => {
       const data = snapshot.val();
       const id = snapshot.key;
 
       console.log(id);
+      console.log(data.status);
+      console.log(data.status !== "Shoplifting");
 
-      if (!data || !id || data.status !== "Shoplifting") return;
+      if (!data || !id) return;
 
       const alertTime = new Date(data.timestamp).getTime();
       if (alertTime < startTimeRef.current) return;
 
-      const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
+      const alertClosed = localStorage.getItem(ALERT_KEY) === "true";
 
       if (!alertClosed && id !== latestAlert?.id) {
         setLatestAlert({ id, ...data });
@@ -160,7 +163,10 @@ const TheftAlert = () => {
       }
     });
 
-    console.log(unsubscribe);
+    //i.ibb.co/8gzqBpDq/cbc22ac7a153.jpg
+    // "2025-06-27T17:57:57.382791"
+
+    https: console.log(unsubscribe);
 
     return () => {
       // nothing to cleanup for onChildAdded
@@ -176,14 +182,14 @@ const TheftAlert = () => {
 
     document.body.style.overflow = "hidden";
 
-    // if (!alarmRef.current) {
-    //   alarmRef.current = new Audio("/sounds/mixkit-classic-alarm-995.wav");
-    //   alarmRef.current.loop = true;
-    // }
+    if (!alarmRef.current) {
+      alarmRef.current = new Audio("/sounds/mixkit-classic-alarm-995.wav");
+      alarmRef.current.loop = true;
+    }
 
-    // alarmRef.current
-    //   .play()
-    //   .catch((e) => console.error("🔇 Audio play failed:", e));
+    alarmRef.current
+      .play()
+      .catch((e) => console.error("🔇 Audio play failed:", e));
 
     return () => {
       document.body.style.overflow = "";
@@ -191,7 +197,7 @@ const TheftAlert = () => {
   }, [isOpen]);
 
   const handleClose = () => {
-    localStorage.setItem(ALERT_KEY, "false");
+    localStorage.setItem(ALERT_KEY, "true");
     setIsOpen(false);
     alarmRef.current?.pause();
     // alarmRef.current && (alarmRef.current.currentTime = 0);
@@ -220,7 +226,7 @@ const TheftAlert = () => {
           onClick={handleClose}
           asChild
         >
-          <ViewTheft latestAlert={latestAlert!} />
+          <ViewTheft latestAlert={latestAlert!} onClick={handleClose} />
         </Button>
         <X
           className="absolute top-5 right-10 cursor-pointer"
