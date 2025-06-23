@@ -35,8 +35,13 @@ const TheftAlert = () => {
       if (alertTime < startTimeRef.current) return;
 
       const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
+      const lastID = localStorage.getItem("lastID");
+      console.log(lastID);
 
-      if (!alertClosed && id !== latestAlert?.id) {
+      if (!alertClosed && id !== lastID) {
+        localStorage.setItem("lastID", latestAlert?.id as string);
+        console.log(localStorage.getItem("lastID"));
+
         setLatestAlert({ id, ...data });
         setIsOpen(true);
       }
