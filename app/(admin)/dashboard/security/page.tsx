@@ -6,8 +6,10 @@ import { Button } from "@/components/ui";
 import Image from "next/image";
 import StatusBoxes from "../_components/StatusBoxes";
 import { IStatusData } from "@/interfaces";
-import TheftAlert from "./_components/TheftAlert";
+// import TheftAlert from "./_components/TheftAlert";
 // import FirebaseRealtimeDemo from "./_components/Firebase";
+// import LatestAlert from "./_components/Firebase";
+// import { ViewTheft } from "./_components/ViewTheft";
 
 const SecurityStatusData: IStatusData[] = [
   {
@@ -110,9 +112,6 @@ const page = () => {
       </div>
       <SecurityTable />
       {/* <ViewTheft/> */}
-      <Button className="bg-primaryRed text-white text-xl" size={"lg"}>
-        <TheftAlert />
-      </Button>
 
       {/* <FirebaseRealtimeDemo /> */}
     </div>

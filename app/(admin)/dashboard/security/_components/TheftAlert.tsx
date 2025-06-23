@@ -127,14 +127,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { ref, onChildAdded } from "firebase/database";
 import { database } from "@/utils/firebase";
 import { ViewTheft } from "./ViewTheft";
-
-interface IAlert {
-  id: string;
-  confidence: number;
-  image_url: string;
-  status: string;
-  timestamp: string;
-}
+import TheftDetailsAndTime from "./TheftDetailsAndTime";
+import { IAlert } from "@/interfaces";
 
 const ALERT_KEY = "theft-alert-closed";
 
@@ -158,7 +152,7 @@ const TheftAlert = () => {
       const alertTime = new Date(data.timestamp).getTime();
       if (alertTime < startTimeRef.current) return;
 
-      const alertClosed = localStorage.getItem(ALERT_KEY) === "true";
+      const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
 
       if (!alertClosed && id !== latestAlert?.id) {
         setLatestAlert({ id, ...data });
@@ -197,7 +191,7 @@ const TheftAlert = () => {
   }, [isOpen]);
 
   const handleClose = () => {
-    localStorage.setItem(ALERT_KEY, "true");
+    localStorage.setItem(ALERT_KEY, "false");
     setIsOpen(false);
     alarmRef.current?.pause();
     // alarmRef.current && (alarmRef.current.currentTime = 0);
@@ -206,56 +200,35 @@ const TheftAlert = () => {
   if (!isOpen) return null;
 
   return (
-    <>
-      <div className="fixed inset-0 z-50 bg-[#0000005e] opacity-60 pointer-events-auto"></div>
+      <>
+          <div className="fixed inset-0 z-50 bg-[#0000005e] opacity-60 pointer-events-auto"></div>
 
-      <div className="fixed inset-0 h-36 z-50 p-2 px-28 bg-[#FEE] flex items-center justify-between border-t-8 border-primaryRed shadow-md">
-        <div className="flex items-center space-x-8">
-          <Image
-            src={"/images/alert.png"}
-            width={76}
-            height={76}
-            alt="security alert"
-            loading="lazy"
-          />
-          <div className="space-y-2">
-            <h2 className="text-primaryRed text-2xl font-bold uppercase">
-              Theft Attempt Detected!
-            </h2>
-            <p className="text-primaryRed text-xl font-semibold">
-              Location: Front Entrance
-            </p>
-            <p className="text-primaryRed text-xl font-semibold">
-              Time:{" "}
-              <span>
-                {latestAlert?.timestamp &&
-                  new Date(latestAlert.timestamp).toLocaleTimeString("en-US", {
-                    hour: "numeric",
-                    minute: "2-digit",
-                    hour12: true,
-                  })}
-              </span>
-            </p>
-            {/* <p className="text-darkGray text-xl font-medium">
-            Confidence: {latestAlert?.confidence}
-          </p> */}
+          <div className="fixed inset-0 h-36 z-50 p-2 px-28 bg-[#FEE] flex items-center justify-between border-t-8 border-primaryRed shadow-md">
+              <div className="flex items-center space-x-8">
+                  <Image
+                      src={"/images/alert.png"}
+                      width={76}
+                      height={76}
+                      alt="security alert"
+                      loading="lazy"
+                  />
+                  <TheftDetailsAndTime latestAlert={latestAlert!} />
+              </div>
+              <Button
+                  className="bg-primaryRed text-white text-xl"
+                  size={"lg"}
+                  onClick={handleClose}
+                  asChild
+              >
+                  <ViewTheft latestAlert={latestAlert!} />
+              </Button>
+              <X
+                  className="absolute top-5 right-10 cursor-pointer"
+                  size={25}
+                  onClick={handleClose}
+              />
           </div>
-        </div>
-        <Button
-          className="bg-primaryRed text-white text-xl"
-          size={"lg"}
-          onClick={handleClose}
-          asChild
-        >
-          <ViewTheft />
-        </Button>
-        <X
-          className="absolute top-5 right-10 cursor-pointer"
-          size={25}
-          onClick={handleClose}
-        />
-      </div>
-    </>
+      </>
   );
 };
 

@@ -76,3 +76,11 @@ export interface IStatusData {
     percent: number;
     percentIncreased: boolean;
 }
+
+export interface IAlert {
+    id: string;
+    confidence: number;
+    image_url: string;
+    status: string;
+    timestamp: string;
+}
