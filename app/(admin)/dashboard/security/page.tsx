@@ -7,7 +7,7 @@ import Image from "next/image";
 import StatusBoxes from "../_components/StatusBoxes";
 import { IStatusData } from "@/interfaces";
 import TheftAlert from "./_components/TheftAlert";
-import FirebaseRealtimeDemo from "./_components/Firebase";
+// import FirebaseRealtimeDemo from "./_components/Firebase";
 
 const SecurityStatusData: IStatusData[] = [
   {
@@ -114,7 +114,7 @@ const page = () => {
         <TheftAlert />
       </Button>
 
-      <FirebaseRealtimeDemo />
+      {/* <FirebaseRealtimeDemo /> */}
     </div>
   );
 };

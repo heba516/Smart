@@ -7,11 +7,11 @@ import { CalendarDateRangePicker } from "./_components/Calender";
 // import { TopProducts } from "./_components/TopProducts";
 import { ChartBoxes } from "./_components/ChartBoxes";
 import { SpreadOfSales } from "./_components/SpreadOfSales";
-import StockStatus from "./_components/StockStatus";
-import StatusBoxes from "./_components/StatusBoxes";
 import { SalesLineChart } from "./sales/components/SalesLineChart";
 import { SalesTopProducts } from "./sales/components/SalesTopProducts";
 import { SecurityTable } from "./security/_components/SecurityTable";
+import StockStatus from "./_components/StockStatus";
+import StatusBoxes from "./_components/StatusBoxes";
 
 const DashboardStatusData: IStatusData[] = [
   {
@@ -59,7 +59,7 @@ const page = () => {
         <div>
           <h1 className="text-black text-2xl font-semibold">SMART Dashboard</h1>
           <p className="text-medGray text-base font-medium">
-            Hi Heba Here’s a review to your smart markat ..
+            Hi Heba Here’s a rSeview to your smart markat ..
           </p>
         </div>
 
@@ -115,19 +115,6 @@ const page = () => {
               Product 1
             </div>
           </ChartBoxes>
-
-          {/* <ChartBoxes title="Top Products Sold" desc="Secondary text">
-            <TopProducts />
-
-            <div className="grid grid-cols-3 gap-2 mt-5 mx-4">
-              {Array.from({ length: 4 }, (_, index) => (
-                <div className="flex items-center" key={index}>
-                  <span className="w-2 h-2 bg-primaryRed rounded-full mr-1 text-sm"></span>
-                  Product {index + 1}
-                </div>
-              ))}
-            </div>
-          </ChartBoxes> */}
         </aside>
       </section>
     </div>
@@ -136,3 +123,18 @@ const page = () => {
 
 export default page;
 // grid grid-cols-2 xl:grid-cols-3 gap-6
+
+{
+  /* <ChartBoxes title="Top Products Sold" desc="Secondary text">
+  <TopProducts />
+
+  <div className="grid grid-cols-3 gap-2 mt-5 mx-4">
+    {Array.from({ length: 4 }, (_, index) => (
+      <div className="flex items-center" key={index}>
+        <span className="w-2 h-2 bg-primaryRed rounded-full mr-1 text-sm"></span>
+        Product {index + 1}
+      </div>
+    ))}
+  </div>
+</ChartBoxes> */
+}
