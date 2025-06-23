@@ -20,7 +20,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { SidebarSkeleton } from "./skeleton/AppSidebarSkeleton";
 
-// Menu items.
 const items = [
   {
     title: "Dashboard",
@@ -75,7 +74,6 @@ export function AppSidebar() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // ينتظر لما يتم التثبيت على المتصفح
     setIsMounted(true);
   }, []);
 

@@ -10,7 +10,6 @@ const NavBar = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    // ينتظر لما يتم التثبيت على المتصفح
     setIsMounted(true);
   }, []);
 
