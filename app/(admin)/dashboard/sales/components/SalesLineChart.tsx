@@ -200,7 +200,7 @@ export function SalesLineChart() {
             <Line
               dataKey={activeChart}
               type="monotone"
-              stroke="#4375FF"
+              stroke="#F94144"
               strokeWidth={2}
               dot={false}
             />

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Control, FieldPath, FieldValues } from "react-hook-form";
+import { Control, FieldPath, FieldValues, useWatch } from "react-hook-form";
 import {
   FormField,
   FormItem,
@@ -16,23 +16,28 @@ import { Icon } from "@iconify/react";
 interface ImageFieldProps<T extends FieldValues> {
   control: Control<T>;
   name: FieldPath<T>;
-  src: string;
 }
 
 export function ImageField<T extends FieldValues>({
   control,
   name,
-  src,
 }: ImageFieldProps<T>) {
   const [imageURL, setImageURL] = useState<string | null>(null);
 
+  const watchedValue = useWatch({ control, name });
+
   useEffect(() => {
-    setImageURL(src);
-  }, [src]);
-  console.log(imageURL);
+    setImageURL(watchedValue || null);
+  }, [watchedValue]);
+
+  // useEffect(() => {
+  //   setImageURL(src);
+  // }, [src]);
+  // console.log(imageURL);
 
   return (
     <FormField
+      key={name}
       control={control}
       name={name}
       render={({ field, fieldState: { error } }) => (
