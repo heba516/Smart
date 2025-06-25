@@ -1,4 +1,4 @@
-import { AxiosInstance } from "@/utils/axiosInstance";
+import { AxiosInstance } from "@/lib/axiosInstance";
 import { IContactUs, ILogin } from "@/interfaces";
 import Cookies from "js-cookie";
 

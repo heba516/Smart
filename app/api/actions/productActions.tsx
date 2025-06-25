@@ -1,5 +1,5 @@
 import { IProductInfo } from "@/interfaces";
-import AxiosInstance from "@/utils/axiosInstance";
+import AxiosInstance from "@/lib/axiosInstance";
 
 export async function getAllProducts() {
   try {

@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { ref, onChildAdded, limitToLast, query } from "firebase/database";
-import { database } from "@/utils/firebase";
+import { database } from "@/lib/firebase";
 import { ViewTheft } from "./ViewTheft";
 import TheftDetailsAndTime from "./TheftDetailsAndTime";
 import { IAlert } from "@/interfaces";
