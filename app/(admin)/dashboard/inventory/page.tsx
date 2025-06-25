@@ -7,7 +7,7 @@ import FormHeader from "./[action]/_components/FormHeader";
 const InventoryStatusData: IStatusData[] = [
   {
     src: "/images/inventoryAvailableProducts.svg",
-    name: "available products",
+    name: "Available Products",
     number: "10,320",
     numberColor: "#24A855",
     numberUnite: "products",
@@ -16,7 +16,7 @@ const InventoryStatusData: IStatusData[] = [
   },
   {
     src: "/images/inventoryLowOfStock.svg",
-    name: "low of stock",
+    name: "Low Of Stock",
     number: "5073",
     numberColor: "#F99141",
     numberUnite: "products",
@@ -25,7 +25,7 @@ const InventoryStatusData: IStatusData[] = [
   },
   {
     src: "/images/inventoryOutofStock.svg",
-    name: "out of stock",
+    name: "Out Of Stock",
     number: "893",
     numberColor: "#ED1C24",
     numberUnite: "products",

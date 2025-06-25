@@ -13,7 +13,7 @@ export default function StatusBoxes(props: StatusBoxesProps) {
     <section className="flex my-8 justify-start mx-auto gap-4 flex-wrap xl:flex-nowrap">
       {statusData.map((box, index) => (
         <div
-          className="rounded-xl border border-[#D8DADC] py-6 px-6 space-y-3 min-w-[245px] xxl:w-[350px]"
+          className="rounded-xl border border-[#D8DADC] py-6 px-6 space-y-3 min-w-[245px] xl:w-[350px]"
           key={index}
         >
           <div className="flex justify-between items-start gap-6">
