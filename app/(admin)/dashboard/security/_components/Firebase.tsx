@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
-import { database } from "@/utils/firebase"; // adjust path as needed
+import { database } from "@/lib/firebase"; // adjust path as needed
 
 interface IAlert {
   id: string; // Firebase key

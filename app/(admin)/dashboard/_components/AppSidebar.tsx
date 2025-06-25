@@ -16,8 +16,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { logout } from "@/app/api/actions/auth";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { SidebarSkeleton } from "./skeleton/AppSidebarSkeleton";
 
-// Menu items.
 const items = [
   {
     title: "Dashboard",
@@ -69,6 +71,13 @@ export function AppSidebar() {
     console.log("logout");
     router.push("/login");
   };
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return <SidebarSkeleton />;
   return (
     <Sidebar>
       <SidebarContent className="py-9 h-full">
@@ -94,10 +103,10 @@ export function AppSidebar() {
                 return (
                   <SidebarMenuItem key={item.title}>
                     <SidebarMenuButton asChild isActive={isActive}>
-                      <a href={item.url} className="flex items-center">
+                      <Link href={item.url} className="flex items-center">
                         <Icon icon={item.icon} width="24" height="24" />
                         <span>{item.title}</span>
-                      </a>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 );

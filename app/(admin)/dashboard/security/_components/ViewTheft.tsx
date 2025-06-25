@@ -13,10 +13,12 @@ import { Icon } from "@iconify/react";
 import { IAlert } from "@/interfaces";
 import TheftDetailsAndTime from "./TheftDetailsAndTime";
 
-interface ViewTheftProps {
+interface ViewTheftProps extends React.ComponentProps<typeof Dialog> {
   latestAlert: IAlert;
+  onClick?: () => void;
 }
-export function ViewTheft({ latestAlert }: ViewTheftProps) {
+
+export function ViewTheft({ latestAlert, onClick }: ViewTheftProps) {
   // const image_url = "/images/viewTheftImage.png";
 
   return (
@@ -57,6 +59,7 @@ export function ViewTheft({ latestAlert }: ViewTheftProps) {
                 variant="default"
                 // size="sm"
                 className="bg-[#F8F8F8] px-5 text-[17px] h-[37px] rounded-lg font-normal text-grayColor border border-input"
+                onClick={onClick}
               >
                 Dismiss
               </Button>
