@@ -5,45 +5,46 @@ import { VerticalSeparator } from "./VerticalSeparator";
 import { DateAndTime } from "./Date&Time";
 import { useState, useEffect } from "react";
 import { NavBarSkeleton } from "./skeleton/NavBarSkeleton";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  Separator,
-  Input,
-} from "@/components/ui";
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+// import {
+//   Dialog,
+//   DialogTrigger,
+//   DialogContent,
+//   DialogHeader,
+//   DialogTitle,
+//   Separator,
+//   Input,
+// } from "@/components/ui";
+// import Link from "next/link";
+// import { ArrowRight } from "lucide-react";
 
-import * as DialogPrimitive from "@radix-ui/react-dialog";
+// import * as DialogPrimitive from "@radix-ui/react-dialog";
+import GlobalSearch from "./GlobalSearch";
 
-interface ISearch {
-  title: string;
-  link: string;
-}
+// interface ISearch {
+//   title: string;
+//   link: string;
+// }
 
 const NavBar = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const [defaultSearch, setDefaultSearch] = useState<ISearch[]>([
-    {
-      title: "Customers",
-      link: "/dashboard/customers",
-    },
-    {
-      title: "Sales",
-      link: "/dashboard/sales",
-    },
-    {
-      title: "Inventory",
-      link: "/dashboard/inventory",
-    },
-    {
-      title: "Security",
-      link: "/dashboard/security",
-    },
-  ]);
+  // const [defaultSearch, setDefaultSearch] = useState<ISearch[]>([
+  //   {
+  //     title: "Customers",
+  //     link: "/dashboard/customers",
+  //   },
+  //   {
+  //     title: "Sales",
+  //     link: "/dashboard/sales",
+  //   },
+  //   {
+  //     title: "Inventory",
+  //     link: "/dashboard/inventory",
+  //   },
+  //   {
+  //     title: "Security",
+  //     link: "/dashboard/security",
+  //   },
+  // ]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -51,9 +52,10 @@ const NavBar = () => {
 
   if (!isMounted) return <NavBarSkeleton />;
   // absolute inset-y-0 start-2 flex items-center ps-3 pointer-events-none
+
   return (
     <nav className="flex items-center justify-center space-x-3 2xl:space-x-9">
-      <Dialog>
+      {/* <Dialog>
         <DialogTrigger>
           <div className="w-[350px] xl:w-[450px] h-[45px] flex items-center space-x-3 bg-lightGray rounded-xl px-8 cursor-pointer">
             <svg
@@ -118,7 +120,9 @@ const NavBar = () => {
             ))}
           </section>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
+
+      <GlobalSearch />
 
       <VerticalSeparator />
 
