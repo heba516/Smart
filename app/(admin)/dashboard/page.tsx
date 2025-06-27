@@ -4,7 +4,6 @@ import { IStatusData } from "@/interfaces";
 import { Icon } from "@iconify/react";
 import { Button, SidebarSeparator } from "@/components/ui";
 import { CalendarDateRangePicker } from "./_components/Calender";
-// import { TopProducts } from "./_components/TopProducts";
 import { ChartBoxes } from "./_components/ChartBoxes";
 import { SpreadOfSales } from "./_components/SpreadOfSales";
 import { SalesLineChart } from "./sales/components/SalesLineChart";
@@ -55,7 +54,7 @@ const DashboardStatusData: IStatusData[] = [
 const page = () => {
   return (
     <div>
-      <section className="xl:w-[86%] mx-auto py-9 flex items-center justify-between">
+      <section className="mx-1 py-9 flex items-center justify-between">
         <div>
           <h1 className="text-black text-2xl font-semibold">SMART Dashboard</h1>
           <p className="text-medGray text-base font-medium">
@@ -122,19 +121,3 @@ const page = () => {
 };
 
 export default page;
-// grid grid-cols-2 xl:grid-cols-3 gap-6
-
-{
-  /* <ChartBoxes title="Top Products Sold" desc="Secondary text">
-  <TopProducts />
-
-  <div className="grid grid-cols-3 gap-2 mt-5 mx-4">
-    {Array.from({ length: 4 }, (_, index) => (
-      <div className="flex items-center" key={index}>
-        <span className="w-2 h-2 bg-primaryRed rounded-full mr-1 text-sm"></span>
-        Product {index + 1}
-      </div>
-    ))}
-  </div>
-</ChartBoxes> */
-}

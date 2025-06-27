@@ -217,9 +217,9 @@ const GlobalSearch = () => {
   );
 
   return (
-    <>
+    <div className="w-6 sm:w-[200px] lg:w-[369px] xl:w-5/6">
       <div
-        className="w-[350px] xl:w-[450px] h-[45px] flex items-center space-x-3 bg-lightGray rounded-xl px-8 cursor-pointer"
+        className="h-[45px] flex items-center space-x-3 bg-lightGray rounded-xl px-1 lg:p-3 lg:px-8 cursor-pointer"
         onClick={() => setOpen(true)}
       >
         <svg
@@ -237,7 +237,7 @@ const GlobalSearch = () => {
             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
           />
         </svg>
-        <p className="text-grayColor">Search here...</p>
+        <p className="hidden sm:block text-grayColor">Search here...</p>
       </div>
 
       <CommandPalette
@@ -264,15 +264,9 @@ const GlobalSearch = () => {
             <CommandPalette.FreeSearchAction />
           )}
         </CommandPalette.Page>
-
-        {/* <CommandPalette.Page id="projects">
-        <p className="bg-red-500">Click</p>
-      </CommandPalette.Page> */}
       </CommandPalette>
-    </>
+    </div>
   );
 };
 
 export default GlobalSearch;
-
-// components/CommandPalette.tsx
