@@ -4,13 +4,13 @@ export function NavBarSkeleton() {
   return (
     <nav className="flex items-center justify-center space-x-3 2xl:space-x-9">
       {/* Search Input */}
-      <Skeleton className="h-[45px] w-[350px] xl:w-[450px] rounded-xl" />
+      <Skeleton className="h-[45px] w-[350px] xl:w-[500px] rounded-xl" />
 
       {/* Separator */}
       <Skeleton className="h-8 w-[2px]" />
 
       {/* Date and Time */}
-      <Skeleton className="h-[45px] w-[180px] rounded-xl" />
+      <Skeleton className="h-[45px] w-[260px] rounded-xl" />
 
       {/* Separator */}
       <Skeleton className="h-8 w-[2px]" />
