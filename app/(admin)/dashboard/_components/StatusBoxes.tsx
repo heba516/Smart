@@ -10,10 +10,10 @@ export default function StatusBoxes(props: StatusBoxesProps) {
   const { statusData } = props;
 
   return (
-    <section className="flex my-8 justify-start mx-auto gap-4 flex-wrap xl:flex-nowrap">
+    <section className="my-8 mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
       {statusData.map((box, index) => (
         <div
-          className="rounded-xl border border-[#D8DADC] py-6 px-6 space-y-3 min-w-[245px] xxl:w-[350px]"
+          className="rounded-xl border border-[#D8DADC] py-6 px-6 space-y-3"
           key={index}
         >
           <div className="flex justify-between items-start gap-6">
