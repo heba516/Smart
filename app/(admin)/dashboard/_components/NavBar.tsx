@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import { AdminProfile } from "./AdminProfile";
 import { VerticalSeparator } from "./VerticalSeparator";
 import { DateAndTime } from "./Date&Time";
@@ -19,6 +18,7 @@ import { NavBarSkeleton } from "./skeleton/NavBarSkeleton";
 
 // import * as DialogPrimitive from "@radix-ui/react-dialog";
 import GlobalSearch from "./GlobalSearch";
+import Notifications from "./Notifications";
 
 // interface ISearch {
 //   title: string;
@@ -26,36 +26,36 @@ import GlobalSearch from "./GlobalSearch";
 // }
 
 const NavBar = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  // const [defaultSearch, setDefaultSearch] = useState<ISearch[]>([
-  //   {
-  //     title: "Customers",
-  //     link: "/dashboard/customers",
-  //   },
-  //   {
-  //     title: "Sales",
-  //     link: "/dashboard/sales",
-  //   },
-  //   {
-  //     title: "Inventory",
-  //     link: "/dashboard/inventory",
-  //   },
-  //   {
-  //     title: "Security",
-  //     link: "/dashboard/security",
-  //   },
-  // ]);
+    const [isMounted, setIsMounted] = useState(false);
+    // const [defaultSearch, setDefaultSearch] = useState<ISearch[]>([
+    //   {
+    //     title: "Customers",
+    //     link: "/dashboard/customers",
+    //   },
+    //   {
+    //     title: "Sales",
+    //     link: "/dashboard/sales",
+    //   },
+    //   {
+    //     title: "Inventory",
+    //     link: "/dashboard/inventory",
+    //   },
+    //   {
+    //     title: "Security",
+    //     link: "/dashboard/security",
+    //   },
+    // ]);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
-  if (!isMounted) return <NavBarSkeleton />;
-  // absolute inset-y-0 start-2 flex items-center ps-3 pointer-events-none
+    if (!isMounted) return <NavBarSkeleton />;
+    // absolute inset-y-0 start-2 flex items-center ps-3 pointer-events-none
 
-  return (
-    <nav className="flex items-center justify-center space-x-3 2xl:space-x-9">
-      {/* <Dialog>
+    return (
+        <nav className="flex items-center justify-center space-x-3 2xl:space-x-9">
+            {/* <Dialog>
         <DialogTrigger>
           <div className="w-[350px] xl:w-[450px] h-[45px] flex items-center space-x-3 bg-lightGray rounded-xl px-8 cursor-pointer">
             <svg
@@ -122,32 +122,33 @@ const NavBar = () => {
         </DialogContent>
       </Dialog> */}
 
-      <GlobalSearch />
+            <GlobalSearch />
 
-      <VerticalSeparator />
+            <VerticalSeparator />
 
-      <DateAndTime />
+            <DateAndTime />
 
-      <VerticalSeparator />
+            <VerticalSeparator />
 
-      <div className="relative p-2 2xl:p-3 bg-lightGray rounded-xl">
-        <span className="absolute -right-1.5 -top-1.5 flex items-center justify-center bg-primaryRed w-[22px] h-[22px] text-white text-[13px] font-semibold rounded-full">
-          12
-        </span>
-        <Image
-          src={"/images/notification.png"}
-          width={26}
-          height={26}
-          alt="date"
-          loading="lazy"
-        />
-      </div>
+            {/* <div className="relative p-1  2xl:p-3 bg-lightGray rounded-xl">
+                <span className="absolute -right-1.5 -top-1.5 flex items-center justify-center bg-primaryRed w-[22px] h-[22px] text-white text-[13px] font-semibold rounded-full">
+                    12
+                </span>
+                <Image
+                    src={"/images/notification.png"}
+                    width={26}
+                    height={26}
+                    alt="date"
+                    loading="lazy"
+                />
+            </div> */}
+                <Notifications />
 
-      <VerticalSeparator />
+            <VerticalSeparator />
 
-      <AdminProfile />
-    </nav>
-  );
+            <AdminProfile />
+        </nav>
+    );
 };
 
 export default NavBar;
