@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ChevronRight, MoreHorizontal } from "lucide-react";
 
+
 export default function Notifications() {
     const [open, setOpen] = useState(false);
     const [filter, setFilter] = useState<"all" | "unread">("all");
@@ -70,9 +71,9 @@ export default function Notifications() {
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="relative h-10 w-10 rounded-xl border border-gray-200"
+                    className="relative h-12 w-12 p-2 bg-lightGray rounded-xl"
                 >
-                    <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primaryRed text-xs font-semibold text-white">
+                    <span className="absolute -right-1.5 -top-1.5 flex items-center justify-center bg-primaryRed w-[22px] h-[22px] text-white text-[13px] font-semibold rounded-full">
                         {unreadCount}
                     </span>
                     <Image
@@ -85,6 +86,8 @@ export default function Notifications() {
                         height={20}
                         alt="Notifications"
                     />
+                    
+
                 </Button>
             </DropdownMenuTrigger>
 
