@@ -18,25 +18,13 @@ import { login } from "@/app/api/actions/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import Link from "next/link";
+// import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
   password: z
     .string()
     .min(1, { message: "Password must be at least 1 characters." }),
-  // .regex(/[A-Z]/, {
-  //   message: "Password must contain at least one uppercase letter.",
-  // })
-  // .regex(/[a-z]/, {
-  //   message: "Password must contain at least one lowercase letter.",
-  // })
-  // .regex(/[0-9]/, {
-  //   message: "Password must contain at least one number.",
-  // })
-  // .regex(/[\W_]/, {
-  //   message: "Password must contain at least one special character.",
-  // }),
 });
 
 interface IInput {
@@ -150,6 +138,8 @@ export default function LoginForm() {
             )}
           />
         ))}
+
+        {/*
         <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
           <FormLabel className="text-base lg:text-center">
             keep me signed in
@@ -168,7 +158,7 @@ export default function LoginForm() {
           </Link>
         </FormItem>
 
-        {/* {error && (
+         {error && (
           <div className="my-2">
             <p className="text-center text-primaryRed">
               Invalid Email Or Password
@@ -179,7 +169,7 @@ export default function LoginForm() {
         <Button
           disabled={loading}
           variant={"default"}
-          className="w-full p-[10px] text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
+          className="w-full p-3 text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
           type="submit"
         >
           Log in
