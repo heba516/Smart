@@ -1,3 +1,4 @@
+"use client";
 import LoginForm from "@/app/(admin)/login/_components/LoginForm";
 import Typewriter from "typewriter-effect";
 import Image from "next/image";
