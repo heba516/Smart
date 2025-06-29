@@ -124,16 +124,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function SalesLineChart() {
-  const [activeChart, setActiveChart] =
-    React.useState<keyof typeof chartConfig>("desktop");
-
-  // const total = React.useMemo(
-  //   () => ({
-  //     desktop: chartData.reduce((acc, curr) => acc + curr.desktop, 0),
-  //   }),
-  //   []
-  // )
-
   return (
     <Card className="py-4 border border-input">
       <CardHeader className="py-4">
@@ -198,7 +188,7 @@ export function SalesLineChart() {
               }
             />
             <Line
-              dataKey={activeChart}
+              dataKey={"desktop"}
               type="monotone"
               stroke="#F94144"
               strokeWidth={2}
