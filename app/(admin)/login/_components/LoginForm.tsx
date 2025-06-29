@@ -18,7 +18,7 @@ import { login } from "@/app/api/actions/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
-import Link from "next/link";
+// import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -150,7 +150,8 @@ export default function LoginForm() {
             )}
           />
         ))}
-        <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
+
+        {/* <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
           <FormLabel className="text-base lg:text-center">
             keep me signed in
             <Icon
@@ -166,7 +167,7 @@ export default function LoginForm() {
           >
             Forget password ?
           </Link>
-        </FormItem>
+        </FormItem> */}
 
         {/* {error && (
           <div className="my-2">

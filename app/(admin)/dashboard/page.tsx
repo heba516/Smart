@@ -87,7 +87,7 @@ const page = () => {
 
       <section className="flex mt-10 space-x-4 flex-col xl:flex-row">
         <SecurityTable />
-        <aside className="flex flex-col space-y-2 xl:w-[45%]">
+        <aside className="flex flex-col space-y-2 xl:w-[40%]">
           <ChartBoxes title="Stock Status" desc="Secondary text">
             <StockStatus />
             <Button
