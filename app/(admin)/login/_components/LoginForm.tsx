@@ -180,7 +180,7 @@ export default function LoginForm() {
         <Button
           disabled={loading}
           variant={"default"}
-          className="w-full p-[10px] text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
+          className="w-full p-3 text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
           type="submit"
         >
           Log in
