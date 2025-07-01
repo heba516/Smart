@@ -1,7 +1,7 @@
 import React from "react";
 import StatusBoxes from "../_components/StatusBoxes";
 import { IStatusData } from "@/interfaces";
-import { DataTableDemo } from "./[action]/_components/ProductsTable";
+import { ProductTable } from "./[action]/_components/ProductsTable";
 import PagesHeader from "../_components/PagesHeader";
 
 const InventoryStatusData: IStatusData[] = [
@@ -39,7 +39,7 @@ const Page = () => {
     <div className="py-5 space-y-10">
       <PagesHeader page={"inventory"} />
       <StatusBoxes statusData={InventoryStatusData} />
-      <DataTableDemo />
+      <ProductTable />
     </div>
   );
 };

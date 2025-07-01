@@ -18,7 +18,7 @@ import {
 // import { socket } from '@/socket';
 import { io } from "socket.io-client";
 
-export function DataTableDemo() {
+export function ProductTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
