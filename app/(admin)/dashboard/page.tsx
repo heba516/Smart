@@ -5,9 +5,9 @@ import { Icon } from "@iconify/react";
 import { Button, SidebarSeparator } from "@/components/ui";
 import { CalendarDateRangePicker } from "./_components/Calender";
 import { ChartBoxes } from "./_components/ChartBoxes";
-import { SpreadOfSales } from "./_components/SpreadOfSales";
+// import { SpreadOfSales } from "./_components/SpreadOfSales";
 import { SalesLineChart } from "./sales/components/SalesLineChart";
-import { SalesTopProducts } from "./sales/components/SalesTopProducts";
+// import { SalesTopProducts } from "./sales/components/SalesTopProducts";
 import { SecurityTable } from "./security/_components/SecurityTable";
 import StockStatus from "./_components/StockStatus";
 import StatusBoxes from "./_components/StatusBoxes";
@@ -54,7 +54,7 @@ const DashboardStatusData: IStatusData[] = [
 const page = () => {
   return (
     <div>
-      <section className="mx-1 py-9 flex items-center justify-between">
+      <header className="mx-1 py-9 flex items-center justify-between">
         <div>
           <h1 className="text-black text-2xl font-semibold">SMART Dashboard</h1>
           <p className="text-medGray text-base font-medium">
@@ -70,24 +70,40 @@ const page = () => {
 
           <CalendarDateRangePicker />
         </div>
-      </section>
+      </header>
 
       <SidebarSeparator className="w-[75%] mx-auto" />
 
       <StatusBoxes statusData={DashboardStatusData} />
 
       <section className="flex space-x-4">
-        <Link href={"/dashboard/sales"} className="w-full">
+        <Link href={"/dashboard/sales"} className="w-[70%]">
           <SalesLineChart />
         </Link>
-        <Link href={"/dashboard/sales"} className="h-full">
-          <SalesTopProducts />
-        </Link>
+        <div className="w-[30%]">
+          <ChartBoxes title="Stock Status" desc="Secondary text">
+            <StockStatus />
+            <Button
+              asChild
+              className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[270px] mt-6 mx-auto"
+            >
+              <Link href={"/dashboard/inventory"}>
+                View Stock
+                <Image
+                  src="/images/viewStockArrow.svg"
+                  width={19}
+                  height={19}
+                  alt="arrow"
+                />
+              </Link>
+            </Button>
+          </ChartBoxes>
+        </div>
       </section>
 
       <section className="flex mt-10 space-x-4 flex-col xl:flex-row">
         <SecurityTable />
-        <aside className="flex flex-col space-y-2 xl:w-[40%]">
+        {/* <aside className="flex flex-col space-y-2 xl:w-[40%]">
           <ChartBoxes title="Stock Status" desc="Secondary text">
             <StockStatus />
             <Button
@@ -114,7 +130,7 @@ const page = () => {
               Product 1
             </div>
           </ChartBoxes>
-        </aside>
+        </aside> */}
       </section>
     </div>
   );
