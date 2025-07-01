@@ -2,13 +2,11 @@ import Image from "next/image";
 import React from "react";
 import { IStatusData } from "@/interfaces";
 
-interface StatusBoxesProps {
+export default function StatusBoxes({
+  statusData,
+}: {
   statusData: IStatusData[];
-}
-
-export default function StatusBoxes(props: StatusBoxesProps) {
-  const { statusData } = props;
-
+}) {
   return (
     <section className="my-8 mx-auto grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4">
       {statusData.map((box, index) => (

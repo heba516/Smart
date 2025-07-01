@@ -78,7 +78,7 @@ export interface IProductInfo {
 export interface IStatusData {
     src: string;
     name: string;
-    number: string;
+    number: number;
     numberColor: string;
     numberUnite: string;
     percent: number;

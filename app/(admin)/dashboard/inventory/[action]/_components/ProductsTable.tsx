@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IProduct } from "@/interfaces";
 import { getAllProducts } from "@/app/api/actions/productActions";
 import { ProductTableSkeleton } from "../../../_components/ProductTableSkeleton";
@@ -19,20 +19,18 @@ import {
 import { io } from "socket.io-client";
 
 export function ProductTable() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
+  const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
-  const [data, setProducts] = React.useState<IProduct[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  const [data, setProducts] = useState<IProduct[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function loadProducts() {
       try {
         setLoading(true);
         const res = await getAllProducts();
-        console.log(res?.data.data);
+        // console.log(res?.data.data);
 
         setProducts(res?.data.data);
       } catch (error) {
@@ -100,8 +98,7 @@ export function ProductTable() {
     };
   }, []);
 
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
   const table = useReactTable({
     data,
