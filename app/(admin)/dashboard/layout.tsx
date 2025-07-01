@@ -31,7 +31,7 @@ export default async function RootLayout({
     <SidebarProvider>
       <AppSidebar />
       <TheftAlert />
-      <main className="w-10/12 p-6">
+      <main className="w-[95%] xl:w-10/12 p-6">
         <NavBar />
         {children}
       </main>

@@ -32,8 +32,8 @@ const DataTables = <T extends IProduct | IShelves | ISecurity | ICustomer>({
   page,
 }: DataTablesProps<T>) => {
   return (
-    <div className="w-full">
-      <div className="flex items-center pb-4">
+    <div className="max-w-full">
+      <div className="flex flex-col lg:flex-row items-center pb-4">
         <h2 className="text-xl font-semibold mr-5 capitalize">
           {page === "security" ? "Security Incidents Log" : page}
         </h2>

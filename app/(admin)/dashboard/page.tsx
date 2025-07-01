@@ -62,7 +62,7 @@ const page = () => {
           </p>
         </div>
 
-        <div className="flex items-center space-x-5">
+        <div className="flex items-center space-x-2 xl:space-x-5">
           <Button className="bg-primaryRed text-white text-base font-semibold rounded-xl h-12">
             <Icon icon="solar:export-bold" width={35} height={35} />
             Export PDF
@@ -76,11 +76,11 @@ const page = () => {
 
       <StatusBoxes statusData={DashboardStatusData} />
 
-      <section className="flex space-x-4">
-        <Link href={"/dashboard/sales"} className="w-[70%]">
+      <section className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4">
+        <Link href={"/dashboard/sales"} className="xl:w-[70%]">
           <SalesLineChart />
         </Link>
-        <div className="w-[30%]">
+        <div className="xl:w-[30%]">
           <ChartBoxes title="Stock Status" desc="Secondary text">
             <StockStatus />
             <Button
@@ -101,7 +101,7 @@ const page = () => {
         </div>
       </section>
 
-      <section className="mt-10">
+      <section className="mt-10 max-w-full">
         <ProductTable />
         {/* <aside className="flex flex-col space-y-2 xl:w-[40%]">
           <ChartBoxes title="Stock Status" desc="Secondary text">
