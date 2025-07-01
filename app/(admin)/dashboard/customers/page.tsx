@@ -8,7 +8,7 @@ const CustomersStatusData: IStatusData[] = [
   {
     src: "/images/customersTotalCustomers.svg",
     name: "Total Customers",
-    number: "2321",
+    number: 2321,
     numberUnite: "customers",
     numberColor: "black",
     percent: 7,
@@ -17,7 +17,7 @@ const CustomersStatusData: IStatusData[] = [
   {
     src: "/images/customersActiveCustomers.svg",
     name: "Active Customers",
-    number: "300",
+    number: 300,
     numberUnite: "customers",
     numberColor: "black",
     percent: 7,
@@ -26,7 +26,7 @@ const CustomersStatusData: IStatusData[] = [
   {
     src: "/images/customersNewCustomers.svg",
     name: "New Customers",
-    number: "435",
+    number: 435,
     numberUnite: "customers",
     numberColor: "black",
     percent: 7,
@@ -35,7 +35,7 @@ const CustomersStatusData: IStatusData[] = [
   {
     src: "/images/customersVIPCustomers.svg",
     name: "VIP Customers",
-    number: "23",
+    number: 23,
     numberUnite: "customers",
     numberColor: "black",
     percent: 7,
