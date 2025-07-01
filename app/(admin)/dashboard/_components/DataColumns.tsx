@@ -183,7 +183,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
           className={cn(
             "capitalize flex items-center text-white w-fit rounded-lg text-base font-semibold",
             statusVal === "available" && "text-green-500",
-            statusVal === "low" && "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+            statusVal === "low" && "bg-[##FFDBB980] text-[#FF7D00] px-2 py-1",
             statusVal === "out" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >
@@ -371,7 +371,7 @@ export const shelvesColumns: ColumnDef<IProduct>[] = [
           className={cn(
             "capitalize flex items-center w-fit rounded-lg text-base font-semibold",
             statusVal === "available" && "text-green-500",
-            statusVal === "low" && "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+            statusVal === "low" && "bg-[#FFDBB980] text-[#FF7D00] px-2 py-1",
             statusVal === "out" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >
@@ -470,7 +470,7 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
             "capitalize flex items-center w-fit rounded-lg text-base font-semibold",
             statusVal === "Resolved" && "text-green-500",
             statusVal === "Under Review" &&
-              "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+              "bg-[#FFDBB980] text-[#FF7D00] px-2 py-1",
             statusVal === "Critical" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >
