@@ -155,7 +155,7 @@ export default function LoginForm() {
           >
             Forget password ?
           </Link>
-        </FormItem> */}
+        </FormItem> 
 
          {error && (
           <div className="my-2">
