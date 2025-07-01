@@ -9,7 +9,7 @@ const SalesStatusData: IStatusData[] = [
   {
     src: "/images/salesTotalSalesToday.svg",
     name: "Total Sales Today",
-    number: "10,320",
+    number: 10320,
     numberColor: "black",
     numberUnite: "EGP",
     percent: 7,
@@ -18,7 +18,7 @@ const SalesStatusData: IStatusData[] = [
   {
     src: "/images/salesNumofTransactions.svg",
     name: "Num of Transactions",
-    number: "230",
+    number: 230,
     numberColor: "black",
     numberUnite: "transncitions",
     percent: 7,
@@ -27,7 +27,7 @@ const SalesStatusData: IStatusData[] = [
   {
     src: "/images/salesAvgBasketValue.svg",
     name: "Avg. Basket Value",
-    number: "893",
+    number: 893,
     numberColor: "black",
     numberUnite: "products",
     percent: -5,

@@ -15,7 +15,7 @@ const SecurityStatusData: IStatusData[] = [
   {
     src: "/images/securityTotalAlerts.svg",
     name: "Total Alerts",
-    number: "3",
+    number: 3,
     numberColor: "black",
     numberUnite: "alerts",
     percent: -5,
@@ -24,7 +24,7 @@ const SecurityStatusData: IStatusData[] = [
   {
     src: "/images/securityTotalIncidents.svg",
     name: "Total Incidents",
-    number: "10",
+    number: 10,
     numberColor: "black",
     numberUnite: "incidents",
     percent: -5,
@@ -33,7 +33,7 @@ const SecurityStatusData: IStatusData[] = [
   {
     src: "/images/securityActivecameras.svg",
     name: "Active cameras",
-    number: "40",
+    number: 40,
     numberColor: "black",
     numberUnite: "camera of",
     percent: 0,

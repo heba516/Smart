@@ -16,7 +16,7 @@ const DashboardStatusData: IStatusData[] = [
   {
     src: "/images/dashboardActiveCustomers.svg",
     name: "Active Customers",
-    number: "300",
+    number: 300,
     numberUnite: "users",
     numberColor: "#24A855",
     percent: 7,
@@ -25,7 +25,7 @@ const DashboardStatusData: IStatusData[] = [
   {
     src: "/images/dashboardTotalCustomers.svg",
     name: "Total Customers",
-    number: "2321",
+    number: 2321,
     numberUnite: "users",
     numberColor: "#24A855",
     percent: 7,
@@ -34,7 +34,7 @@ const DashboardStatusData: IStatusData[] = [
   {
     src: "/images/dashboardTotalProductssaled.svg",
     name: " Total Products saled",
-    number: "892",
+    number: 892,
     numberUnite: "products",
     numberColor: "#24A855",
     percent: -3,
@@ -43,7 +43,7 @@ const DashboardStatusData: IStatusData[] = [
   {
     src: "/images/dashboardTotalSales.svg",
     name: "Total Sales",
-    number: "32.123",
+    number: 32.123,
     numberUnite: "EGP",
     numberColor: "#24A855",
     percent: 7,
