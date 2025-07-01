@@ -79,6 +79,17 @@ export function ProductTable() {
       }
     });
 
+    socket.on("product-states-update", (response) => {
+      if (response.success) {
+        console.log("Updated product state counts:", response.stateCounts);
+        // response.stateCounts example:
+        // { available: 4, outOfStock: 2, lowStock: 3 }
+        // Update your dashboard/statistics panel accordingly
+      } else {
+        console.error("Failed to receive product state counts:", response);
+      }
+    });
+
     // Handle disconnection
     socket.on("disconnect", () => {
       console.log("Disconnected from shelf socket");
