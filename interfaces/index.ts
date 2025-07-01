@@ -33,6 +33,14 @@ export interface IProduct {
     categories: string[];
     state: "Available" | "Out" | "Low";
 }
+export interface IShelves {
+    _id?: string;
+    title: string;
+    shelfNumber?: string;
+    stock: number;
+    categories: string[];
+    state: "Available" | "Out" | "Low";
+}
 
 export interface ISecurity {
     title: string;

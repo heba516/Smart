@@ -34,30 +34,12 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       return (
         <div
           className={cn(
-            "lowercase",
-            statusVal === "out" && "text-primaryRed",
-            statusVal === "low" && "text-[#FF8714]"
-          )}
-        >
-          {row.getValue("title")}
-        </div>
-      );
-    },
-  },
-  {
-    accessorKey: "shelfNumber",
-    header: "Shelf Number",
-    cell: ({ row }) => {
-      const statusVal = row.getValue("state");
-      return (
-        <div
-          className={cn(
             "capitalize",
             statusVal === "out" && "text-primaryRed",
             statusVal === "low" && "text-[#FF8714]"
           )}
         >
-          {row.getValue("shelfNumber")}
+          {row.getValue("title")}
         </div>
       );
     },
@@ -76,6 +58,25 @@ export const productsColumns: ColumnDef<IProduct>[] = [
           )}
         >
           {row.getValue("barcode")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "shelfNumber",
+    header: "Shelf No.",
+    cell: ({ row }) => {
+      // const statusVal = row.getValue("state");
+      return (
+        <div
+          className="ml-5"
+          // className={cn(
+          //   "capitalize",
+          //   statusVal === "out" && "text-primaryRed",
+          //   statusVal === "low" && "text-[#FF8714]"
+          // )}
+        >
+          {row.getValue("shelfNumber")}
         </div>
       );
     },
@@ -129,14 +130,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       }).format(amount);
       const statusVal = row.getValue("state");
       return (
-        <div
-          className={cn(
-            "font-medium flex items-center",
-            formatted === "0" && "text-primaryRed",
-            statusVal === "low" && "text-[#FF8714]",
-            statusVal === "out" && "text-primaryRed"
-          )}
-        >
+        <div className="font-medium flex items-center text-medGray">
           {formatted === "0" && (
             <Icon
               icon="fluent-mdl2:error-badge"
@@ -145,7 +139,17 @@ export const productsColumns: ColumnDef<IProduct>[] = [
               className="text-primaryRed mr-1.5"
             />
           )}
-          {formatted} pcs
+          <span
+            className={cn(
+              formatted === "0" && "text-primaryRed",
+              statusVal === "available" && "text-black",
+              statusVal === "low" && "text-[#FF8714]",
+              statusVal === "out" && "text-primaryRed"
+            )}
+          >
+            {formatted} pcs
+          </span>
+          /400
         </div>
       );
     },
@@ -165,7 +169,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("categories")}</div>
+      <div className="capitalize ml-3">{row.getValue("categories")}</div>
     ),
   },
   {
@@ -177,10 +181,198 @@ export const productsColumns: ColumnDef<IProduct>[] = [
       return (
         <div
           className={cn(
-            "capitalize flex items-center text-white w-fit rounded-lg",
+            "capitalize flex items-center text-white w-fit rounded-lg text-base font-semibold",
             statusVal === "available" && "text-green-500",
-            statusVal === "low" && "bg-[#FF8714] px-2 py-1",
-            statusVal === "out" && "bg-primaryRed px-2 py-1"
+            statusVal === "low" && "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+            statusVal === "out" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
+          )}
+        >
+          {statusVal === "low" && (
+            <Icon
+              icon="si:warning-line"
+              width="17"
+              height="17"
+              className="mr-1.5"
+            />
+          )}
+          {statusVal === "out" && (
+            <Icon
+              icon="fluent-mdl2:error-badge"
+              width="17"
+              height="17"
+              className="mr-1.5"
+            />
+          )}
+          {row.getValue("state")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: " ",
+    // header: "State",
+    cell: ({ row }) => {
+      const statusVal = row.getValue("state");
+
+      return (
+        <div
+          className={cn(
+            "capitalize flex items-center text-medGray cursor-pointer",
+            // statusVal === "available" && "text-green-500",
+            statusVal === "low" && "text-[#FF8714]",
+            statusVal === "out" && "text-primaryRed"
+          )}
+        >
+          <Icon
+            icon="dashicons:update"
+            width="23"
+            height="23"
+            className="mr-[6px]"
+          />
+          Restock
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "Actions",
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+      const id = row.original._id as string;
+      return <RowActions id={id} />;
+    },
+  },
+];
+
+////////////Shelves Columns////////////
+export const shelvesColumns: ColumnDef<IProduct>[] = [
+  {
+    accessorKey: "shelfNumber",
+    header: "Shelf No.",
+    cell: ({ row }) => {
+      // const statusVal = row.getValue("state");
+      return (
+        <div
+          className="ml-5"
+          // className={cn(
+          //   "capitalize",
+          //   statusVal === "out" && "text-primaryRed",
+          //   statusVal === "low" && "text-[#FF8714]"
+          // )}
+        >
+          {row.getValue("shelfNumber")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "title",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Shelf Product Name
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const statusVal = row.getValue("state");
+      return (
+        <div
+          className={cn(
+            "capitalize",
+            statusVal === "out" && "text-primaryRed",
+            statusVal === "low" && "text-[#FF8714]"
+          )}
+        >
+          {row.getValue("title")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "stock",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          On Shelf
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const amount = parseFloat(row.getValue("stock"));
+
+      // Format the amount as a dollar amount
+      const formatted = new Intl.NumberFormat("en-US", {
+        style: "decimal",
+      }).format(amount);
+      const statusVal = row.getValue("state");
+      return (
+        <div className="font-medium flex items-center text-medGray">
+          {formatted === "0" && (
+            <Icon
+              icon="fluent-mdl2:error-badge"
+              width="18"
+              height="18"
+              className="text-primaryRed mr-1.5"
+            />
+          )}
+          <span
+            className={cn(
+              formatted === "0" && "text-primaryRed",
+              statusVal === "available" && "text-black",
+              statusVal === "low" && "text-[#FF8714]",
+              statusVal === "out" && "text-primaryRed"
+            )}
+          >
+            {formatted} pcs
+          </span>
+          /400
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "categories",
+    header: ({ column }) => {
+      return (
+        <Button
+          className="p-0 text-black text-base font-semibold"
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Category
+          <Icon icon="fa6-solid:sort" width="14" height="14" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize ml-3">{row.getValue("categories")}</div>
+    ),
+  },
+  {
+    accessorKey: "state",
+    header: "State",
+    cell: ({ row }) => {
+      const statusVal = row.getValue("state");
+
+      return (
+        <div
+          className={cn(
+            "capitalize flex items-center w-fit rounded-lg text-base font-semibold",
+            statusVal === "available" && "text-green-500",
+            statusVal === "low" && "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+            statusVal === "out" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >
           {statusVal === "low" && (
@@ -208,9 +400,33 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     accessorKey: "Actions",
     id: "actions",
     enableHiding: false,
-    cell: ({ row }) => {
-      const id = row.original._id as string;
-      return <RowActions id={id} />;
+    cell: () => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            className="hover:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+            asChild
+          >
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="center">
+            {/* <DropdownMenuItem>
+              <Eye /> View
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link className="flex items-center" href={`/dashboard/security`}>
+                <PenIcon className="mr-2" /> Edit
+              </Link>
+            </DropdownMenuItem> */}
+            <DropdownMenuItem>
+              <Trash /> Delete
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
     },
   },
 ];
@@ -251,9 +467,11 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
       return (
         <div
           className={cn(
-            "capitalize flex items-center w-fit rounded-lg",
-            statusVal === "Under Review" && "bg-[#FF8714] px-2 py-1 text-white",
-            statusVal === "Critical" && "bg-primaryRed px-2 py-1 text-white"
+            "capitalize flex items-center w-fit rounded-lg text-base font-semibold",
+            statusVal === "Resolved" && "text-green-500",
+            statusVal === "Under Review" &&
+              "bg-[#FFDBB9] text-[#FF7D00] px-2 py-1",
+            statusVal === "Critical" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >
           {statusVal === "Under Review" && (
@@ -377,7 +595,7 @@ export const securityColumns: ColumnDef<ISecurity>[] = [
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="center">
             <DropdownMenuItem>
               <Eye /> View
             </DropdownMenuItem>
@@ -475,7 +693,7 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
       return (
         <div
           className={cn(
-            "capitalize flex items-center w-fit rounded-lg",
+            "capitalize flex items-center w-fit rounded-lg text-base font-semibold",
             statusVal === "Active" && "text-green-500",
             statusVal === "Inactive" && "text-grayColor",
             statusVal === "VIP" && "text-[#8407E3]"
@@ -510,7 +728,7 @@ export const customersColumns: ColumnDef<ICustomer>[] = [
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
+          <DropdownMenuContent align="center">
             <DropdownMenuItem>
               <Eye /> View
             </DropdownMenuItem>

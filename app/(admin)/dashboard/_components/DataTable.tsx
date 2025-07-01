@@ -15,8 +15,8 @@ import {
   TableRow,
 } from "@/components/ui";
 import { DataTablePagination } from "../_components/Pagination";
-import { cn } from "@/lib/utils";
-import { ICustomer, IProduct, ISecurity } from "@/interfaces";
+// import { cn } from "@/lib/utils";
+import { ICustomer, IProduct, ISecurity, IShelves } from "@/interfaces";
 // import { productStatus } from "./DataColumns";
 import { Icon } from "@iconify/react";
 import { Plus } from "lucide-react";
@@ -24,22 +24,18 @@ import Link from "next/link";
 
 type DataTablesProps<T> = {
   table: Table<T>;
-  page: "products" | "security" | "customers";
+  page: "products" | "shelves" | "security" | "customers";
 };
 
-const DataTables = <T extends IProduct | ISecurity | ICustomer>({
+const DataTables = <T extends IProduct | IShelves | ISecurity | ICustomer>({
   table,
   page,
 }: DataTablesProps<T>) => {
   return (
     <div className="w-full">
       <div className="flex items-center pb-4">
-        <h2 className="text-xl font-semibold mr-5">
-          {page === "products"
-            ? "Products"
-            : page === "security"
-            ? "Security Incidents Log"
-            : "Customers"}
+        <h2 className="text-xl font-semibold mr-5 capitalize">
+          {page === "security" ? "Security Incidents Log" : page}
         </h2>
         <Input
           placeholder="Search Products..."
@@ -119,7 +115,7 @@ const DataTables = <T extends IProduct | ISecurity | ICustomer>({
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => {
-                const statusVal = row.getValue("state") as string;
+                // const statusVal = row.getValue("state") as string;
                 // if ("_id" in row.original) {
                 //   statusVal = row.getValue("state");
                 //   // statusVal = productStatus(row as Row<IProduct>);
@@ -133,13 +129,14 @@ const DataTables = <T extends IProduct | ISecurity | ICustomer>({
                     {row.getVisibleCells().map((cell) => (
                       <TableCell
                         key={cell.id}
-                        className={cn(
-                          "font-medium text-base",
-                          statusVal?.endsWith("low") && "bg-[#FFF3E9]",
-                          ["Out", "Critical", "Under Review"].includes(
-                            statusVal
-                          ) && "bg-[#FFEDED]"
-                        )}
+                        className="font-medium text-base"
+                        // {cn(
+                        // "font-medium text-base",
+                        // statusVal?.endsWith("low") && "bg-[#FFF3E9]",
+                        //   ["Out", "Critical", "Under Review"].includes(
+                        //     statusVal
+                        //   ) && "bg-[#FFEDED]"
+                        // )}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

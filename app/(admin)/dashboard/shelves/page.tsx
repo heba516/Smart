@@ -1,13 +1,13 @@
 import React from "react";
 import StatusBoxes from "../_components/StatusBoxes";
 import { IStatusData } from "@/interfaces";
-import { DataTableDemo } from "./[action]/_components/ProductsTable";
 import PagesHeader from "../_components/PagesHeader";
+import { DataTableDemo } from "./components/ShelvesTable";
 
 const InventoryStatusData: IStatusData[] = [
   {
     src: "/images/inventoryAvailableProducts.svg",
-    name: "Available Products",
+    name: "Available Shelves",
     number: "10,320",
     numberColor: "#24A855",
     numberUnite: "products",
@@ -16,7 +16,7 @@ const InventoryStatusData: IStatusData[] = [
   },
   {
     src: "/images/inventoryLowOfStock.svg",
-    name: "Low Of Stock",
+    name: "Low Of Stock Shelves",
     number: "5073",
     numberColor: "#F99141",
     numberUnite: "products",
@@ -25,7 +25,7 @@ const InventoryStatusData: IStatusData[] = [
   },
   {
     src: "/images/inventoryOutofStock.svg",
-    name: "Out Of Stock",
+    name: "Out Of Stock Shelves",
     number: "893",
     numberColor: "#ED1C24",
     numberUnite: "products",
@@ -37,7 +37,7 @@ const InventoryStatusData: IStatusData[] = [
 const Page = () => {
   return (
     <div className="py-5 space-y-10">
-      <PagesHeader page={"inventory"} />
+      <PagesHeader page={"shelves"} />
       <StatusBoxes statusData={InventoryStatusData} />
       <DataTableDemo />
     </div>

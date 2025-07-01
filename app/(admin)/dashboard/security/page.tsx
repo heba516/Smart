@@ -1,6 +1,6 @@
 import React from "react";
 import { SecurityTable } from "./_components/SecurityTable";
-import FormHeader from "../inventory/[action]/_components/FormHeader";
+import PagesHeader from "../_components/PagesHeader";
 import TheftImage from "./_components/TheftImage";
 import { Button } from "@/components/ui";
 import Image from "next/image";
@@ -58,7 +58,7 @@ const page = () => {
 
   return (
     <div className="py-5 space-y-10">
-      <FormHeader page={"security"} />
+      <PagesHeader page={"security"} />
       <StatusBoxes statusData={SecurityStatusData} />
       <div className="space-y-5">
         <div className="flex justify-between items-center">

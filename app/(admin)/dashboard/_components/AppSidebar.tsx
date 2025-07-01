@@ -41,6 +41,11 @@ const items = [
     url: "/dashboard/inventory",
     icon: "solar:box-bold",
   },
+  {
+    title: "Shelves",
+    url: "/dashboard/shelves",
+    icon: "bi:bookshelf",
+  },
   // {
   //   title: "Employee",
   //   url: "/dashboard/employee",
