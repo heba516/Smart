@@ -183,7 +183,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
           className={cn(
             "capitalize flex items-center text-white w-fit rounded-lg text-base font-semibold",
             statusVal === "available" && "text-green-500",
-            statusVal === "low" && "bg-[##FFDBB980] text-[#FF7D00] px-2 py-1",
+            statusVal === "low" && "bg-[#FFDBB980] text-[#FF7D00] px-2 py-1",
             statusVal === "out" && "bg-[#FFECEC] text-primaryRed px-2 py-1"
           )}
         >

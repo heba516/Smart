@@ -16,7 +16,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 // import { socket } from '@/socket';
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
+import socket from "@/lib/socketInstance";
 
 export function ProductTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -44,18 +45,18 @@ export function ProductTable() {
   }, []);
 
   useEffect(() => {
-    console.log("🔌 Initializing socket...");
+    // console.log("🔌 Initializing socket...");
 
-    const socket = io(
-      "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf",
-      {
-        transports: ["websocket"], // Critical for fallback
-      }
-    );
+    // const socket = io(
+    //   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf",
+    //   {
+    //     transports: ["websocket"], // Critical for fallback
+    //   }
+    // );
 
-    socket.on("connect", () => {
-      console.log("🔗 Connected to shelf socket: ", socket.id);
-    });
+    // socket.on("connect", () => {
+    //   console.log("🔗 Connected to shelf socket: ", socket.id);
+    // });
 
     // Listen for shelf updates
     socket.on("shelf-state-update", (response) => {
@@ -74,17 +75,6 @@ export function ProductTable() {
         );
       } else {
         console.error("Shelf update failed:", response);
-      }
-    });
-
-    socket.on("product-states-update", (response) => {
-      if (response.success) {
-        console.log("Updated product state counts:", response.stateCounts);
-        // response.stateCounts example:
-        // { available: 4, outOfStock: 2, lowStock: 3 }
-        // Update your dashboard/statistics panel accordingly
-      } else {
-        console.error("Failed to receive product state counts:", response);
       }
     });
 
