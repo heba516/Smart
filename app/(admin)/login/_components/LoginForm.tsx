@@ -25,18 +25,6 @@ const formSchema = z.object({
   password: z
     .string()
     .min(1, { message: "Password must be at least 1 characters." }),
-  // .regex(/[A-Z]/, {
-  //   message: "Password must contain at least one uppercase letter.",
-  // })
-  // .regex(/[a-z]/, {
-  //   message: "Password must contain at least one lowercase letter.",
-  // })
-  // .regex(/[0-9]/, {
-  //   message: "Password must contain at least one number.",
-  // })
-  // .regex(/[\W_]/, {
-  //   message: "Password must contain at least one special character.",
-  // }),
 });
 
 interface IInput {
@@ -150,8 +138,8 @@ export default function LoginForm() {
             )}
           />
         ))}
-
-        {/* <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
+        {/*
+        <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
           <FormLabel className="text-base lg:text-center">
             keep me signed in
             <Icon
@@ -169,7 +157,7 @@ export default function LoginForm() {
           </Link>
         </FormItem> */}
 
-        {/* {error && (
+         {error && (
           <div className="my-2">
             <p className="text-center text-primaryRed">
               Invalid Email Or Password
