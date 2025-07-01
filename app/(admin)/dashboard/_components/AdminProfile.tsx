@@ -14,10 +14,10 @@ export const AdminProfile = () => {
   }, []);
 
   return (
-    <div className="flex items-center space-x-3 text-base font-semibold text-medGray">
+    <div className="w-[35%] flex items-center xl:space-x-4 text-base font-semibold text-medGray">
       Hello,
       <span className="text-grayColor ml-1">{adminName}</span>
-      <Avatar className="h-[50px] w-[50px]">
+      <Avatar className="h-[50px] w-[50px] hidden lg:block">
         <AvatarImage
           src="/images/avatar.avif"
           alt="@shadcn"

@@ -138,7 +138,6 @@ export default function LoginForm() {
             )}
           />
         ))}
-
         {/*
         <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
           <FormLabel className="text-base lg:text-center">
@@ -156,7 +155,7 @@ export default function LoginForm() {
           >
             Forget password ?
           </Link>
-        </FormItem>
+        </FormItem> */}
 
          {error && (
           <div className="my-2">

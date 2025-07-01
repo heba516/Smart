@@ -7,36 +7,32 @@ import { NavBarSkeleton } from "./skeleton/NavBarSkeleton";
 import GlobalSearch from "./GlobalSearch";
 import Notifications from "./Notifications";
 
-
-
 const NavBar = () => {
-    const [isMounted, setIsMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+  if (!isMounted) return <NavBarSkeleton />;
 
-    if (!isMounted) return <NavBarSkeleton />;
+  return (
+    <nav className="flex items-center justify-center space-x-2 lg:space-x-3 2xl:space-x-9">
+      <GlobalSearch />
 
-    return (
-        <nav className="flex items-center justify-center space-x-3 2xl:space-x-9">
+      <VerticalSeparator />
 
-            <GlobalSearch />
+      <DateAndTime />
 
-            <VerticalSeparator />
+      <VerticalSeparator />
 
-            <DateAndTime />
+      <Notifications />
 
-            <VerticalSeparator />
+      <VerticalSeparator />
 
-            <Notifications />
-
-            <VerticalSeparator />
-
-            <AdminProfile />
-        </nav>
-    );
+      <AdminProfile />
+    </nav>
+  );
 };
 
 export default NavBar;

@@ -1,47 +1,3 @@
-// "use client";
-// import { useState, useEffect } from "react";
-// import Image from "next/image";
-
-// export function DateAndTime() {
-//   const [currentTime, setCurrentTime] = useState(new Date());
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentTime(new Date());
-//     }, 60 * 1000);
-
-//     return () => clearInterval(interval);
-//   }, []);
-
-//   const formattedDate = new Intl.DateTimeFormat("en-GB", {
-//     day: "numeric",
-//     month: "short",
-//     year: "numeric",
-//   }).format(currentTime);
-
-//   const formattedTime = new Intl.DateTimeFormat("en-GB", {
-//     hour: "2-digit",
-//     minute: "2-digit",
-//     hour12: true,
-//   }).format(currentTime);
-
-//   return (
-//     <div className="flex items-center p-3 2xl:px-5 bg-lightGray rounded-xl space-x-1 xl:space-x-3 text-grayColor font-semibold text-base">
-//       <Image
-//         src={"/images/date.png"}
-//         width={23}
-//         height={23}
-//         alt="date"
-//         loading="lazy"
-//       />
-//       <span className="border-r border-grayColor pr-1 xl:pr-3">
-//         {formattedDate}
-//       </span>
-//       <span>{formattedTime}</span>
-//     </div>
-//   );
-// }
-
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -74,9 +30,15 @@ export function DateAndTime() {
   }).format(currentTime);
 
   return (
-    <div className="flex items-center p-3 2xl:px-5 bg-lightGray rounded-xl space-x-1 xl:space-x-3 text-grayColor font-semibold text-base">
-      <Image src="/images/date.png" width={23} height={23} alt="date" />
-      <span className="border-r border-grayColor pr-1 xl:pr-3">
+    <div className="md:min-w-fit xl:w-[45%] flex items-center p-1 md:py-2 lg:px-2 lg:py-3 xl:px-5 bg-lightGray rounded-xl md:space-x-1 lg:space-x-2 xl:space-x-5 text-grayColor font-semibold text-base">
+      <Image
+        src="/images/date.png"
+        width={23}
+        height={23}
+        alt="date"
+        className="hidden sm:block"
+      />
+      <span className="border-r border-grayColor lg:pr-1 xl:pr-5">
         {formattedDate}
       </span>
       <span>{formattedTime}</span>
