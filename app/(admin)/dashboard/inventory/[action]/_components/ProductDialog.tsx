@@ -37,6 +37,7 @@ export function ProductDialog({
     brand: "",
     categoryId: "",
     subCategoryId: "",
+    shelfNumber: 0,
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
