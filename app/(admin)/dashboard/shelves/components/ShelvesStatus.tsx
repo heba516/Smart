@@ -2,7 +2,7 @@
 import { IStatusData } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import StatusBoxes from "../../../_components/StatusBoxes";
+import StatusBoxes from "../../_components/StatusBoxes";
 
 interface IStateCounts {
   available: number;
@@ -14,7 +14,7 @@ interface IStateCounts {
 const SOCKET_URL =
   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
 
-export const InventoryStatus = () => {
+export const ShelvesStatus = () => {
   const [stateCounts, setStateCounts] = useState<IStateCounts>({
     available: 0,
     low: 0,
@@ -66,28 +66,28 @@ export const InventoryStatus = () => {
   const InventoryStatusData: IStatusData[] = [
     {
       src: "/images/inventoryAvailableProducts.svg",
-      name: "Available Products",
+      name: "Available Shelves",
       number: stateCounts.available,
       numberColor: "#24A855",
-      numberUnite: "products",
+      numberUnite: "shelves",
       percent: 7,
       percentIncreased: true,
     },
     {
       src: "/images/inventoryLowOfStock.svg",
-      name: "Low Of Stock",
+      name: "Low Of Stock Shelves",
       number: stateCounts.low,
       numberColor: "#F99141",
-      numberUnite: "products",
+      numberUnite: "shelves",
       percent: 7,
       percentIncreased: true,
     },
     {
       src: "/images/inventoryOutofStock.svg",
-      name: "Out Of Stock",
+      name: "Out Of Stock Shelves",
       number: stateCounts.out,
       numberColor: "#ED1C24",
-      numberUnite: "products",
+      numberUnite: "shelves",
       percent: -5,
       percentIncreased: false,
     },

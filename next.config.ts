@@ -9,8 +9,23 @@ const nextConfig: NextConfig = {
                 port: "",
                 pathname: "/**",
             },
+            {
+                protocol: "https",
+                hostname: "cdnprod.mafretailproxy.com",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "i.ibb.co",
+                pathname: "/**",
+            },
+            {
+                protocol: "https",
+                hostname: "www.amazon.com", 
+                pathname: "/**",
+              },
         ],
-        domains: ['i.ibb.co'],
+        // domains: ['i.ibb.co'],
     },
 };
 

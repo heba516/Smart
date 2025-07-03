@@ -40,18 +40,39 @@ export function ProductDialog({
     shelfNumber: 0,
     item_weight: "",
   });
+
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function loadProductInfo() {
-      if (!open || !id) return;
+      if (!id) return;
 
       setLoading(true);
       try {
         const res = await getProduct(id);
-        if (res?.data?.data) {
-          setProduct(res.data.data);
-        }
+        const product = res?.data.data;
+        const values = {
+          title: product.title,
+          description: product.description,
+          highlights: product.highlights,
+          image_url: product.image_url,
+          price: product.price,
+          discount: product.discount,
+          discountType: product.discountType,
+          barcode: product.barcode,
+          stock: product.stock,
+          brand: product.brand,
+          categoryId: product.categoryId,
+          subCategoryId: product.subCategoryId,
+          shelfNumber: product.shelfNumber,
+          item_weight: product.item_weight,
+        };
+
+        setProduct(values);
+        console.log("✅ Product loaded and set:", values);
+        // if (res?.data.data) {
+
+        // }
       } catch (error) {
         console.error("Error loading product:", error);
       } finally {
@@ -60,9 +81,10 @@ export function ProductDialog({
     }
 
     loadProductInfo();
-  }, [id, open]);
+    console.log(product.image_url);
+  }, [id]);
 
-  console.log(product);
+  // console.log(product);
   const getStockStatus = (stock: number) => {
     if (stock <= 50) return "OUT";
     if (stock <= 100) return "LOW";
@@ -85,7 +107,7 @@ export function ProductDialog({
         <Separator className="my-4" />
 
         <div className="flex justify-between items-start gap-6">
-          <div className=" ">
+          <div>
             {product.image_url && (
               <div
                 className="p-2 border border-[#D8DADC] rounded-[10px] mb-4"
