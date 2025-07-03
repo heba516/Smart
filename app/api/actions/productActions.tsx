@@ -38,6 +38,16 @@ export async function deleteProduct(id: string) {
 
     return res;
   } catch (error) {
-    console.log("error while fetching products", error);
+    console.log("error while deleting product", error);
+  }
+}
+
+export async function restock(id: string, stock: number) {
+  try {
+    const res = await AxiosInstance.put(`api/product/${id}`, { stock });
+
+    return res;
+  } catch (error) {
+    console.log("error while restock product", error);
   }
 }
