@@ -6,7 +6,7 @@ import { IProductInfo } from "@/interfaces";
 import { getProduct } from "@/app/api/actions/productActions";
 import { Edit, Trash2 } from "lucide-react";
 import FormComponentSkeleton from "./FormComponentSkeleton";
-import FormHeader from "../_components/FormHeader";
+import PagesHeader from "../../../_components/PagesHeader";
 import {
   Button,
   Dialog,
@@ -37,6 +37,7 @@ export function ProductDialog({
     brand: "",
     categoryId: "",
     subCategoryId: "",
+    shelfNumber: 0,
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
@@ -77,7 +78,7 @@ export function ProductDialog({
       <DialogContent className="max-w-5xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            <FormHeader action="view" page={""} />
+            <PagesHeader action="view" page={""} />
           </DialogTitle>
         </DialogHeader>
 

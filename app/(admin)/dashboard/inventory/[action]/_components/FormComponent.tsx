@@ -13,7 +13,7 @@ import { SelectField } from "../_components/SelectField";
 import { ImageField } from "../_components/ImageField";
 import { AddProductConfirm } from "./AddProductConfirm";
 import Box from "../_components/Box";
-import FormHeader from "../_components/FormHeader";
+import PagesHeader from "../../../_components/PagesHeader";
 import FormComponentSkeleton from "./FormComponentSkeleton";
 import Link from "next/link";
 
@@ -40,6 +40,7 @@ const FormComponent = ({ action, id }: IProps) => {
     brand: "",
     categoryId: "",
     subCategoryId: "",
+    shelfNumber: 1,
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
@@ -73,6 +74,7 @@ const FormComponent = ({ action, id }: IProps) => {
           brand: product.brand,
           categoryId: product.categoryId,
           subCategoryId: product.subCategoryId,
+          shelfNumber: product.shelfNumber,
           item_weight: product.item_weight,
         };
         setDefaultValues(values);
@@ -108,7 +110,7 @@ const FormComponent = ({ action, id }: IProps) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <header className="flex items-center justify-between mt-8">
-            <FormHeader page="inventory" action={action}></FormHeader>
+            <PagesHeader page="inventory" action={action}></PagesHeader>
             <div className="flex items-center space-x-4">
               <Button
                 onClick={() => form.reset()}

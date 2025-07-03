@@ -5,7 +5,7 @@ interface IProps {
   action?: "add" | "edit" | "view";
 }
 
-const FormHeader = ({ page, action }: IProps) => {
+const PagesHeader = ({ page, action }: IProps) => {
   return (
     <div>
       <h1 className="text-2xl font-semibold pl-2 border-l-4 border-primaryRed capitalize">
@@ -41,4 +41,4 @@ const FormHeader = ({ page, action }: IProps) => {
   );
 };
 
-export default FormHeader;
+export default PagesHeader;

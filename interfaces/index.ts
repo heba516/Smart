@@ -22,13 +22,11 @@ export interface ILogin {
     password: string;
 }
 
-export interface IProduct {
+
+export interface IShelves {
     _id?: string;
     title: string;
-    barcode: string;
     shelfNumber?: string;
-    price: number;
-    image_url?: string;
     stock: number;
     categories: string[];
     state: "Available" | "Out" | "Low";
@@ -65,12 +63,25 @@ export interface IProductInfo {
     categoryId?: string;
     subCategoryId?: string;
     item_weight?: string;
+    shelfNumber: number;
+}
+
+export interface IProduct {
+    _id?: string;
+    title: string;
+    barcode: string;
+    shelfNumber?: string;
+    price: number;
+    image_url?: string;
+    stock: number;
+    categories: string[];
+    state: "Available" | "Out" | "Low";
 }
 
 export interface IStatusData {
     src: string;
     name: string;
-    number: string;
+    number: number;
     numberColor: string;
     numberUnite: string;
     percent: number;

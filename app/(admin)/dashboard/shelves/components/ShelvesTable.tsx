@@ -1,10 +1,8 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { IProduct } from "@/interfaces";
 import { getAllProducts } from "@/app/api/actions/productActions";
-import { ProductTableSkeleton } from "../../../_components/ProductTableSkeleton";
-import DataTables from "../../../_components/DataTable";
-import { productsColumns as columns } from "../../../_components/DataColumns";
+
 import {
   ColumnFiltersState,
   SortingState,
@@ -15,20 +13,27 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+// import { socket } from '@/socket';
 import { io } from "socket.io-client";
+import { ProductTableSkeleton } from "../../_components/ProductTableSkeleton";
+import DataTables from "../../_components/DataTable";
+import { shelvesColumns as columns } from "../../_components/DataColumns";
 
-export function ProductTable() {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+export function DataTableDemo() {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
-  const [data, setProducts] = useState<IProduct[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [data, setProducts] = React.useState<IProduct[]>([]);
+  const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     async function loadProducts() {
       try {
         setLoading(true);
         const res = await getAllProducts();
+        console.log(res?.data.data);
 
         setProducts(res?.data.data);
       } catch (error) {
@@ -41,8 +46,6 @@ export function ProductTable() {
     loadProducts();
   }, []);
 
-  console.log(columns);
-
   const SOCKET_URL =
     "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
 
@@ -50,7 +53,7 @@ export function ProductTable() {
     console.log("🔌 Initializing socket...");
 
     const socket = io(SOCKET_URL, {
-      transports: ["websocket"],
+      transports: ["websocket"], // Critical for fallback
     });
 
     socket.on("connect", () => {
@@ -87,7 +90,8 @@ export function ProductTable() {
     };
   }, []);
 
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({});
 
   const table = useReactTable({
     data,
@@ -108,5 +112,5 @@ export function ProductTable() {
 
   if (loading) return <ProductTableSkeleton />;
 
-  return <DataTables table={table} page={"products"} />;
+  return <DataTables table={table} page={"shelves"} />;
 }

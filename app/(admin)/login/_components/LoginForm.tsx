@@ -70,10 +70,12 @@ export default function LoginForm() {
       await login(data);
 
       router.push("/dashboard");
+      // redirect("/dashboard");
     } catch (error) {
       console.log(error);
       // setError("Invalid Email Or Password");
       toast.error("Invalid Email Or Password");
+    } finally {
       setLoading(false);
     }
   }
@@ -138,7 +140,6 @@ export default function LoginForm() {
             )}
           />
         ))}
-
         {/*
         <FormItem className="flex lg:flex-row flex-col justify-between item-center space-y-0">
           <FormLabel className="text-base lg:text-center">
@@ -156,7 +157,7 @@ export default function LoginForm() {
           >
             Forget password ?
           </Link>
-        </FormItem>
+        </FormItem> 
 
          {error && (
           <div className="my-2">
@@ -169,10 +170,10 @@ export default function LoginForm() {
         <Button
           disabled={loading}
           variant={"default"}
-          className="w-full p-3 text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
+          className="w-full p-6 text-xl leading-4 font-semibold rounded-lg bg-primaryRed lg:mt-4"
           type="submit"
         >
-          Log in
+          {loading ? "Logging in..." : "Log in"}
         </Button>
       </form>
     </Form>
