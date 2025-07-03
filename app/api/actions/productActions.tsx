@@ -42,7 +42,7 @@ export async function deleteProduct(id: string) {
   }
 }
 
-export async function restock(id: string, stock: number) {
+export async function restock(id: string, stock: { stock: number }) {
   try {
     const res = await AxiosInstance.put(`api/product/${id}`, stock);
 
