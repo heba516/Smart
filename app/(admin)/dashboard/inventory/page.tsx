@@ -36,7 +36,6 @@ import { InventoryStatus } from "./[action]/_components/InventoryStatus";
 // ];
 
 const Page = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
     <div className="py-5 space-y-10">
       <PagesHeader page={"inventory"} />
