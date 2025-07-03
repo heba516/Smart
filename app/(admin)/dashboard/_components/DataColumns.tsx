@@ -240,6 +240,7 @@ export const productsColumns: ColumnDef<IProduct>[] = [
     enableHiding: false,
     cell: ({ row }) => {
       const id = row.original._id as string;
+
       return <RowActions id={id} />;
     },
   },

@@ -1,9 +1,8 @@
 "use client";
 import { IStatusData } from "@/interfaces";
 import { useEffect, useState } from "react";
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 import StatusBoxes from "../../../_components/StatusBoxes";
-import socket from "@/lib/socketInstance";
 
 interface IStateCounts {
   available: number;
@@ -12,8 +11,8 @@ interface IStateCounts {
   total?: number;
 }
 
-// const SOCKET_URL =
-//   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
+const SOCKET_URL =
+  "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
 
 export const InventoryStatus = () => {
   const [stateCounts, setStateCounts] = useState<IStateCounts>({
@@ -22,50 +21,47 @@ export const InventoryStatus = () => {
     out: 0,
   });
 
-  //   useEffect(() => {
-  //     console.log("🔌 Initializing socket...");
-
-  //     const socket = io(SOCKET_URL, {
-  //       transports: ["websocket"], // Critical for fallback
-  //     });
-
-  //     socket.on("connect", () => {
-  //       console.log("🔗 Connected to shelf socket: ", socket.id);
-  //     });
-
-  //     socket.on("product-states-update", (response) => {
-  //       if (response.success) {
-  //         console.log("Updated product state counts:", response.stateCounts);
-  //         // response.stateCounts example:
-  //         // { available: 4, outOfStock: 2, lowStock: 3 }
-  //         // Update your dashboard/statistics panel accordingly
-  //         setStateCounts(response.stateCounts);
-  //       } else {
-  //         console.error("Failed to receive product state counts:", response);
-  //       }
-  //     });
-
-  //     // Handle disconnection
-  //     socket.on("disconnect", () => {
-  //       console.log("Disconnected from shelf socket");
-  //     });
-
-  //     return () => {
-  //       socket.disconnect();
-  //     };
-  //   }, []);
-
   useEffect(() => {
+    console.log("🔌 Initializing socket...");
+
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"], // Critical for fallback
+    });
+
+    socket.on("connect", () => {
+      console.log("🔗 Connected to shelf socket: ", socket.id);
+    });
+
     socket.on("product-states-update", (response) => {
-      if (response.success && response.stateCounts) {
+      if (response.success) {
+        console.log("Updated product state counts:", response.stateCounts);
         setStateCounts(response.stateCounts);
+      } else {
+        console.error("Failed to receive product state counts:", response);
       }
+    });
+
+    // Handle disconnection
+    socket.on("disconnect", () => {
+      console.log("Disconnected from shelf socket");
     });
 
     return () => {
       socket.disconnect();
     };
   }, []);
+
+  // useEffect(() => {
+  //   socket.on("product-states-update", (response) => {
+  //     if (response.success && response.stateCounts) {
+  //       setStateCounts(response.stateCounts);
+  //     }
+  //   });
+
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const InventoryStatusData: IStatusData[] = [
     {

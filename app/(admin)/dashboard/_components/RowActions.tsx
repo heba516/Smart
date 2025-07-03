@@ -10,6 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
 import { ProductDialog } from "../inventory/[action]/_components/ProductDialog";
+import { deleteProduct } from "@/app/api/actions/productActions";
+import toast from "react-hot-toast";
 
 export function RowActions({ id }: { id: string }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -46,7 +48,12 @@ export function RowActions({ id }: { id: string }) {
               Edit
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              deleteProduct(id);
+              toast.success("Product deleted successfully");
+            }}
+          >
             <Trash className="mr-2 h-4 w-4" />
             Delete
           </DropdownMenuItem>

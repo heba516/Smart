@@ -15,9 +15,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-// import { socket } from '@/socket';
-// import { io } from "socket.io-client";
-import socket from "@/lib/socketInstance";
+import { io } from "socket.io-client";
 
 export function ProductTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -31,7 +29,6 @@ export function ProductTable() {
       try {
         setLoading(true);
         const res = await getAllProducts();
-        // console.log(res?.data.data);
 
         setProducts(res?.data.data);
       } catch (error) {
@@ -44,19 +41,21 @@ export function ProductTable() {
     loadProducts();
   }, []);
 
+  console.log(columns);
+
+  const SOCKET_URL =
+    "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
+
   useEffect(() => {
-    // console.log("🔌 Initializing socket...");
+    console.log("🔌 Initializing socket...");
 
-    // const socket = io(
-    //   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf",
-    //   {
-    //     transports: ["websocket"], // Critical for fallback
-    //   }
-    // );
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"],
+    });
 
-    // socket.on("connect", () => {
-    //   console.log("🔗 Connected to shelf socket: ", socket.id);
-    // });
+    socket.on("connect", () => {
+      console.log("🔗 Connected to shelf socket: ", socket.id);
+    });
 
     // Listen for shelf updates
     socket.on("shelf-state-update", (response) => {

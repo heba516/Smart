@@ -14,7 +14,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 // import { socket } from '@/socket';
-// import { io } from "socket.io-client";
+import { io } from "socket.io-client";
 import { ProductTableSkeleton } from "../../_components/ProductTableSkeleton";
 import DataTables from "../../_components/DataTable";
 import { shelvesColumns as columns } from "../../_components/DataColumns";
@@ -46,49 +46,49 @@ export function DataTableDemo() {
     loadProducts();
   }, []);
 
-  //   useEffect(() => {
-  //     console.log("🔌 Initializing socket...");
+  const SOCKET_URL =
+    "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
 
-  //     const socket = io(
-  //       "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf",
-  //       {
-  //         transports: ["websocket"], // Critical for fallback
-  //       }
-  //     );
+  useEffect(() => {
+    console.log("🔌 Initializing socket...");
 
-  //     socket.on("connect", () => {
-  //       console.log("🔗 Connected to shelf socket: ", socket.id);
-  //     });
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"], // Critical for fallback
+    });
 
-  //     // Listen for shelf updates
-  //     socket.on("shelf-state-update", (response) => {
-  //       if (response.success) {
-  //         const updatedProduct = response.product;
-  //         console.log("Shelf updated:", updatedProduct);
-  //         setProducts((prevProducts) =>
-  //           prevProducts.map((product) =>
-  //             product._id === updatedProduct._id
-  //               ? {
-  //                   ...product,
-  //                   state: updatedProduct.shelfState,
-  //                 }
-  //               : product
-  //           )
-  //         );
-  //       } else {
-  //         console.error("Shelf update failed:", response);
-  //       }
-  //     });
+    socket.on("connect", () => {
+      console.log("🔗 Connected to shelf socket: ", socket.id);
+    });
 
-  //     // Handle disconnection
-  //     socket.on("disconnect", () => {
-  //       console.log("Disconnected from shelf socket");
-  //     });
+    // Listen for shelf updates
+    socket.on("shelf-state-update", (response) => {
+      if (response.success) {
+        const updatedProduct = response.product;
+        console.log("Shelf updated:", updatedProduct);
+        setProducts((prevProducts) =>
+          prevProducts.map((product) =>
+            product._id === updatedProduct._id
+              ? {
+                  ...product,
+                  state: updatedProduct.shelfState,
+                }
+              : product
+          )
+        );
+      } else {
+        console.error("Shelf update failed:", response);
+      }
+    });
 
-  //     return () => {
-  //       socket.disconnect();
-  //     };
-  //   }, []);
+    // Handle disconnection
+    socket.on("disconnect", () => {
+      console.log("Disconnected from shelf socket");
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
 
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});

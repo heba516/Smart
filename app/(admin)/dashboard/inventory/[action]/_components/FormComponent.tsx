@@ -40,6 +40,7 @@ const FormComponent = ({ action, id }: IProps) => {
     brand: "",
     categoryId: "",
     subCategoryId: "",
+    shelfNumber: 1,
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
@@ -73,6 +74,7 @@ const FormComponent = ({ action, id }: IProps) => {
           brand: product.brand,
           categoryId: product.categoryId,
           subCategoryId: product.subCategoryId,
+          shelfNumber: product.shelfNumber,
           item_weight: product.item_weight,
         };
         setDefaultValues(values);

@@ -31,3 +31,13 @@ export async function addProduct(data: IProductInfo) {
     console.log("error while adding product", error);
   }
 }
+
+export async function deleteProduct(id: string) {
+  try {
+    const res = await AxiosInstance.delete(`api/product/${id}`);
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching products", error);
+  }
+}
