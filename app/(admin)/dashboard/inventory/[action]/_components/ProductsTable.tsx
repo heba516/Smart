@@ -46,11 +46,13 @@ export function ProductTable() {
   const [restockProduct, setRestockProduct] = useState<{
     name: string;
     id: string;
+    state: string;
     stock: number;
     maxStock: number;
   }>({
     name: "",
     id: "",
+    state: "",
     stock: 0,
     maxStock: 400,
   });
@@ -248,6 +250,7 @@ export function ProductTable() {
               setRestockProduct({
                 name: product.title,
                 id: product._id,
+                state: product.state,
                 stock: product.stock,
                 maxStock: 400,
               });
@@ -331,7 +334,7 @@ export function ProductTable() {
       }
     }
     loadProducts();
-  }, [isRestockOpen]);
+  }, []);
 
   const SOCKET_URL =
     "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
@@ -403,6 +406,7 @@ export function ProductTable() {
       <RestockShelf
         productId={restockProduct.id}
         productName={restockProduct.name}
+        productState={restockProduct.state}
         currentStock={restockProduct.stock}
         maxStock={restockProduct.maxStock}
         onRestockSuccess={() => {

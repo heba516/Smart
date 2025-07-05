@@ -15,6 +15,7 @@ import { Label } from "@/components/ui/label";
 interface RestockShelfProps {
   productId: string;
   productName: string;
+  productState: string;
   currentStock: number;
   maxStock: number;
   onRestockSuccess: () => void;
@@ -24,6 +25,7 @@ interface RestockShelfProps {
 export function RestockShelf({
   productId,
   productName,
+  productState,
   currentStock,
   maxStock,
   onRestockSuccess,
@@ -45,7 +47,7 @@ export function RestockShelf({
   let stockNumberColor = "";
   let statusIcon = null;
 
-  if (currentStock <= 10) {
+  if (productState === "out") {
     stockStatus = "Out of stock";
     statusClass = "bg-primaryRed text-white";
     stockNumberColor = "text-primaryRed";
@@ -57,7 +59,7 @@ export function RestockShelf({
         className="mr-1.5"
       />
     );
-  } else if (currentStock <= 100) {
+  } else if (productState === "low") {
     stockStatus = "Low of stock";
     statusClass = "bg-[#FF8714] text-white";
     stockNumberColor = "text-[#FF8714]";
