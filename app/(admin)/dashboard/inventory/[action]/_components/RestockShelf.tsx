@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { restock } from "@/app/api/actions/productActions";
 import { Icon } from "@iconify/react";
 import { Label } from "@/components/ui/label";
+import { IProduct } from "@/interfaces";
 
 interface RestockShelfProps {
   productId: string;
@@ -18,7 +19,7 @@ interface RestockShelfProps {
   productState: string;
   currentStock: number;
   maxStock: number;
-  onRestockSuccess: () => void;
+  onRestockSuccess: (product: IProduct) => void;
   onClose: () => void;
 }
 
@@ -35,9 +36,9 @@ export function RestockShelf({
 
   const handleRestock = async () => {
     if (newQuantity > 0 && newQuantity <= maxStock - currentStock) {
-      await restock(productId, { stock: newQuantity });
-      console.log("success");
-      onRestockSuccess();
+      const res = await restock(productId, { stock: newQuantity });
+      console.log({ res });
+      onRestockSuccess(res?.data.data);
       onClose();
     }
   };

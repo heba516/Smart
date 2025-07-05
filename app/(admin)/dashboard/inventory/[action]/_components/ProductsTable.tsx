@@ -392,6 +392,7 @@ export function ProductTable() {
   });
 
   if (loading) return <ProductTableSkeleton />;
+
   if (isDialogOpen)
     return (
       <ProductDialog
@@ -401,7 +402,8 @@ export function ProductTable() {
         onOpenChange={setIsDialogOpen}
       />
     );
-  if (restockProduct && isRestockOpen)
+
+  if (restockProduct && isRestockOpen) {
     return (
       <RestockShelf
         productId={restockProduct.id}
@@ -409,12 +411,24 @@ export function ProductTable() {
         productState={restockProduct.state}
         currentStock={restockProduct.stock}
         maxStock={restockProduct.maxStock}
-        onRestockSuccess={() => {
+        onRestockSuccess={(updatedProduct) => {
+          setProducts((prev) =>
+            prev.map((p) =>
+              p._id === updatedProduct._id
+                ? {
+                    ...p,
+                    stock: updatedProduct.stock,
+                    state: updatedProduct.state,
+                  }
+                : p
+            )
+          );
           setIsRestockOpen(false);
         }}
         onClose={() => setIsRestockOpen(false)}
       />
     );
+  }
 
   return <DataTables table={table} page={"products"} />;
 }
