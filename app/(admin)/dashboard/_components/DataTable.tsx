@@ -113,7 +113,7 @@ const DataTables = <T extends IProduct | IShelves | ISecurity | ICustomer>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.length ? (
+            {table.getRowModel()?.rows.length ? (
               table.getRowModel().rows.map((row) => {
                 // const statusVal = row.getValue("state") as string;
                 // if ("_id" in row.original) {
@@ -151,7 +151,7 @@ const DataTables = <T extends IProduct | IShelves | ISecurity | ICustomer>({
               <TableRow>
                 <TableCell
                   //   colSpan={table.column}
-                  className="w-full h-24 text-center"
+                  className="h-24 text-lg"
                 >
                   No results.
                 </TableCell>

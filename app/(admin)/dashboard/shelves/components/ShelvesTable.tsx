@@ -35,7 +35,7 @@ export function DataTableDemo() {
         const res = await getAllProducts();
         console.log(res?.data.data);
 
-        setProducts(res?.data.data);
+        setProducts(res?.data.data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
