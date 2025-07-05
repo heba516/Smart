@@ -50,8 +50,6 @@ export interface ICustomer {
 
 
 export interface IProductInfo {
-    status: any;
-    id: any;
     title: string;
     description?: string;
     highlights?: string;
