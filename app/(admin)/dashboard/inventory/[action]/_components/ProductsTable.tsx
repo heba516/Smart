@@ -73,7 +73,7 @@ export function ProductTable() {
         );
       },
       cell: ({ row }) => {
-        const statusVal = row.getValue("state");
+        const statusVal = row.getValue("stockState");
         return (
           <div
             className={cn(
@@ -91,7 +91,7 @@ export function ProductTable() {
       accessorKey: "barcode",
       header: "Barcode",
       cell: ({ row }) => {
-        const statusVal = row.getValue("state");
+        const statusVal = row.getValue("stockState");
         return (
           <div
             className={cn(
@@ -154,7 +154,7 @@ export function ProductTable() {
         const formatted = new Intl.NumberFormat("en-US", {
           style: "decimal",
         }).format(amount);
-        const statusVal = row.getValue("state");
+        const statusVal = row.getValue("stockState");
         return (
           <div className="font-medium flex items-center text-medGray">
             {formatted === "0" && (
@@ -199,10 +199,10 @@ export function ProductTable() {
       ),
     },
     {
-      accessorKey: "state",
+      accessorKey: "stockState",
       header: "State",
       cell: ({ row }) => {
-        const statusVal = row.getValue("state");
+        const statusVal = row.getValue("stockState");
         return (
           <div
             className={cn(
@@ -228,7 +228,7 @@ export function ProductTable() {
                 className="mr-1.5"
               />
             )}
-            {row.getValue("state")}
+            {row.getValue("stockState")}
           </div>
         );
       },
@@ -236,7 +236,7 @@ export function ProductTable() {
     {
       accessorKey: " ",
       cell: ({ row }) => {
-        const statusVal = row.getValue("state");
+        const statusVal = row.getValue("stockState");
         const product = row.original;
 
         return (
@@ -250,7 +250,7 @@ export function ProductTable() {
               setRestockProduct({
                 name: product.title,
                 id: product._id,
-                state: product.state,
+                state: product.stockState,
                 stock: product.stock,
                 maxStock: 400,
               });
@@ -354,7 +354,7 @@ export function ProductTable() {
         setProducts((prevProducts) =>
           prevProducts.map((product) =>
             product._id === updatedProduct._id
-              ? { ...product, state: updatedProduct.shelfState }
+              ? { ...product, stockState: updatedProduct.shelfState }
               : product
           )
         );
@@ -414,7 +414,7 @@ export function ProductTable() {
         onRestockSuccess={(updatedProduct) => {
           setProducts((prev) =>
             prev.map((p) =>
-              p._id === updatedProduct._id
+              p._id === restockProduct.id
                 ? {
                     ...p,
                     stock: updatedProduct.stock,

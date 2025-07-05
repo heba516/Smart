@@ -74,6 +74,7 @@ export interface IProduct {
     price: number;
     image_url?: string;
     stock: number;
+    stockState:  "available" | "out" | "low";
     categories: string[];
     state: "Available" | "Out" | "Low";
 }
