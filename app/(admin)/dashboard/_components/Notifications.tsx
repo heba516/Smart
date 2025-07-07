@@ -213,6 +213,9 @@ export default function Notifications() {
                 onClick={() => setFilter("unread")}
               >
                 Unread
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primaryRed text-xs font-semibold text-white">
+                  {unreadCount}
+                </span>
               </Button>
             </div>
             <div className="mt-3 flex gap-4">
@@ -252,7 +255,7 @@ export default function Notifications() {
                     <div
                       key={notification._id}
                       className={`border-b ${
-                        group === "new" ? "bg-[#FFEDED]" : "bg-lightGray"
+                        !notification.isRead ? "bg-[#FFEDED]" : "bg-lightGray"
                       } p-4 mx-4 my-3 rounded-lg last:border-b-0 pe-7`}
                     >
                       <div className="flex items-center gap-3 relative">
@@ -287,10 +290,7 @@ export default function Notifications() {
                           onClick={() => clearOne(notification._id)}
                           className="absolute bottom-2 -right-[7px] hover:text-primaryRed transition duration-200 cursor-pointer"
                         />
-                        {/* <Trash
-                          size={18}
-                          className="absolute bottom-2 -right-1.5 hover:text-primaryRed transition duration-200 cursor-pointer"
-                        /> */}
+
                         {/* {!notification.isRead && (
                           <Icon
                             icon="streamline:check-solid"
