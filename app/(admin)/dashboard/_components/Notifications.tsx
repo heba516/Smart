@@ -114,7 +114,7 @@ export default function Notifications() {
       case "customer_activity":
         return "/images/customerNotifications.svg";
       case "security_alert":
-        return "/images/securityNotifications.svg";
+        return "/images/SecurityNotifications.svg";
       default:
         return "/images/inventoryNotifications.svg";
     }
