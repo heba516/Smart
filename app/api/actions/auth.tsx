@@ -17,7 +17,6 @@ export async function login(data: ILogin) {
     console.log(res);
 
     const { accessToken, firstName, lastName, role } = res.data;
-    console.log(accessToken);
 
     if (role !== "admin") {
       throw new Error("Unauthorized access: Admin role required");
