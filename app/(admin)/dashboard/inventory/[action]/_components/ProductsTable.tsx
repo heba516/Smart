@@ -33,6 +33,7 @@ import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { RestockShelf } from "./RestockShelf"; // Import the new component
+import { useDashboardContext } from "@/context/dashboardContext";
 
 export function ProductTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -56,6 +57,8 @@ export function ProductTable() {
     stock: 0,
     maxStock: 400,
   });
+
+  const { setAvailableItems, setLowItems, setOutItems } = useDashboardContext();
 
   const columns: ColumnDef<IProduct>[] = [
     {
@@ -327,6 +330,7 @@ export function ProductTable() {
         setLoading(true);
         const res = await getAllProducts();
         setProducts(res?.data.data.products);
+        console.log({ data });
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -335,6 +339,16 @@ export function ProductTable() {
     }
     loadProducts();
   }, []);
+
+  useEffect(() => {
+    console.log("update");
+
+    setAvailableItems(
+      data.filter((itm) => itm.stockState === "available").length
+    );
+    setLowItems(data.filter((itm) => itm.stockState === "low").length);
+    setOutItems(data.filter((itm) => itm.stockState === "out").length);
+  }, [data]);
 
   const SOCKET_URL =
     "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
@@ -412,13 +426,15 @@ export function ProductTable() {
         currentStock={restockProduct.stock}
         maxStock={restockProduct.maxStock}
         onRestockSuccess={(updatedProduct) => {
+          console.log({ updatedProduct });
+
           setProducts((prev) =>
             prev.map((p) =>
               p._id === restockProduct.id
                 ? {
                     ...p,
                     stock: updatedProduct.stock,
-                    state: updatedProduct.state,
+                    stockState: updatedProduct.stockState,
                   }
                 : p
             )

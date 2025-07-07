@@ -1,323 +1,359 @@
 "use client";
-import {useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuTrigger,
-    DropdownMenuContent,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
 } from "@/components/ui/dropdown-menu";
 import { MoreHorizontal } from "lucide-react";
+import { io, Socket } from "socket.io-client";
 
 type Notification = {
-    _id: string;
-    title: string;
-    message: string;
-    createdAt: string;
-    isRead: boolean;
-    type: string;
+  _id: string;
+  title: string;
+  message: string;
+  createdAt: string;
+  isRead: boolean;
+  type: string;
 };
 
+const SOCKET_URL =
+  "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/shelf";
+
 export default function Notifications() {
-    const [open, setOpen] = useState(false);
-    const [filter, setFilter] = useState<"all" | "unread">("all");
-    const [notifications, setNotifications] = useState<Notification[]>([
-        {
-            title: "Inventory Alert",
-            message: "Product iPhone 15 is out of stock.",
-            type: "inventory_alert",
-            isRead: true,
-            _id: "686d9839d3ae8724f33e198",
-            createdAt: "2025-07-06T07:51:31.361Z",
-        },
-        {
-            title: "Inventory Alert",
-            message: "Product iPhone 15 is out of stock.",
-            type: "securety_alert",
-            isRead: true,
-            _id: "6868d9839d3ae87233e198",
-            createdAt: "2025-07-03T07:51:31.361Z",
-        },
-        {
-            title: "Inventory Alert",
-            message: "Product iPhone 15 is out of stock.",
-            type: "sales_alert",
-            isRead: false,
-            _id: "68d9839d3ae8724f33e198",
-            createdAt: "2025-07-07T07:51:31.361Z",
-        },
-        {
-            title: "Inventory Alert",
-            message: "Product iPhone 15 is out of stock.",
-            type: "customer_alert",
-            isRead: false,
-            _id: "6868d9839d3ae8724f33e19",
-            createdAt: "2025-07-05T07:51:31.361Z",
-        },
-    ]);
-    
-    const clearAllNotifications = () => {
-        // socket?.emit("clear-all-notifications");
-        setNotifications([]);
+  const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState<"all" | "unread">("all");
+  const [notifications, setNotifications] = useState<Notification[]>([
+    // {
+    //   title: "Inventory Alert",
+    //   message: "Product iPhone 15 is out of stock.",
+    //   type: "inventory_alert",
+    //   isRead: true,
+    //   _id: "686d9839d3ae8724f33e198",
+    //   createdAt: "2025-07-06T07:51:31.361Z",
+    // },
+    // {
+    //   title: "Inventory Alert",
+    //   message: "Product iPhone 15 is out of stock.",
+    //   type: "securety_alert",
+    //   isRead: true,
+    //   _id: "6868d9839d3ae87233e198",
+    //   createdAt: "2025-07-03T07:51:31.361Z",
+    // },
+    // {
+    //   title: "Inventory Alert",
+    //   message: "Product iPhone 15 is out of stock.",
+    //   type: "sales_alert",
+    //   isRead: false,
+    //   _id: "68d9839d3ae8724f33e198",
+    //   createdAt: "2025-07-07T07:51:31.361Z",
+    // },
+    // {
+    //   title: "Inventory Alert",
+    //   message: "Product iPhone 15 is out of stock.",
+    //   type: "customer_alert",
+    //   isRead: false,
+    //   _id: "6868d9839d3ae8724f33e19",
+    //   createdAt: "2025-07-05T07:51:31.361Z",
+    // },
+  ]);
+
+  const socketRef = useRef<Socket | null>(null);
+
+  const clearAllNotifications = () => {
+    // socket?.emit("clear-all-notifications");
+    setNotifications([]);
+  };
+
+  const getNotificationIcon = (type: string) => {
+    switch (type) {
+      case "sales_alert":
+        return "/images/salesNotifications.svg";
+      case "inventory_alert":
+        return "/images/inventoryNotifications.svg";
+      case "customer_alert":
+        return "/images/customerNotifications.svg";
+      case "security_alert":
+        return "/images/securityNotifications.svg";
+      default:
+        return "/images/inventoryNotifications.svg";
+    }
+  };
+
+  const getTimeLabel = (dateString: string): string => {
+    const now = new Date();
+    const date = new Date(dateString);
+    const diffHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
+
+    if (diffHours < 24) return "New";
+    if (diffHours < 48) return "Yesterday";
+    return "Earlier";
+  };
+
+  useEffect(() => {
+    console.log("🔌 Initializing socket...");
+
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"], // Critical for fallback
+    });
+
+    socketRef.current = socket;
+
+    socket.on("connect", () => {
+      console.log("🔗 Connected to notifications socket: ", socket.id);
+      // Get all notifications
+      socket.emit("get-notifications", (response: Notification[]) => {
+        console.log("✅ Notifications received:", response);
+        setNotifications(response);
+      });
+    });
+
+    // Mark all as read
+    // socket.emit("mark-all-as-read");
+    // socket.on("notifications-marked-read", () => {
+    //   /* mark all as read in UI */
+    // });
+
+    socket.on("error", (err) => {
+      console.error("🚨 Socket error:", err);
+    });
+
+    // // Clear all notifications
+    // socket.emit("clear-all-notifications");
+    // socket.on("notifications-cleared", () => {
+    //   /* clear all from list */
+    // });
+
+    // // Clear a specific notification
+    // socket.emit("clear-notification", "notificationId123");
+    // socket.on("notification-cleared", (id) => {
+    //   /* remove one from list */
+    // });
+
+    // Handle disconnection
+    socket.on("disconnect", () => {
+      console.log("Disconnected from shelf socket");
+    });
+
+    return () => {
+      socket.disconnect();
     };
-    
-    const getNotificationIcon = (type: string) => {
-        switch (type) {
-            case "sales_alert":
-                return "/images/salesNotifications.svg";
-            case "inventory_alert":
-                return "/images/inventoryNotifications.svg";
-            case "customer_alert":
-                return "/images/customerNotifications.svg";
-            case "security_alert":
-                return "/images/securityNotifications.svg";
-            default:
-                return "/images/inventoryNotifications.svg";
-        }
-    };
+  }, []);
 
-    const getTimeLabel = (dateString: string): string => {
-        const now = new Date();
-        const date = new Date(dateString);
-        const diffHours = (now.getTime() - date.getTime()) / (1000 * 60 * 60);
+  const unreadCount = notifications.filter((n) => !n.isRead).length;
+  const allCount = notifications.length;
 
-        if (diffHours < 24) return "New";
-        if (diffHours < 48) return "Yesterday";
-        return "Earlier";
-    };
+  const filteredNotifications =
+    filter === "all" ? notifications : notifications.filter((n) => !n.isRead);
 
+  const groupedNotifications = {
+    new: filteredNotifications.filter(
+      (n) => getTimeLabel(n.createdAt) === "New"
+    ),
+    yesterday: filteredNotifications.filter(
+      (n) => getTimeLabel(n.createdAt) === "Yesterday"
+    ),
+    earlier: filteredNotifications.filter(
+      (n) => getTimeLabel(n.createdAt) === "Earlier"
+    ),
+  };
 
-    const unreadCount = notifications.filter((n) => !n.isRead).length;
-    const allCount = notifications.length;
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative h-12 w-10 lg:w-[7%] p-2 bg-lightGray rounded-xl"
+        >
+          <span className="absolute -right-1.5 -top-1.5 flex items-center justify-center bg-primaryRed w-[22px] h-[22px] text-white text-[13px] font-semibold rounded-full">
+            {unreadCount}
+          </span>
+          <Image
+            src={
+              open
+                ? "/images/notificationOpen.svg"
+                : "/images/notificationClose.svg"
+            }
+            width={20}
+            height={20}
+            alt="Notifications"
+            className="w-auto h-auto"
+          />
+        </Button>
+      </DropdownMenuTrigger>
 
-    const filteredNotifications =
-        filter === "all"
-            ? notifications
-            : notifications.filter((n) => !n.isRead);
+      <DropdownMenuContent
+        className="w-[500px] rounded-lg p-0 shadow-lg"
+        align="end"
+        forceMount
+      >
+        {/* Header */}
+        <div className="border-b p-4">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-semibold">Notifications</h3>
+            <Button variant="ghost" size="icon" className="h-8 w-8">
+              <MoreHorizontal size={18} className="text-gray-400" />
+            </Button>
+          </div>
 
-    const groupedNotifications = {
-        new: filteredNotifications.filter(
-            (n) => getTimeLabel(n.createdAt) === "New"
-        ),
-        yesterday: filteredNotifications.filter(
-            (n) => getTimeLabel(n.createdAt) === "Yesterday"
-        ),
-        earlier: filteredNotifications.filter(
-            (n) => getTimeLabel(n.createdAt) === "Earlier"
-        ),
-    };
-
-    return (
-        <DropdownMenu open={open} onOpenChange={setOpen}>
-            <DropdownMenuTrigger asChild>
-                <Button
-                    variant="ghost"
-                    size="icon"
-                    className="relative h-12 w-10 lg:w-[7%] p-2 bg-lightGray rounded-xl"
-                >
-                    <span className="absolute -right-1.5 -top-1.5 flex items-center justify-center bg-primaryRed w-[22px] h-[22px] text-white text-[13px] font-semibold rounded-full">
-                        {unreadCount}
-                    </span>
-                    <Image
-                        src={
-                            open
-                                ? "/images/notificationOpen.svg"
-                                : "/images/notificationClose.svg"
-                        }
-                        width={20}
-                        height={20}
-                        alt="Notifications"
-                        className="w-auto h-auto"
-                    />
-                </Button>
-            </DropdownMenuTrigger>
-
-            <DropdownMenuContent
-                className="w-[500px] rounded-lg p-0 shadow-lg"
-                align="end"
-                forceMount
+          <div className="flex items-center justify-between">
+            <div className="mt-3 flex gap-4">
+              <Button
+                variant="link"
+                size="sm"
+                className={`h-8 ${
+                  filter === "all"
+                    ? "text-primaryRed underline"
+                    : "text-[#989797]"
+                }`}
+                onClick={() => setFilter("all")}
+              >
+                All{" "}
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primaryRed text-xs font-semibold text-white">
+                  {allCount}
+                </span>
+              </Button>
+              <Button
+                variant="link"
+                size="sm"
+                className={`h-8 ${
+                  filter === "unread"
+                    ? "text-primaryRed underline"
+                    : "text-[#989797]"
+                }`}
+                onClick={() => setFilter("unread")}
+              >
+                Unread
+              </Button>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="h-8 text-[#989797]"
+              onClick={clearAllNotifications}
             >
-                {/* Header */}
-                <div className="border-b p-4">
-                    <div className="flex items-center justify-between">
-                        <h3 className="text-lg font-semibold">Notifications</h3>
-                        <Button variant="ghost" size="icon" className="h-8 w-8">
-                            <MoreHorizontal
-                                size={18}
-                                className="text-gray-400"
-                            />
-                        </Button>
-                    </div>
+              Clear All
+            </Button>
+          </div>
+        </div>
 
-                    <div className="flex items-center justify-between">
-                        <div className="mt-3 flex gap-4">
-                            <Button
-                                variant="link"
-                                size="sm"
-                                className={`h-8 ${
-                                    filter === "all"
-                                        ? "text-primaryRed underline"
-                                        : "text-[#989797]"
-                                }`}
-                                onClick={() => setFilter("all")}
-                            >
-                                All{" "}
-                                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primaryRed text-xs font-semibold text-white">
-                                    {allCount}
-                                </span>
-                            </Button>
-                            <Button
-                                variant="link"
-                                size="sm"
-                                className={`h-8 ${
-                                    filter === "unread"
-                                        ? "text-primaryRed underline"
-                                        : "text-[#989797]"
-                                }`}
-                                onClick={() => setFilter("unread")}
-                            >
-                                Unread
-                            </Button>
-                        </div>
-                        <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 text-[#989797]"
-                            onClick={clearAllNotifications}
-                        >
-                            Clear All
-                        </Button>
-                    </div>
+        {!notifications.length ? (
+          <div className="p-4 text-red-500 text-center">No Notifications</div>
+        ) : (
+          <div className="max-h-[400px] overflow-y-auto">
+            {groupedNotifications.new.length > 0 && (
+              <div className="text-center mt-3">
+                <span className="text-xs font-medium text-[#666666]">New</span>
+              </div>
+            )}
+            {groupedNotifications.new.map((notification) => (
+              <div
+                key={notification._id}
+                className="border-b bg-[#FFEDED] p-4 mx-4 my-3 rounded-lg last:border-b-0 pe-7"
+              >
+                <div className="flex items-center gap-3 relative">
+                  {!notification.isRead && (
+                    <Image
+                      src="/images/notificationsDot.svg"
+                      width={7}
+                      height={7}
+                      alt="dot"
+                      className="absolute top-2 right-0"
+                    />
+                  )}
+
+                  <Image
+                    src={getNotificationIcon(notification.type)}
+                    width={45}
+                    height={45}
+                    alt={notification.title}
+                    className="mt-1 w-auto h-auto"
+                  />
+                  <div className="pe-7">
+                    <h4 className="font-semibold text-[#484C52]">
+                      {notification.title}
+                    </h4>
+                    <p className="mt-1 text-sm font-medium">
+                      {notification.message}
+                    </p>
+                  </div>
                 </div>
+              </div>
+            ))}
 
-                {!notifications.length ? (
-                    <div className="p-4 text-red-500 text-center">
-                        No Notifications
+            {groupedNotifications.yesterday.length > 0 && (
+              <>
+                <div className="text-center">
+                  <span className="text-xs font-medium text-[#666666]">
+                    Yesterday
+                  </span>
+                </div>
+                {groupedNotifications.yesterday.map((notification) => (
+                  <div
+                    key={notification._id}
+                    className="border-b bg-lightGray p-4 mx-4 my-3 last:border-b-0 rounded-lg pe-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={getNotificationIcon(notification.type)}
+                        width={45}
+                        height={45}
+                        alt={notification.title}
+                        className="mt-1 w-auto h-auto"
+                      />
+                      <div className="pe-7">
+                        <h4 className="font-semibold text-[#484C52]">
+                          {notification.title}
+                        </h4>
+                        <p className="mt-1 text-sm font-medium">
+                          {notification.message}
+                        </p>
+                      </div>
                     </div>
-                ) : (
-                    <div className="max-h-[400px] overflow-y-auto">
-                        {groupedNotifications.new.length > 0 && (
-                            <div className="text-center mt-3">
-                                <span className="text-xs font-medium text-[#666666]">
-                                    New
-                                </span>
-                            </div>
-                        )}
-                        {groupedNotifications.new.map((notification) => (
-                            <div
-                                key={notification._id}
-                                className="border-b bg-[#FFEDED] p-4 mx-4 my-3 rounded-lg last:border-b-0 pe-7"
-                            >
-                                <div className="flex items-center gap-3 relative">
-                                    {!notification.isRead && (
-                                        <Image
-                                            src="/images/notificationsDot.svg"
-                                            width={7}
-                                            height={7}
-                                            alt="dot"
-                                            className="absolute top-2 right-0"
-                                        />
-                                    )}
+                  </div>
+                ))}
+              </>
+            )}
 
-                                    <Image
-                                        src={getNotificationIcon(
-                                            notification.type
-                                        )}
-                                        width={45}
-                                        height={45}
-                                        alt={notification.title}
-                                        className="mt-1 w-auto h-auto"
-                                    />
-                                    <div className="pe-7">
-                                        <h4 className="font-semibold text-[#484C52]">
-                                            {notification.title}
-                                        </h4>
-                                        <p className="mt-1 text-sm font-medium">
-                                            {notification.message}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                        {groupedNotifications.yesterday.length > 0 && (
-                            <>
-                                <div className="text-center">
-                                    <span className="text-xs font-medium text-[#666666]">
-                                        Yesterday
-                                    </span>
-                                </div>
-                                {groupedNotifications.yesterday.map(
-                                    (notification) => (
-                                        <div
-                                            key={notification._id}
-                                            className="border-b bg-lightGray p-4 mx-4 my-3 last:border-b-0 rounded-lg pe-5"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <Image
-                                                    src={getNotificationIcon(
-                                                        notification.type
-                                                    )}
-                                                    width={45}
-                                                    height={45}
-                                                    alt={notification.title}
-                                                    className="mt-1 w-auto h-auto"
-                                                />
-                                                <div className="pe-7">
-                                                    <h4 className="font-semibold text-[#484C52]">
-                                                        {notification.title}
-                                                    </h4>
-                                                    <p className="mt-1 text-sm font-medium">
-                                                        {notification.message}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                )}
-                            </>
-                        )}
-
-                        {groupedNotifications.earlier.length > 0 && (
-                            <>
-                                <div className="text-center">
-                                    <span className="text-xs font-medium text-[#666666]">
-                                        Earlier
-                                    </span>
-                                </div>
-                                {groupedNotifications.earlier.map(
-                                    (notification) => (
-                                        <div
-                                            key={notification._id}
-                                            className="border-b bg-lightGray p-4 mx-4 my-3 last:border-b-0 rounded-lg pe-5"
-                                        >
-                                            <div className="flex items-center gap-3">
-                                                <Image
-                                                    src={getNotificationIcon(
-                                                        notification.type
-                                                    )}
-                                                    width={45}
-                                                    height={45}
-                                                    alt={notification.title}
-                                                    className="mt-1 w-auto h-auto"
-                                                />
-                                                <div className="pe-7">
-                                                    <h4 className="font-semibold text-[#484C52]">
-                                                        {notification.title}
-                                                    </h4>
-                                                    <p className="mt-1 text-sm font-medium">
-                                                        {notification.message}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                )}
-                            </>
-                        )}
+            {groupedNotifications.earlier.length > 0 && (
+              <>
+                <div className="text-center">
+                  <span className="text-xs font-medium text-[#666666]">
+                    Earlier
+                  </span>
+                </div>
+                {groupedNotifications.earlier.map((notification) => (
+                  <div
+                    key={notification._id}
+                    className="border-b bg-lightGray p-4 mx-4 my-3 last:border-b-0 rounded-lg pe-5"
+                  >
+                    <div className="flex items-center gap-3">
+                      <Image
+                        src={getNotificationIcon(notification.type)}
+                        width={45}
+                        height={45}
+                        alt={notification.title}
+                        className="mt-1 w-auto h-auto"
+                      />
+                      <div className="pe-7">
+                        <h4 className="font-semibold text-[#484C52]">
+                          {notification.title}
+                        </h4>
+                        <p className="mt-1 text-sm font-medium">
+                          {notification.message}
+                        </p>
+                      </div>
                     </div>
-                )}
-            </DropdownMenuContent>
-        </DropdownMenu>
-    );
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }

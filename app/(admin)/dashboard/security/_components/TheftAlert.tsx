@@ -8,6 +8,7 @@ import { database } from "@/lib/firebase";
 import { ViewTheft } from "./ViewTheft";
 import TheftDetailsAndTime from "./TheftDetailsAndTime";
 import { IAlert } from "@/interfaces";
+import { useDashboardContext } from "@/context/dashboardContext";
 
 const ALERT_KEY = "theft-alert-closed";
 
@@ -16,6 +17,7 @@ const TheftAlert = () => {
   const [isOpen, setIsOpen] = useState(false);
   const startTimeRef = useRef<number>(Date.now());
   const alarmRef = useRef<HTMLAudioElement | null>(null);
+  const { setAlertsCount } = useDashboardContext();
 
   useEffect(() => {
     // const alertsRef = ref(database, "/alerts");
@@ -24,6 +26,8 @@ const TheftAlert = () => {
     const unsubscribe = onChildAdded(alertsRef, (snapshot) => {
       const data = snapshot.val();
       const id = snapshot.key;
+
+      setAlertsCount((prev) => prev + 1);
 
       console.log({ id });
       console.log({ data });

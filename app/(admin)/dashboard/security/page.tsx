@@ -4,42 +4,8 @@ import PagesHeader from "../_components/PagesHeader";
 import TheftImage from "./_components/TheftImage";
 import { Button } from "@/components/ui";
 import Image from "next/image";
-import StatusBoxes from "../_components/StatusBoxes";
-import { IStatusData } from "@/interfaces";
-// import TheftAlert from "./_components/TheftAlert";
-// import FirebaseRealtimeDemo from "./_components/Firebase";
-// import LatestAlert from "./_components/Firebase";
-// import { ViewTheft } from "./_components/ViewTheft";
 
-const SecurityStatusData: IStatusData[] = [
-  {
-    src: "/images/securityTotalAlerts.svg",
-    name: "Total Alerts",
-    number: 3,
-    numberColor: "black",
-    numberUnite: "alerts",
-    percent: -5,
-    percentIncreased: false,
-  },
-  {
-    src: "/images/securityTotalIncidents.svg",
-    name: "Total Incidents",
-    number: 10,
-    numberColor: "black",
-    numberUnite: "incidents",
-    percent: -5,
-    percentIncreased: false,
-  },
-  {
-    src: "/images/securityActivecameras.svg",
-    name: "Active cameras",
-    number: 40,
-    numberColor: "black",
-    numberUnite: "camera of",
-    percent: 0,
-    percentIncreased: false,
-  },
-];
+import SecurityStatus from "./_components/SecurityStatus";
 
 const page = () => {
   const images = [
@@ -59,7 +25,7 @@ const page = () => {
   return (
     <div className="py-5 space-y-10">
       <PagesHeader page={"security"} />
-      <StatusBoxes statusData={SecurityStatusData} />
+      <SecurityStatus />
       <div className="space-y-5">
         <div className="flex justify-between items-center">
           <h2 className="text-xl font-semibold mr-5 capitalize">

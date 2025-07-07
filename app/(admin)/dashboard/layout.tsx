@@ -3,6 +3,7 @@ import { AppSidebar } from "./_components/AppSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import TheftAlert from "./security/_components/TheftAlert";
 import NavBar from "./_components/NavBar";
+import { DashboardProvider } from "@/context/dashboardContext";
 
 export const metadata: Metadata = {
   title: {
@@ -28,13 +29,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <TheftAlert />
-      <main className="w-[95%] xl:w-10/12 p-6">
-        <NavBar />
-        {children}
-      </main>
-    </SidebarProvider>
+    <DashboardProvider>
+      <SidebarProvider>
+        <AppSidebar />
+        <TheftAlert />
+        <main className="w-[95%] xl:w-10/12 p-6">
+          <NavBar />
+          {children}
+        </main>
+      </SidebarProvider>
+    </DashboardProvider>
   );
 }
