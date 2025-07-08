@@ -10,7 +10,7 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 import { Icon } from "@iconify/react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 type Notification = {
   _id: string;
