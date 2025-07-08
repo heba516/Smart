@@ -64,8 +64,9 @@ export async function refreshAccessToken() {
   }
 }
 
+const token = Cookies.get("token");
+
 export async function getProfile() {
-  const token = Cookies.get("token");
   try {
     const res = await AxiosInstance.get("api/users/me", {
       headers: {
@@ -80,9 +81,13 @@ export async function getProfile() {
 
 export async function resetPassword(data: IResetPass) {
   try {
-    const res = await AxiosInstance.post("/api/users/resetpassword", data);
+    const res = await AxiosInstance.post("/api/users/resetpassword", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return res;
   } catch (error) {
-    console.log("error when getting profile data", error);
+    console.log("error when reseting password", error);
   }
 }
