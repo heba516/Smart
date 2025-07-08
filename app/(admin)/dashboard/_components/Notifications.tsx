@@ -23,8 +23,8 @@ type Notification = {
 
 const SOCKET_URL =
   "https://faint-ilyse-iot-based-smart-retail-system-897f175c.koyeb.app/notifications";
-// const TOKEN =
-//   "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ZjMGY4MWQwNTc0OThkZjNjNTA1NDEiLCJlbWFpbCI6Inlhc21lZW5heXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiWWFzbWVlbiIsImxhc3ROYW1lIjoiRWxfQXp6YXppIiwicGhvbmVOdW1iZXIiOiIwMTU1NzIxNjI3NiIsInJvbGUiOiJ1c2VyIiwidmVyaWZpY2F0aW9uQ29kZUV4cGlyZXMiOm51bGwsImNyZWF0ZWRBdCI6IjIwMjUtMDQtMTNUMTk6MjQ6NDkuNzU3WiIsInVwZGF0ZWRBdCI6IjIwMjUtMDQtMTlUMDE6MTE6MDkuNzkzWiIsImlhdCI6MTc1MTg3NTA3OSwiZXhwIjoxNzUxOTYxNDc5fQ.eDMzivDnyERuoIF6KWC_6Ghzqw4hwVN2VP8CiCn7K_BHVWi_c38NygLeXqMZEjHJVuHJsx56bOJGMviOomeTr6mj3MBAn_Rl0ibsai_p-u_-7sFcovotcrd-jRz0JNr7QM48mHKLw7dPLs1ckI3S-Mcfzrhad20lVYvInBPwxthJWG-99D7Si3TEabPmTiJYxjheDJdNxj-nIoyuaVGBLjFNw3QKXJg35KtIQcHAKFPq9ArbBs03TO5KTqh4qWWsTzBlg5v7f2s8wAQVrjQyTa4-O5mlGQuVB9XFtneKtEhHFGmN7hdPRL4UgYQh4ssyrVjaFqclUovq67e40j_sMQ";
+const TOKEN =
+  "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ZjMGY4MWQwNTc0OThkZjNjNTA1NDEiLCJlbWFpbCI6Inlhc21lZW5heXJAZ21haWwuY29tIiwiZmlyc3ROYW1lIjoiWWFzbWVlbiIsImxhc3ROYW1lIjoiRWxfQXp6YXppIiwicGhvbmVOdW1iZXIiOiIwMTU1NzIxNjI3NiIsInJvbGUiOiJ1c2VyIiwidmVyaWZpY2F0aW9uQ29kZUV4cGlyZXMiOm51bGwsImNyZWF0ZWRBdCI6IjIwMjUtMDQtMTNUMTk6MjQ6NDkuNzU3WiIsInVwZGF0ZWRBdCI6IjIwMjUtMDQtMTlUMDE6MTE6MDkuNzkzWiIsImlhdCI6MTc1MTg3NTA3OSwiZXhwIjoxNzUxOTYxNDc5fQ.eDMzivDnyERuoIF6KWC_6Ghzqw4hwVN2VP8CiCn7K_BHVWi_c38NygLeXqMZEjHJVuHJsx56bOJGMviOomeTr6mj3MBAn_Rl0ibsai_p-u_-7sFcovotcrd-jRz0JNr7QM48mHKLw7dPLs1ckI3S-Mcfzrhad20lVYvInBPwxthJWG-99D7Si3TEabPmTiJYxjheDJdNxj-nIoyuaVGBLjFNw3QKXJg35KtIQcHAKFPq9ArbBs03TO5KTqh4qWWsTzBlg5v7f2s8wAQVrjQyTa4-O5mlGQuVB9XFtneKtEhHFGmN7hdPRL4UgYQh4ssyrVjaFqclUovq67e40j_sMQ";
 
 export default function Notifications() {
   const [open, setOpen] = useState(false);
@@ -33,16 +33,16 @@ export default function Notifications() {
   const [unreadCount, setUnreadCount] = useState<number>(0);
 
   const socketRef = useRef<Socket | null>(null);
-  const token = Cookies.get("token");
+  // const token = Cookies.get("token");
 
   useEffect(() => {
-    if (!token) return;
-    console.log(token);
+    // if (!token) return;
+    // console.log(token);
 
     console.log("🔌 Initializing socket...");
 
     const socket = io(SOCKET_URL, {
-      auth: { token: token },
+      auth: { token: TOKEN },
     });
 
     socketRef.current = socket;
