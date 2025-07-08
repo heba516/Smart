@@ -409,12 +409,13 @@ export function ProductTable() {
 
   if (isDialogOpen)
     return (
-      <ProductDialog
-        key={selectedProductId}
-        id={selectedProductId}
-        open={isDialogOpen}
-        onOpenChange={setIsDialogOpen}
-      />
+        <ProductDialog
+            key={selectedProductId}
+            id={selectedProductId}
+            open={isDialogOpen}
+            onOpenChange={setIsDialogOpen}
+            setProducts={setProducts}
+        />
     );
 
   if (restockProduct && isRestockOpen) {
