@@ -18,6 +18,7 @@ import { login } from "@/app/api/actions/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
+import { useDashboardContext } from "@/context/dashboardContext";
 // import Link from "next/link";
 
 const formSchema = z.object({
@@ -60,6 +61,7 @@ export default function LoginForm() {
 
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
+  const { setUser } = useDashboardContext();
   // const [error, setError] = useState<string>("");
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
@@ -67,7 +69,10 @@ export default function LoginForm() {
       setLoading(true);
       console.log(data);
 
-      await login(data);
+      const res = await login(data);
+      console.log(res.data);
+
+      setUser(res?.data);
 
       router.push("/dashboard");
       // redirect("/dashboard");
