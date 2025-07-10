@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
   DropdownMenuContent,
 } from "@/components/ui";
-import { MoreHorizontal } from "lucide-react";
 import { io, Socket } from "socket.io-client";
 import { Icon } from "@iconify/react";
 import Cookies from "js-cookie";
@@ -190,9 +189,6 @@ export default function Notifications() {
         <div className="border-b p-4">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-semibold">Notifications</h3>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <MoreHorizontal size={18} className="text-gray-400" />
-            </Button>
           </div>
           <div className="flex items-center justify-between">
             <div className="mt-3 flex gap-4">
