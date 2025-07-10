@@ -37,14 +37,21 @@ const TheftAlert = () => {
       if (!data || !id) return;
 
       const alertTime = new Date(data.timestamp).getTime();
-      if (alertTime < startTimeRef.current) return;
+      console.log(
+        "Alert time:",
+        alertTime,
+        "Component started at:",
+        startTimeRef.current
+      );
+
+      if (alertTime < startTimeRef.current - 3000) return;
 
       const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
       const lastID = localStorage.getItem("lastID");
       console.log(lastID);
 
       if (!alertClosed && id !== lastID) {
-        localStorage.setItem("lastID", latestAlert?.id as string);
+        localStorage.setItem("lastID", id);
         console.log(localStorage.getItem("lastID"));
 
         setLatestAlert({ id, ...data });
@@ -55,7 +62,7 @@ const TheftAlert = () => {
     https: console.log(unsubscribe);
 
     return () => {};
-  }, [latestAlert]);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) {
