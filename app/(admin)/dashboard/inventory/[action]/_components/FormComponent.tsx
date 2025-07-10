@@ -261,10 +261,10 @@ const FormComponent = ({ action, id }: IProps) => {
               />
 
               <SelectField
-                name="categoryId"
-                label="product Categoires"
+                name="category"
+                label="product Categoiry"
                 optional={false}
-                placeholder="Product Categoires"
+                placeholder="Product Categoiry"
                 options={[
                   { label: "snacks", value: "snacks" },
                   {
@@ -279,10 +279,10 @@ const FormComponent = ({ action, id }: IProps) => {
               />
 
               <SelectField
-                name="subCategoryId"
-                label="product Subcategoires"
+                name="subCategory"
+                label="product Subcategoiry"
                 optional={false}
-                placeholder="Product Subcategoires"
+                placeholder="Product Subcategoiry"
                 options={[
                   { label: "chocolate", value: "chocolate" },
                   {
