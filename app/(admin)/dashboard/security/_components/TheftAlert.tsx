@@ -44,7 +44,7 @@ const TheftAlert = () => {
         startTimeRef.current
       );
 
-      if (alertTime < startTimeRef.current - 3000) return;
+      // if (alertTime < startTimeRef.current - 3000) return;
 
       const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
       const lastID = localStorage.getItem("lastID");
