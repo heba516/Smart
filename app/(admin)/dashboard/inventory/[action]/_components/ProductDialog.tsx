@@ -40,8 +40,8 @@ export function ProductDialog({
         barcode: "",
         stock: 0,
         brand: "",
-        categoryId: "",
-        subCategoryId: "",
+        category: "",
+        subCategory: "",
         shelfNumber: 0,
         item_weight: "",
     });
@@ -68,8 +68,8 @@ export function ProductDialog({
                     barcode: product.barcode,
                     stock: product.stock,
                     brand: product.brand,
-                    categoryId: product.categoryId,
-                    subCategoryId: product.subCategoryId,
+                    category: product.category.name,
+                    subCategory: product.subCategory.name,
                     shelfNumber: product.shelfNumber,
                     item_weight: product.item_weight,
                 };
@@ -196,7 +196,7 @@ export function ProductDialog({
 
                             <div className="flex items-center gap-2 text-sm">
                                 <span className="font-medium">
-                                    {product.categoryId}
+                                    {product.category}
                                 </span>
                                 <Image
                                     className="mx-2"
@@ -206,7 +206,7 @@ export function ProductDialog({
                                     alt="view product arrow"
                                 />
                                 <span className="font-medium">
-                                    {product.subCategoryId}
+                                    {product.subCategory}
                                 </span>
                                 <Image
                                     className="mx-2"
