@@ -26,6 +26,7 @@ interface SelectFieldProps<T extends FieldValues> {
   placeholder: string;
   options: Option[];
   optional: boolean;
+  onChange?: (value: string) => void;
 }
 
 export function SelectField<T extends FieldValues>({
@@ -35,6 +36,7 @@ export function SelectField<T extends FieldValues>({
   placeholder,
   options,
   optional = false,
+  onChange,
 }: SelectFieldProps<T>) {
   return (
     <FormField
@@ -46,7 +48,11 @@ export function SelectField<T extends FieldValues>({
           <FormControl>
             <Select
               {...field}
-              onValueChange={field.onChange}
+              // onValueChange={field.onChange}
+              onValueChange={(val) => {
+                field.onChange(val);
+                onChange?.(val);
+              }}
               value={field.value || ""}
             >
               <SelectTrigger className="w-full">

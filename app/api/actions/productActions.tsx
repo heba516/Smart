@@ -62,3 +62,33 @@ export async function restock(id: string, stock: number) {
     console.log("error while restock product", error);
   }
 }
+
+export async function getCategories() {
+  try {
+    const res = await AxiosInstance.get("api/category");
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching categories", error);
+  }
+}
+
+export async function getSubCategories() {
+  try {
+    const res = await AxiosInstance.get("api/category/sub");
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching sub categories", error);
+  }
+}
+
+export async function getSubCategoriesById(id: string) {
+  try {
+    const res = await AxiosInstance.get(`api/category/${id}`);
+
+    return res;
+  } catch (error) {
+    console.log("error while fetching sub categories id", error);
+  }
+}

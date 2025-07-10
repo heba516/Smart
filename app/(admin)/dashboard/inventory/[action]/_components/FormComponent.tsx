@@ -8,7 +8,10 @@ import { Form, Button, SidebarSeparator } from "@/components/ui";
 import { formSchema } from "../_components/schema";
 import {
   addProduct,
+  getCategories,
   getProduct,
+  getSubCategories,
+  getSubCategoriesById,
   updateProduct,
 } from "@/app/api/actions/productActions";
 import { IProductInfo } from "@/interfaces";
@@ -25,6 +28,11 @@ import toast from "react-hot-toast";
 interface IProps {
   action: "add" | "edit";
   id?: string;
+}
+
+interface IOptions {
+  name: string;
+  _id: string;
 }
 
 const FormComponent = ({ action, id }: IProps) => {
@@ -45,14 +53,22 @@ const FormComponent = ({ action, id }: IProps) => {
     brand: "",
     category: "",
     subCategory: "",
+    categoryId: "",
+    subCategoryId: "",
     shelfNumber: 1,
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
-  const [pendingData, setPendingData] = useState<z.infer<
-    typeof formSchema
-  > | null>(null);
+  // const [pendingData, setPendingData] = useState<z.infer<
+  //   typeof formSchema
+  // > | null>(null);
+  const [pendingData, setPendingData] = useState<IProductInfo | null>(null);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
+  const [categoriesOptions, setCategoriesOption] = useState<IOptions[]>([]);
+  const [subCategoriesOptions, setSubCategoriesOption] = useState<IOptions[]>(
+    []
+  );
+  const [categoryId, setCategoryId] = useState<string | null>(null);
 
   useEffect(() => {
     console.log(action, id);
@@ -80,6 +96,8 @@ const FormComponent = ({ action, id }: IProps) => {
           brand: product.brand,
           category: product.category,
           subCategory: product.subCategory,
+          categoryId: product.categoryId,
+          subCategoryId: product.subCategoryId,
           shelfNumber: product.shelfNumber,
           item_weight: product.item_weight,
         };
@@ -92,13 +110,84 @@ const FormComponent = ({ action, id }: IProps) => {
     }
   }, [action, id]);
 
+  useEffect(() => {
+    async function getAllCategories() {
+      try {
+        const res = await getCategories();
+        console.log(res?.data.data);
+        setCategoriesOption(res?.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    async function getAllSubCategories() {
+      try {
+        const res = await getSubCategories();
+        console.log(res?.data.data);
+        setSubCategoriesOption(res?.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getAllCategories();
+    getAllSubCategories();
+  }, []);
+
+  // useEffect(() => {
+  //   async function getAllSubCategoriesById() {
+  //     try {
+  //       const res = await getSubCategoriesById(categoryId as string);
+  //       console.log(res?.data.data);
+  //       setSubCategoriesOption(res?.data.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+
+  //   console.log({ categoryId });
+
+  //   if (categoryId) {
+  //     getAllSubCategoriesById();
+  //   }
+  // }, [categoryId]);
+
+  useEffect(() => {
+    if (!categoryId) return;
+    console.log({ categoryId });
+
+    const fetchSubCategories = async () => {
+      try {
+        const res = await getSubCategoriesById(categoryId);
+        console.log(res?.data?.data.subCategories);
+
+        setSubCategoriesOption(res?.data?.data.subCategories);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchSubCategories();
+  }, [categoryId]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues,
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    setPendingData(data);
+    // const selectedCategory = categoriesOptions.find(
+    //   (cat) => cat._id === data.categoryId
+    // );
+    // const selectedSubCategory = subCategoriesOptions.find(
+    //   (sub) => sub._id === data.subCategoryId
+    // );
+
+    // category: selectedCategory?.name || "",
+    // subCategory: selectedSubCategory?.name || "",
+    setPendingData({
+      ...data,
+      shelfNumber: 1,
+    });
     setShowConfirm(true);
   }
 
@@ -125,6 +214,8 @@ const FormComponent = ({ action, id }: IProps) => {
               >
                 <AddProductConfirm
                   setConfirmOpen={async () => {
+                    console.log(pendingData);
+
                     if (showConfirm && pendingData) {
                       if (action === "edit" && id) {
                         const res = await updateProduct(id, pendingData);
@@ -261,39 +352,59 @@ const FormComponent = ({ action, id }: IProps) => {
               />
 
               <SelectField
-                name="category"
+                name="categoryId"
                 label="product Categoiry"
                 optional={false}
                 placeholder="Product Categoiry"
-                options={[
-                  { label: "snacks", value: "snacks" },
-                  {
-                    label: "67f05d585cf9bb7600e810f3",
-                    value: "67f05d585cf9bb7600e810f3",
-                  },
-                  {
-                    label: "67f05d585cf9bb7600e810f5",
-                    value: "67f05d585cf9bb7600e810f5",
-                  },
-                ]}
+                onChange={(val) => {
+                  const selectedCategory = categoriesOptions.find(
+                    (cat) => cat.name === val
+                  );
+                  if (selectedCategory) {
+                    setCategoryId(selectedCategory._id);
+                  }
+                }}
+                // options={[
+                //   { label: "snacks", value: "snacks" },
+                //   {
+                //     label: "67f05d585cf9bb7600e810f3",
+                //     value: "67f05d585cf9bb7600e810f3",
+                //   },
+                //   {
+                //     label: "67f05d585cf9bb7600e810f5",
+                //     value: "67f05d585cf9bb7600e810f5",
+                //   },
+                // ]}
+                options={categoriesOptions.map((item) => {
+                  return {
+                    label: item.name,
+                    value: item.name,
+                  };
+                })}
               />
 
               <SelectField
-                name="subCategory"
+                name="subCategoryId"
                 label="product Subcategoiry"
                 optional={false}
                 placeholder="Product Subcategoiry"
-                options={[
-                  { label: "chocolate", value: "chocolate" },
-                  {
-                    label: "68002d17c5a01d0b460d7c54",
-                    value: "68002d17c5a01d0b460d7c54",
-                  },
-                  {
-                    label: "68002d17c5a01d0b460d7c55",
-                    value: "68002d17c5a01d0b460d7c55",
-                  },
-                ]}
+                // options={[
+                //   { label: "chocolate", value: "chocolate" },
+                //   {
+                //     label: "68002d17c5a01d0b460d7c54",
+                //     value: "68002d17c5a01d0b460d7c54",
+                //   },
+                //   {
+                //     label: "68002d17c5a01d0b460d7c55",
+                //     value: "68002d17c5a01d0b460d7c55",
+                //   },
+                // ]}
+                options={subCategoriesOptions.map((item) => {
+                  return {
+                    label: item.name,
+                    value: item.name,
+                  };
+                })}
               />
             </div>
           </Box>

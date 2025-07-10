@@ -77,8 +77,10 @@ export interface IProductInfo {
     barcode: string;
     stock: number;
     brand: string;
-    category: string;
-    subCategory: string;
+    category?: string;
+    subCategory?: string;
+    categoryId: string;
+    subCategoryId: string;
     item_weight?: string;
     shelfNumber: number;
 }
