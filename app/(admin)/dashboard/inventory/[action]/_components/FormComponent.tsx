@@ -59,9 +59,6 @@ const FormComponent = ({ action, id }: IProps) => {
     item_weight: "",
   });
   const [loading, setLoading] = useState<boolean>(false);
-  // const [pendingData, setPendingData] = useState<z.infer<
-  //   typeof formSchema
-  // > | null>(null);
   const [pendingData, setPendingData] = useState<IProductInfo | null>(null);
   const [showConfirm, setShowConfirm] = useState<boolean>(false);
   const [categoriesOptions, setCategoriesOption] = useState<IOptions[]>([]);
@@ -133,24 +130,6 @@ const FormComponent = ({ action, id }: IProps) => {
     getAllSubCategories();
   }, []);
 
-  // useEffect(() => {
-  //   async function getAllSubCategoriesById() {
-  //     try {
-  //       const res = await getSubCategoriesById(categoryId as string);
-  //       console.log(res?.data.data);
-  //       setSubCategoriesOption(res?.data.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  //   console.log({ categoryId });
-
-  //   if (categoryId) {
-  //     getAllSubCategoriesById();
-  //   }
-  // }, [categoryId]);
-
   useEffect(() => {
     if (!categoryId) return;
     console.log({ categoryId });
@@ -175,15 +154,6 @@ const FormComponent = ({ action, id }: IProps) => {
   });
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    // const selectedCategory = categoriesOptions.find(
-    //   (cat) => cat._id === data.categoryId
-    // );
-    // const selectedSubCategory = subCategoriesOptions.find(
-    //   (sub) => sub._id === data.subCategoryId
-    // );
-
-    // category: selectedCategory?.name || "",
-    // subCategory: selectedSubCategory?.name || "",
     setPendingData({
       ...data,
       shelfNumber: 1,
@@ -364,17 +334,6 @@ const FormComponent = ({ action, id }: IProps) => {
                     setCategoryId(selectedCategory._id);
                   }
                 }}
-                // options={[
-                //   { label: "snacks", value: "snacks" },
-                //   {
-                //     label: "67f05d585cf9bb7600e810f3",
-                //     value: "67f05d585cf9bb7600e810f3",
-                //   },
-                //   {
-                //     label: "67f05d585cf9bb7600e810f5",
-                //     value: "67f05d585cf9bb7600e810f5",
-                //   },
-                // ]}
                 options={categoriesOptions.map((item) => {
                   return {
                     label: item.name,
@@ -388,17 +347,6 @@ const FormComponent = ({ action, id }: IProps) => {
                 label="product Subcategoiry"
                 optional={false}
                 placeholder="Product Subcategoiry"
-                // options={[
-                //   { label: "chocolate", value: "chocolate" },
-                //   {
-                //     label: "68002d17c5a01d0b460d7c54",
-                //     value: "68002d17c5a01d0b460d7c54",
-                //   },
-                //   {
-                //     label: "68002d17c5a01d0b460d7c55",
-                //     value: "68002d17c5a01d0b460d7c55",
-                //   },
-                // ]}
                 options={subCategoriesOptions.map((item) => {
                   return {
                     label: item.name,

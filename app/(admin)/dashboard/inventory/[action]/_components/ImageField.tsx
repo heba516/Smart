@@ -64,8 +64,7 @@ export function ImageField<T extends FieldValues>({
                     height="61"
                   />
                   <p className="font-medium text-lg text-black">
-                    <span className="text-blue-600">Click to upload</span> or
-                    drag and drop
+                    <span className="text-blue-600">Click to upload</span>
                   </p>
                   <p className="text-xs text-gray-500">
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
