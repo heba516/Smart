@@ -43,8 +43,8 @@ const FormComponent = ({ action, id }: IProps) => {
     barcode: "",
     stock: 0,
     brand: "",
-    categoryId: "",
-    subCategoryId: "",
+    category: "",
+    subCategory: "",
     shelfNumber: 1,
     item_weight: "",
   });
@@ -78,8 +78,8 @@ const FormComponent = ({ action, id }: IProps) => {
           barcode: product.barcode,
           stock: product.stock,
           brand: product.brand,
-          categoryId: product.categoryId,
-          subCategoryId: product.subCategoryId,
+          category: product.category,
+          subCategory: product.subCategory,
           shelfNumber: product.shelfNumber,
           item_weight: product.item_weight,
         };
