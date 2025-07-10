@@ -22,11 +22,18 @@ export interface ILogin {
     password: string;
 }
 export interface IAdminInfo {
+    _id: string;
     firstName: string;
     lastName: string;
     email: string;
     phoneNumber: string;
     password: string;
+}
+
+export interface IUpdateAdmin {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
 }
 
 export interface IResetPass {

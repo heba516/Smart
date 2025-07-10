@@ -6,7 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form, Button, SidebarSeparator } from "@/components/ui";
 import { formSchema } from "../_components/schema";
-import { addProduct, getProduct } from "@/app/api/actions/productActions";
+import {
+  addProduct,
+  getProduct,
+  updateProduct,
+} from "@/app/api/actions/productActions";
 import { IProductInfo } from "@/interfaces";
 import { TextInputField } from "../_components/InputField";
 import { SelectField } from "../_components/SelectField";
@@ -16,6 +20,7 @@ import Box from "../_components/Box";
 import PagesHeader from "../../../_components/PagesHeader";
 import FormComponentSkeleton from "./FormComponentSkeleton";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 interface IProps {
   action: "add" | "edit";
@@ -47,6 +52,7 @@ const FormComponent = ({ action, id }: IProps) => {
   const [pendingData, setPendingData] = useState<z.infer<
     typeof formSchema
   > | null>(null);
+  const [showConfirm, setShowConfirm] = useState<boolean>(false);
 
   useEffect(() => {
     console.log(action, id);
@@ -84,8 +90,6 @@ const FormComponent = ({ action, id }: IProps) => {
       productInfo();
       setLoading(false);
     }
-    //   else {
-    //   }
   }, [action, id]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -93,13 +97,10 @@ const FormComponent = ({ action, id }: IProps) => {
     defaultValues,
   });
 
-  async function onSubmit(data: z.infer<typeof formSchema>) {
+  function onSubmit(data: z.infer<typeof formSchema>) {
     setPendingData(data);
+    setShowConfirm(true);
   }
-
-  //   const imageUrl = defaultValues.image_url;
-
-  //   console.log(imageUrl);
 
   if (loading) {
     <FormComponentSkeleton />;
@@ -124,12 +125,18 @@ const FormComponent = ({ action, id }: IProps) => {
               >
                 <AddProductConfirm
                   setConfirmOpen={async () => {
-                    if (pendingData) {
-                      const res = await addProduct(pendingData);
+                    if (showConfirm && pendingData) {
+                      if (action === "edit" && id) {
+                        const res = await updateProduct(id, pendingData);
+                        console.log(res);
+                      } else {
+                        const res = await addProduct(pendingData);
+                        console.log(res);
+                      }
                       form.reset();
-                      console.log(res);
                       setPendingData(null);
                       redirect("/dashboard/inventory");
+                      toast.success("Product Saved");
                     }
                   }}
                 />
@@ -154,7 +161,7 @@ const FormComponent = ({ action, id }: IProps) => {
                 name="description"
                 label="product description"
                 placeholder="Enter Product Description"
-                optional={true}
+                optional={false}
                 control={form.control}
                 inputType="Textarea"
               />
@@ -163,7 +170,7 @@ const FormComponent = ({ action, id }: IProps) => {
                 name="highlights"
                 label="product highlights"
                 placeholder="Enter Product Highlights"
-                optional={true}
+                optional={false}
                 control={form.control}
                 inputType="Textarea"
               />
@@ -247,9 +254,9 @@ const FormComponent = ({ action, id }: IProps) => {
                 optional={false}
                 placeholder="Product Brand"
                 options={[
-                  { label: "Eldoha", value: "Eldoha" },
-                  { label: "type2", value: "type2" },
-                  { label: "type3", value: "type3" },
+                  { label: "Brand1", value: "Brand1" },
+                  { label: "Brand12", value: "Brand12" },
+                  { label: "Brand13", value: "Brand13" },
                 ]}
               />
 

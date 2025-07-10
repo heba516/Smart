@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const formSchema = z.object({
   title: z.string().min(3, { message: "Must be at least 3 characters." }),
-  description: z.string().optional(),
-  highlights: z.string().optional(),
+  description: z.string().min(3, { message: "Must be at least 3 characters." }),
+  highlights: z.string().min(3, { message: "Must be at least 3 characters." }),
   image_url: z.string().min(1,{message:"invalid image"}),
   price: z.coerce.number().min(1, { message: "At least 1 EGP" }),
   discount: z.coerce.number().optional(),

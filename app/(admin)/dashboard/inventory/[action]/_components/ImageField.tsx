@@ -42,10 +42,7 @@ export function ImageField<T extends FieldValues>({
       name={name}
       render={({ field, fieldState: { error } }) => (
         <FormItem className="w-full">
-          <Label
-            label="Upload Product Images (front, back, side, etc.)"
-            opt={false}
-          />
+          <Label label="Upload Product Image" opt={false} />
           <FormControl>
             <FormLabel
               htmlFor="dropzone-file"

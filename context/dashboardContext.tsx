@@ -2,6 +2,8 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 
 type DashboardContextType = {
+  userName: string;
+  setUserName: (name: string) => void;
   availableCount: number;
   lowStockCount: number;
   outOfStockCount: number;
@@ -17,6 +19,7 @@ const DashboardContext = createContext<DashboardContextType | undefined>(
 );
 
 export const DashboardProvider = ({ children }: { children: ReactNode }) => {
+  const [userName, setUserName] = useState("");
   const [availableCount, setAvailable] = useState(0);
   const [lowStockCount, setLow] = useState(0);
   const [outOfStockCount, setOut] = useState(0);
@@ -25,6 +28,8 @@ export const DashboardProvider = ({ children }: { children: ReactNode }) => {
   return (
     <DashboardContext.Provider
       value={{
+        userName,
+        setUserName,
         availableCount,
         lowStockCount,
         outOfStockCount,

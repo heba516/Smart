@@ -1,5 +1,5 @@
 import { AxiosInstance } from "@/lib/axiosInstance";
-import { IContactUs, ILogin, IResetPass } from "@/interfaces";
+import { IContactUs, ILogin, IResetPass, IUpdateAdmin } from "@/interfaces";
 import Cookies from "js-cookie";
 
 export async function contactUs(data: IContactUs) {
@@ -79,9 +79,22 @@ export async function getProfile() {
   }
 }
 
+export async function updateProfile(id: string, data: IUpdateAdmin) {
+  try {
+    const res = await AxiosInstance.put(`api/users/${id}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("error when updating admin info", error);
+  }
+}
+
 export async function resetPassword(data: IResetPass) {
   try {
-    const res = await AxiosInstance.post("/api/users/resetpassword", data, {
+    const res = await AxiosInstance.post("api/users/resetpassword", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -32,7 +32,7 @@ import { ProductDialog } from "./ProductDialog";
 import { MoreHorizontal, Eye, PenIcon, Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { RestockShelf } from "./RestockShelf"; // Import the new component
+import { RestockShelf } from "./RestockShelf";
 import { useDashboardContext } from "@/context/dashboardContext";
 
 export function ProductTable() {
@@ -409,13 +409,13 @@ export function ProductTable() {
 
   if (isDialogOpen)
     return (
-        <ProductDialog
-            key={selectedProductId}
-            id={selectedProductId}
-            open={isDialogOpen}
-            onOpenChange={setIsDialogOpen}
-            setProducts={setProducts}
-        />
+      <ProductDialog
+        key={selectedProductId}
+        id={selectedProductId}
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        setProducts={setProducts}
+      />
     );
 
   if (restockProduct && isRestockOpen) {

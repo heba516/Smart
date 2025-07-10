@@ -32,6 +32,17 @@ export async function addProduct(data: IProductInfo) {
   }
 }
 
+export async function updateProduct(id: string, data: IProductInfo) {
+  try {
+    const res = await AxiosInstance.put(`api/product/${id}`, data);
+    console.log(res);
+
+    return res;
+  } catch (error) {
+    console.log("error while updating product", error);
+  }
+}
+
 export async function deleteProduct(id: string) {
   try {
     const res = await AxiosInstance.delete(`api/product/${id}`);

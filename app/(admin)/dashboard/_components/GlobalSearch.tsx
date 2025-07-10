@@ -212,6 +212,18 @@ const GlobalSearch = () => {
           },
         ],
       },
+      {
+        heading: "Settings",
+        id: "settings",
+        items: [
+          {
+            id: "profile",
+            children: "Profile",
+            icon: "UserIcon",
+            onClick: () => onItemClick("/settings"),
+          },
+        ],
+      },
     ],
     search
   );

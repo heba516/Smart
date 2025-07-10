@@ -1,10 +1,12 @@
 "use client";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { useDashboardContext } from "@/context/dashboardContext";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 
 export const AdminProfile = () => {
   const [adminName, setAdminName] = useState<string | null>(null);
+  const { userName } = useDashboardContext();
 
   useEffect(() => {
     const storedAdminName = Cookies.get("adminName");
@@ -16,7 +18,7 @@ export const AdminProfile = () => {
   return (
     <div className="w-[35%] flex items-center xl:space-x-4 text-base font-semibold text-medGray">
       Hello,
-      <span className="text-grayColor ml-1">{adminName}</span>
+      <span className="text-grayColor ml-1">{userName || adminName}</span>
       <Avatar className="h-[50px] w-[50px] hidden lg:block">
         <AvatarImage
           src="/images/avatar.avif"

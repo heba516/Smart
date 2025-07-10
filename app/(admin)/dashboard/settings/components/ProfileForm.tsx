@@ -4,7 +4,6 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Icon } from "@iconify/react";
-
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   Button,
@@ -16,8 +15,14 @@ import {
   FormMessage,
   Input,
 } from "@/components/ui";
-import { getProfile, resetPassword } from "@/app/api/actions/auth";
+import {
+  getProfile,
+  resetPassword,
+  updateProfile,
+} from "@/app/api/actions/auth";
 import { IAdminInfo } from "@/interfaces";
+import Cookies from "js-cookie";
+import { useDashboardContext } from "@/context/dashboardContext";
 
 // ✅ Main Profile Schema (no password)
 const profileSchema = z.object({
@@ -47,7 +52,9 @@ const passwordSchema = z
 
 const ProfileForm = () => {
   const [edit, setEdit] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [user, setUser] = useState<IAdminInfo>({
+    _id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -55,6 +62,7 @@ const ProfileForm = () => {
     password: "",
   });
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const { setUserName } = useDashboardContext();
 
   const togglePasswordVisibility = () => setPasswordVisible((prev) => !prev);
 
@@ -78,8 +86,11 @@ const ProfileForm = () => {
   useEffect(() => {
     async function fetchData() {
       try {
+        setLoading(true);
         const res = await getProfile();
         const userData = res?.data.data.user;
+        console.log(userData);
+
         setUser(userData);
         profileForm.reset({
           firstName: userData.firstName,
@@ -88,15 +99,31 @@ const ProfileForm = () => {
         });
       } catch (err) {
         console.log("profile", err);
+      } finally {
+        setLoading(false);
       }
     }
     fetchData();
   }, [profileForm]);
 
-  const onProfileSubmit = (data: z.infer<typeof profileSchema>) => {
+  async function onProfileSubmit(data: z.infer<typeof profileSchema>) {
     console.log("Profile updated:", data);
     setEdit(false);
-  };
+    Cookies.set(
+      "adminName",
+      JSON.stringify(data.firstName + " " + data.lastName)
+    );
+    setUserName(data.firstName + " " + data.lastName);
+
+    try {
+      console.log(user._id);
+
+      const res = await updateProfile(user._id, data);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function onPasswordSubmit(data: z.infer<typeof passwordSchema>) {
     console.log("Password updated:", data);
@@ -118,12 +145,14 @@ const ProfileForm = () => {
             <Avatar className="w-20 h-20">
               <AvatarImage src="/images/avatar.avif" alt="@shadcn" />
             </Avatar>
-            <div className="mx-3 space-y-1">
-              <h3 className="text-lg font-semibold">
-                {user.firstName} {user.lastName}
-              </h3>
-              <p>{user.email}</p>
-            </div>
+            {!loading && (
+              <div className="mx-3 space-y-1">
+                <h3 className="text-lg font-semibold">
+                  {user.firstName} {user.lastName}
+                </h3>
+                <p>{user.email}</p>
+              </div>
+            )}
             <div className="ml-auto space-x-4">
               {edit ? (
                 <>
