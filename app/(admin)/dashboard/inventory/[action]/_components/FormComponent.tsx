@@ -139,7 +139,9 @@ const FormComponent = ({ action, id }: IProps) => {
         const res = await getSubCategoriesById(categoryId);
         console.log(res?.data?.data.subCategories);
 
-        setSubCategoriesOption(res?.data?.data.subCategories);
+        if (res?.status === 200 && res?.data?.data.subCategories.length > 0) {
+          setSubCategoriesOption(res?.data?.data.subCategories);
+        }
       } catch (error) {
         console.error(error);
       }
