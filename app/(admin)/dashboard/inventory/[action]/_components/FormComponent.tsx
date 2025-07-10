@@ -323,9 +323,9 @@ const FormComponent = ({ action, id }: IProps) => {
 
               <SelectField
                 name="categoryId"
-                label="product Categoiry"
+                label="product Category"
                 optional={false}
-                placeholder="Product Categoiry"
+                placeholder="Product Category"
                 onChange={(val) => {
                   const selectedCategory = categoriesOptions.find(
                     (cat) => cat.name === val
@@ -344,9 +344,9 @@ const FormComponent = ({ action, id }: IProps) => {
 
               <SelectField
                 name="subCategoryId"
-                label="product Subcategoiry"
+                label="product Subcategory"
                 optional={false}
-                placeholder="Product Subcategoiry"
+                placeholder="Product Subcategory"
                 options={subCategoriesOptions.map((item) => {
                   return {
                     label: item.name,
