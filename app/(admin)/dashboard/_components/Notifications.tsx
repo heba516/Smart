@@ -42,7 +42,9 @@ export default function Notifications() {
     console.log("🔌 Initializing socket...");
 
     const socket = io(SOCKET_URL, {
-      auth: { token: token },
+      auth: {
+        token: token,
+      },
     });
 
     socketRef.current = socket;
@@ -51,6 +53,8 @@ export default function Notifications() {
       console.log("✅ Connected to socket:", socket.id);
       socket.emit("get-notifications");
     });
+
+    console.log("Is socket connected?", socket.connected);
 
     socket.on("notifications", (data: Notification[]) => {
       console.log("📦 Notifications received:", data);

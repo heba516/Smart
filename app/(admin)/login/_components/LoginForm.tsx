@@ -67,7 +67,8 @@ export default function LoginForm() {
       setLoading(true);
       console.log(data);
 
-      await login(data);
+      const res = await login(data);
+      console.log(res.data);
 
       router.push("/dashboard");
       // redirect("/dashboard");

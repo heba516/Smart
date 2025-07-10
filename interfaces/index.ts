@@ -21,8 +21,19 @@ export interface ILogin {
     email: string;
     password: string;
 }
+export interface IAdminInfo {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    password: string;
+}
 
-
+export interface IResetPass {
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+}
 export interface IShelves {
     _id?: string;
     title: string;
@@ -47,7 +58,6 @@ export interface ICustomer {
     phone: string;
     state: "Active" | "Inactive" | "VIP";
 }
-
 
 export interface IProductInfo {
     title: string;
@@ -88,7 +98,6 @@ export interface IStatusData {
     percent: number;
     percentIncreased: boolean;
 }
-
 export interface IAlert {
     id: string;
     confidence: number;

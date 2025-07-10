@@ -1,16 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IStatusData } from "@/interfaces";
-import { Icon } from "@iconify/react";
 import { Button, SidebarSeparator } from "@/components/ui";
-import { CalendarDateRangePicker } from "./_components/Calender";
 import { ChartBoxes } from "./_components/ChartBoxes";
-// import { SpreadOfSales } from "./_components/SpreadOfSales";
 import { SalesLineChart } from "./sales/components/SalesLineChart";
-// import { SalesTopProducts } from "./sales/components/SalesTopProducts";
 import StockStatus from "./_components/StockStatus";
 import StatusBoxes from "./_components/StatusBoxes";
 import { ProductTable } from "./inventory/[action]/_components/ProductsTable";
+import DashboardHeader from "./_components/DashboardHeader";
 
 const DashboardStatusData: IStatusData[] = [
   {
@@ -54,7 +51,7 @@ const DashboardStatusData: IStatusData[] = [
 const page = () => {
   return (
     <div>
-      <header className="mx-1 py-9 flex items-center justify-between">
+      {/* <header className="mx-1 py-9 flex items-center justify-between">
         <div>
           <h1 className="text-black text-2xl font-semibold">SMART Dashboard</h1>
           <p className="text-medGray text-base font-medium">
@@ -70,7 +67,8 @@ const page = () => {
 
           <CalendarDateRangePicker />
         </div>
-      </header>
+      </header> */}
+      <DashboardHeader />
 
       <SidebarSeparator className="w-[75%] mx-auto" />
 
@@ -103,34 +101,6 @@ const page = () => {
 
       <section className="mt-10 max-w-full">
         <ProductTable />
-        {/* <aside className="flex flex-col space-y-2 xl:w-[40%]">
-          <ChartBoxes title="Stock Status" desc="Secondary text">
-            <StockStatus />
-            <Button
-              asChild
-              className="bg-primaryRed text-white text-base font-semibold rounded-xl py-3 w-[270px] mx-auto"
-            >
-              <Link href={"/dashboard/inventory"}>
-                View Stock
-                <Image
-                  src="/images/viewStockArrow.svg"
-                  width={19}
-                  height={19}
-                  alt="arrow"
-                />
-              </Link>
-            </Button>
-          </ChartBoxes>
-
-          <ChartBoxes title="Spread of sales" desc="Secondary text">
-            <SpreadOfSales />
-
-            <div className="flex items-center mt-5 mx-4">
-              <span className="w-2 h-2 bg-primaryRed rounded-full mr-2"></span>
-              Product 1
-            </div>
-          </ChartBoxes>
-        </aside> */}
       </section>
     </div>
   );

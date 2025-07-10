@@ -1,7 +1,11 @@
-import React from "react";
+import ProfileForm from "./components/ProfileForm";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <div className="py-10">
+      <ProfileForm />
+    </div>
+  );
 };
 
 export default page;

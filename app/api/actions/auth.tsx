@@ -1,5 +1,5 @@
 import { AxiosInstance } from "@/lib/axiosInstance";
-import { IContactUs, ILogin } from "@/interfaces";
+import { IContactUs, ILogin, IResetPass } from "@/interfaces";
 import Cookies from "js-cookie";
 
 export async function contactUs(data: IContactUs) {
@@ -14,7 +14,6 @@ export async function contactUs(data: IContactUs) {
 export async function login(data: ILogin) {
   try {
     const res = await AxiosInstance.post("api/sessions", data);
-    console.log(res);
 
     const { accessToken, firstName, lastName, role } = res.data;
 
@@ -23,10 +22,8 @@ export async function login(data: ILogin) {
     }
 
     Cookies.set("token", accessToken, {
-      // httpOnly: false,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
-      // expires: 2,
     });
 
     const adminName = firstName + " " + lastName;
@@ -36,10 +33,6 @@ export async function login(data: ILogin) {
       sameSite: "strict",
     });
 
-    console.log("name", Cookies.get("adminName"));
-
-    // localStorage.setItem("adminName", JSON.stringify(adminName));
-    console.log(res.data);
     return res;
   } catch (error) {
     logout();
@@ -51,17 +44,14 @@ export async function login(data: ILogin) {
 export function logout() {
   Cookies.remove("token");
   Cookies.remove("adminName");
-  // localStorage.clear();
 }
 
 export async function refreshAccessToken() {
   try {
-    // This assumes your backend sets refresh_token as HttpOnly cookie
     const response = await AxiosInstance.post("api/sessions/refresh");
 
     const { accessToken } = response.data;
 
-    // Update the access token
     Cookies.set("access_token", accessToken, {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
@@ -71,5 +61,33 @@ export async function refreshAccessToken() {
   } catch (error) {
     logout();
     console.log("Session expired. Please login again.", error);
+  }
+}
+
+const token = Cookies.get("token");
+
+export async function getProfile() {
+  try {
+    const res = await AxiosInstance.get("api/users/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("error when getting profile data", error);
+  }
+}
+
+export async function resetPassword(data: IResetPass) {
+  try {
+    const res = await AxiosInstance.post("/api/users/resetpassword", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res;
+  } catch (error) {
+    console.log("error when reseting password", error);
   }
 }
