@@ -29,12 +29,9 @@ const TheftAlert = () => {
 
       setAlertsCount((prev) => prev + 1);
 
-      console.log({ id });
       console.log({ data });
-      console.log(typeof data.status);
-      console.log(!data || !id);
 
-      if (!data || !id) return;
+      // if (!data || !id) return;
 
       const alertTime = new Date(data.timestamp).getTime();
       console.log(
@@ -46,11 +43,11 @@ const TheftAlert = () => {
 
       // if (alertTime < startTimeRef.current - 3000) return;
 
-      const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
+      // const alertClosed = localStorage.getItem(ALERT_KEY) === "false";
       const lastID = localStorage.getItem("lastID");
       console.log(lastID);
 
-      if (!alertClosed && id !== lastID) {
+      if (id && id !== lastID) {
         localStorage.setItem("lastID", id);
         console.log(localStorage.getItem("lastID"));
 

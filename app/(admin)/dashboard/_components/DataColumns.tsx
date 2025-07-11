@@ -305,7 +305,7 @@ export const shelvesColumns: ColumnDef<IProduct>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          On Shelf
+          On Stock
           <Icon icon="fa6-solid:sort" width="14" height="14" />
         </Button>
       );
@@ -317,7 +317,7 @@ export const shelvesColumns: ColumnDef<IProduct>[] = [
       const formatted = new Intl.NumberFormat("en-US", {
         style: "decimal",
       }).format(amount);
-      const statusVal = row.getValue("state");
+      // const statusVal = row.getValue("state");
       return (
         <div className="font-medium flex items-center text-medGray">
           {formatted === "0" && (
@@ -330,10 +330,10 @@ export const shelvesColumns: ColumnDef<IProduct>[] = [
           )}
           <span
             className={cn(
-              formatted === "0" && "text-primaryRed",
-              statusVal === "available" && "text-black",
-              statusVal === "low" && "text-[#FF8714]",
-              statusVal === "out" && "text-primaryRed"
+              formatted === "0" ? "text-primaryRed" : "text-black"
+              // statusVal === "available" && "",
+              // statusVal === "low" && "text-[#FF8714]",
+              // statusVal === "out" && "text-primaryRed"
             )}
           >
             {formatted} pcs
