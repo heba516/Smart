@@ -300,7 +300,7 @@ export function ProductDialog({
                         />
                         <span>
                           {product.stock} pieces (
-                          {product.stockState.toLowerCase()} stock)
+                          {product.stockState?.toLowerCase()} stock)
                         </span>
                       </span>
                     </div>
